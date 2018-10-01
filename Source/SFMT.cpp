@@ -1,4 +1,4 @@
-#include "SFMT.hpp"
+#include "Header/SFMT.hpp"
 
 // Constructor for SFMT
 SFMT::SFMT(u32 seed, u32 frames)
