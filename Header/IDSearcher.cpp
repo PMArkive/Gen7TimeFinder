@@ -36,12 +36,6 @@ void IDSearcher::run()
             u32 seed = sfmt.nextULong() & 0xffffffff;
             IDModel id(frame, seed);
 
-            if (id.getTID() == 1373 && id.getSID() == 40775)
-            {
-                int x = 5;
-                x++;
-            }
-
             if (!idFilter.isEmpty())
             {
                 QPair<u32, u32> tmp;
@@ -80,10 +74,9 @@ void IDSearcher::run()
             id.setStart(target);
             results.append(id);
         }
-        progress++;
         if (!results.isEmpty())
             emit resultReady(results);
-        emit updateProgress(progress);
+        emit updateProgress(++progress);
     }
 }
 
