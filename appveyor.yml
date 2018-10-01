@@ -1,0 +1,71 @@
+version: 1.0.0.{build}
+
+environment:
+    matrix:
+        # Windows 64-bit
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+          QTDIR: C:\Qt\5.11\msvc2017_64
+          BUILDER: NMAKE
+          ARCH: x64
+          OS: windows
+        # Linux
+        - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+          BUILDER: MAKE
+          ARCH: x64
+          OS: linux
+        # Windows 32-Bit
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+          QTDIR: C:\Qt\5.11\mingw53_32
+          BUILDER: MINGW
+          ARCH: x86
+          OS: windows
+          
+services:
+    - Docker
+
+install:
+    - git submodule update --init --recursive
+    # Windows
+    - cmd: set PATH=%QTDIR%\bin;%PATH%
+    - cmd: if "%BUILDER%"=="MINGW" set PATH=C:\Qt\Tools\mingw530_32\bin;%PATH%
+    - cmd: if "%BUILDER%"=="NMAKE" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+    # Linux
+    - sh: docker build . -t Gen7TimeFinder-ci
+    
+build_script:
+    # Windows
+    - cmd: qmake Gen7TimeFinder.pro
+    - cmd: if "%BUILDER%"=="MINGW" mingw32-make
+    - cmd: if "%BUILDER%"=="NMAKE" nmake
+    # Linux
+    - sh: docker run -w="/app" -v "$(pwd)":/app Gen7TimeFinder-ci qmake
+    - sh: docker run -w="/app" -v "$(pwd)":/app Gen7TimeFinder-ci make
+
+after_build:
+    # Windows
+    - cmd: md Gen7TimeFinder-windows
+    - cmd: del Languages\*.ts
+    - cmd: move Languages Gen7TimeFinder-windows\Languages
+    - cmd: move release\Gen7TimeFinder.exe Gen7TimeFinder-windows\Gen7TimeFinder.exe 
+    - cmd: windeployqt --release --no-translations --no-angle --no-plugins --no-opengl-sw Gen7TimeFinder-windows\Gen7TimeFinder.exe
+    - cmd: del Gen7TimeFinder-windows\vcredist*.exe
+    - cmd: del Gen7TimeFinder-windows\vc_redist*.exe
+    - cmd: xcopy /I %QTDIR%\plugins\platforms\qwindows.dll Gen7TimeFinder-windows\platforms\
+    - cmd: 7z a Gen7TimeFinder-windows-%ARCH%.zip Gen7TimeFinder-windows\
+    # Linux
+    - sh: rm Languages/*.ts
+    - sh: zip -r Gen7TimeFinder-linux-x64.zip Gen7TimeFinder Languages
+    
+artifacts:
+    - path: Gen7TimeFinder-%OS%-%ARCH%.zip
+
+deploy:
+    provider: GitHub
+    description: ''
+    auth_token:
+        secure: KPKgc2JaeXV8NBnz+72ILmsh7hKA3v7fWYG4D7X4Oxn7zplWJwP/eeWoObEg9YDH
+    artifact: Gen7TimeFinder-%OS%-%ARCH%.zip
+    draft: false
+    prerelease: true
+    on:
+        APPVEYOR_REPO_TAG: true
