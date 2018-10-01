@@ -44,8 +44,6 @@ build_script:
 after_build:
     # Windows
     - cmd: md Gen7TimeFinder-windows
-    - cmd: del Languages\*.ts
-    - cmd: move Languages Gen7TimeFinder-windows\Languages
     - cmd: move release\Gen7TimeFinder.exe Gen7TimeFinder-windows\Gen7TimeFinder.exe 
     - cmd: windeployqt --release --no-translations --no-angle --no-plugins --no-opengl-sw Gen7TimeFinder-windows\Gen7TimeFinder.exe
     - cmd: del Gen7TimeFinder-windows\vcredist*.exe
@@ -53,8 +51,7 @@ after_build:
     - cmd: xcopy /I %QTDIR%\plugins\platforms\qwindows.dll Gen7TimeFinder-windows\platforms\
     - cmd: 7z a Gen7TimeFinder-windows-%ARCH%.zip Gen7TimeFinder-windows\
     # Linux
-    - sh: rm Languages/*.ts
-    - sh: zip -r Gen7TimeFinder-linux-x64.zip Gen7TimeFinder Languages
+    - sh: zip -r Gen7TimeFinder-linux-x64.zip Gen7TimeFinder
     
 artifacts:
     - path: Gen7TimeFinder-%OS%-%ARCH%.zip

@@ -16,7 +16,6 @@ script:
 before_deploy:
   - rm Languages/*.ts
   - mkdir Gen7TimeFinder.app/Contents/MacOS/Languages
-  - cp Languages/*.qm Gen7TimeFinder.app/Contents/MacOS/Languages
   - /usr/local/Cellar/qt/5.11.2/bin/macdeployqt Gen7TimeFinder.app -dmg -verbose=2
   - zip -r Gen7TimeFinder-macOS.zip Gen7TimeFinder.dmg
 
