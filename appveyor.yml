@@ -30,7 +30,7 @@ install:
     - cmd: if "%BUILDER%"=="MINGW" set PATH=C:\Qt\Tools\mingw530_32\bin;%PATH%
     - cmd: if "%BUILDER%"=="NMAKE" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
     # Linux
-    - sh: docker build . -t Gen7TimeFinder-ci
+    - sh: docker build . -t timefinder-ci
     
 build_script:
     # Windows
@@ -38,8 +38,8 @@ build_script:
     - cmd: if "%BUILDER%"=="MINGW" mingw32-make
     - cmd: if "%BUILDER%"=="NMAKE" nmake
     # Linux
-    - sh: docker run -w="/app" -v "$(pwd)":/app Gen7TimeFinder-ci qmake
-    - sh: docker run -w="/app" -v "$(pwd)":/app Gen7TimeFinder-ci make
+    - sh: docker run -w="/app" -v "$(pwd)":/app timefinder-ci qmake
+    - sh: docker run -w="/app" -v "$(pwd)":/app timefinder-ci make
 
 after_build:
     # Windows
