@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tableViewID->setModel(idView);
     ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewID->verticalHeader()->setVisible(false);
 
     qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
 }
@@ -19,8 +20,6 @@ MainWindow::~MainWindow()
     delete ui;
     delete idView;
 }
-
-#include <QDebug>
 
 void MainWindow::on_pushButtonIDSearch_clicked()
 {
