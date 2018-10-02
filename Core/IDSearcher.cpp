@@ -1,15 +1,13 @@
 #include "IDSearcher.hpp"
 
-IDSearcher::IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick, QVector<QPair<u32, u32>> idFilter, QVector<u32> tsvFilter, int filterType)
+IDSearcher::IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick, IDFilter compare)
 {
     startTime = start;
     endTime = end;
     this->startFrame = startFrame;
     this->endFrame = endFrame;
     this->tick = tick;
-    this->idFilter = idFilter;
-    this->tsvFilter = tsvFilter;
-    this->filterType = filterType;
+    this->compare = compare;
     cancel = false;
     progress = 0;
 }
@@ -36,39 +34,8 @@ void IDSearcher::run()
             u32 seed = sfmt.nextULong() & 0xffffffff;
             IDModel id(frame, seed);
 
-            if (!idFilter.isEmpty())
-            {
-                QPair<u32, u32> tmp;
-                if (filterType == 0)
-                {
-                    tmp.first = id.getTID();
-                    tmp.second = 0;
-                }
-                else if (filterType == 1)
-                {
-                    tmp.first = id.getSID();
-                    tmp.second = 0;
-                }
-                else if (filterType == 2)
-                {
-                    tmp.first = id.getTID();
-                    tmp.second = id.getSID();
-                }
-                else
-                {
-                    tmp.first = id.getDisplayTID();
-                    tmp.second = 0;
-                }
-
-                if (!idFilter.contains(tmp))
-                    continue;
-            }
-
-            if (!tsvFilter.isEmpty())
-            {
-                if (!tsvFilter.contains(id.getTSV()))
-                    continue;
-            }
+            if (!compare.compare(id))
+                continue;
 
             QDateTime target = QDateTime::fromMSecsSinceEpoch(static_cast<qlonglong>(Utility::getNormalTime(epoch)), Qt::UTC);
             id.setStart(target);

@@ -6,6 +6,7 @@
 #include <QPair>
 #include <Core/Utility.hpp>
 #include <Core/SFMT.hpp>
+#include <Core/IDFilter.hpp>
 #include <Models/IDModel.hpp>
 
 class IDSearcher : public QThread
@@ -20,12 +21,11 @@ private:
     bool cancel;
     QDateTime startTime, endTime;
     u32 startFrame, endFrame, tick;
-    int filterType, progress;
-    QVector<QPair<u32, u32>> idFilter;
-    QVector<u32> tsvFilter;
+    int progress;
+    IDFilter compare;
 
 public:
-    IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick, QVector<QPair<u32, u32>> idFilter, QVector<u32> tsvFilter, int filterType);
+    IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick, IDFilter compare);
     void run();
     int maxProgress();
 

@@ -6,6 +6,7 @@
 #include <Core/StationarySearcher.hpp>
 #include <Views/StationaryView.hpp>
 #include <Core/IDSearcher.hpp>
+#include <Core/IDFilter.hpp>
 #include <Views/IDView.hpp>
 
 namespace Ui

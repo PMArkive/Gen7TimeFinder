@@ -121,7 +121,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
         }
     }
 
-    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, 0x383e329, filter, tsv, filterType);
+    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, 0x383e329, IDFilter(filter, tsv, filterType));
     connect(search, &IDSearcher::resultReady, this, &MainWindow::addIDFrame);
     connect(search, &IDSearcher::updateProgress, this, &MainWindow::updateIDProgess);
     connect(search, &IDSearcher::finished, search, &QObject::deleteLater);

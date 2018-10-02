@@ -41,7 +41,8 @@ HEADERS += \
     Views/IDView.hpp \
     Core/StationarySearcher.hpp \
     Models/StationaryModel.hpp \
-    Views/StationaryView.hpp
+    Views/StationaryView.hpp \
+    Core/IDFilter.hpp
 
 SOURCES += \
     Core/IDSearcher.cpp \
@@ -53,4 +54,5 @@ SOURCES += \
     main.cpp \
     Core/StationarySearcher.cpp \
     Models/StationaryModel.cpp \
-    Views/StationaryView.cpp
+    Views/StationaryView.cpp \
+    Core/IDFilter.cpp

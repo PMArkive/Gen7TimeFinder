@@ -10,13 +10,13 @@ u32 Utility::changeEndian(u32 num)
 
 u64 Utility::getCitraTime(QDateTime dateTime)
 {
-    u64 val = static_cast<u64>(dateTime.toMSecsSinceEpoch()) + 17016;
+    u64 val = static_cast<u64>(dateTime.toMSecsSinceEpoch()) + 17017;
     return val - 946684800000;
 }
 
 u64 Utility::getNormalTime(u64 time)
 {
-    return time + 946684800000 - 17016;
+    return time + 946684800000 - 17017;
 }
 
 u32 Utility::calcInitialSeed(u32 *values)
