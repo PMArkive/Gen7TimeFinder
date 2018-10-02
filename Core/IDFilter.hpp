@@ -9,7 +9,8 @@ class IDFilter
 {
 
 private:
-    QVector<QPair<u32, u32>> idFilter;
+    QVector<u32> tidFilter;
+    QVector<u32> sidFilter;
     QVector<u32> tsvFilter;
     int filterType;
     bool checkID;
@@ -17,7 +18,7 @@ private:
 
 public:
     IDFilter() {}
-    IDFilter(QVector<QPair<u32, u32>> idFilter, QVector<u32> tsvFilter, int filterType);
+    IDFilter(QString idList, QString tsvList, int filterType);
     bool compare(IDModel frame);
 
 };

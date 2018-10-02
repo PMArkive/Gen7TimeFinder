@@ -1,42 +1,67 @@
 #include "IDFilter.hpp"
 
-IDFilter::IDFilter(QVector<QPair<u32, u32>> idFilter, QVector<u32> tsvFilter, int filterType)
+IDFilter::IDFilter(QString idList, QString tsvList, int filterType)
 {
-    this->idFilter = idFilter;
-    this->tsvFilter = tsvFilter;
     this->filterType = filterType;
-    checkID = !idFilter.isEmpty();
-    checkTSV = !tsvFilter.isEmpty();
+    checkID = !idList.isEmpty();
+    checkTSV = !tsvList.isEmpty();
+
+    if (!idList.isEmpty())
+    {
+        for (QString in : idList.split("\n"))
+        {
+            if (filterType == 0 || filterType == 1) // TID or SID
+            {
+                tidFilter.append(filterType == 0 ? in.toUInt() : 0);
+                sidFilter.append(filterType == 0 ? 0 : in.toUInt());
+            }
+            else if (filterType == 2) // TID/SID
+            {
+                QStringList split = in.split("/");
+                tidFilter.append(split[0].toUInt());
+                sidFilter.append(split[1].toUInt());
+            }
+            else // G7 TID
+            {
+                tidFilter.append(in.toUInt());
+                sidFilter.append(0);
+            }
+        }
+    }
+
+    if (!tsvList.isEmpty())
+    {
+        for (QString in : tsvList.split("\n"))
+        {
+            tsvFilter.append(in.toUInt());
+        }
+    }
 }
 
 bool IDFilter::compare(IDModel frame)
 {
     if (checkID)
     {
-        QPair<u32, u32> tmp;
-        if (filterType == 0)
+        if (filterType == 0) // TID
         {
-            tmp.first = frame.getTID();
-            tmp.second = 0;
+            if (!tidFilter.contains(frame.getTID()))
+                return false;
         }
-        else if (filterType == 1)
+        else if (filterType == 1) // SID
         {
-            tmp.first = frame.getSID();
-            tmp.second = 0;
+            if (!sidFilter.contains(frame.getSID()))
+                return false;
         }
-        else if (filterType == 2)
+        else if (filterType == 2) // TID/SID
         {
-            tmp.first = frame.getTID();
-            tmp.second = frame.getSID();
+            if (!tidFilter.contains(frame.getTID()) || !sidFilter.contains(frame.getSID()))
+                return false;
         }
-        else
+        else // G7 TID
         {
-            tmp.first = frame.getDisplayTID();
-            tmp.second = 0;
+            if (!tidFilter.contains(frame.getDisplayTID()))
+                return false;
         }
-
-        if (!idFilter.contains(tmp))
-            return false;
     }
 
     if (checkTSV)

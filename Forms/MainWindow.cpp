@@ -91,37 +91,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     else
         filterType = 3;
 
-    QVector<QPair<u32, u32>> filter;
-    if (!ui->textEditIDFilter->toPlainText().isEmpty())
-    {
-        for (QString in : ui->textEditIDFilter->toPlainText().split("\n"))
-        {
-            QPair<u32, u32> pair;
-            if (filterType == 2)
-            {
-                QStringList split = in.split("/");
-                pair.first = split[0].toUInt();
-                pair.second = split[1].toUInt();
-            }
-            else
-            {
-                pair.first = in.toUInt();
-                pair.second = 0;
-            }
-            filter.append(pair);
-        }
-    }
-
-    QVector<u32> tsv;
-    if (!ui->textEditTSVFilter->toPlainText().isEmpty())
-    {
-        for (QString in : ui->textEditTSVFilter->toPlainText().split("\n"))
-        {
-            tsv.append(in.toUInt());
-        }
-    }
-
-    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, 0x383e329, IDFilter(filter, tsv, filterType));
+    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, 0x383e329, IDFilter(ui->textEditIDFilter->toPlainText(), ui->textEditTSVFilter->toPlainText(), filterType));
     connect(search, &IDSearcher::resultReady, this, &MainWindow::addIDFrame);
     connect(search, &IDSearcher::updateProgress, this, &MainWindow::updateIDProgess);
     connect(search, &IDSearcher::finished, search, &QObject::deleteLater);
