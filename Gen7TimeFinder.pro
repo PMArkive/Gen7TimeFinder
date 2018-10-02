@@ -33,18 +33,24 @@ FORMS += \
     Forms/MainWindow.ui
 
 HEADERS += \
+    Core/IDSearcher.hpp \
+    Core/SFMT.hpp \
+    Core/Utility.hpp \
     Forms/MainWindow.hpp \
-    Header/SFMT.hpp \
-    Header/IDSearcher.hpp \
     Models/IDModel.hpp \
     Views/IDView.hpp \
-    Header/Utility.hpp
+    Core/StationarySearcher.hpp \
+    Models/StationaryModel.hpp \
+    Views/StationaryView.hpp
 
 SOURCES += \
+    Core/IDSearcher.cpp \
+    Core/SFMT.cpp \
+    Core/Utility.cpp \
     Forms/MainWindow.cpp \
-    Source/SFMT.cpp \
-    main.cpp \
-    Header/IDSearcher.cpp \
     Models/IDModel.cpp \
     Views/IDView.cpp \
-    Header/Utility.cpp
+    main.cpp \
+    Core/StationarySearcher.cpp \
+    Models/StationaryModel.cpp \
+    Views/StationaryView.cpp

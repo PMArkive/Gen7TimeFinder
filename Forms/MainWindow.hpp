@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
-#include <Header/IDSearcher.hpp>
+#include <Core/StationarySearcher.hpp>
+#include <Views/StationaryView.hpp>
+#include <Core/IDSearcher.hpp>
 #include <Views/IDView.hpp>
 
 namespace Ui
@@ -20,13 +22,18 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_pushButtonStationarySearch_clicked();
+    void addStationaryFrame(QVector<StationaryModel> frames);
+    void updateStationaryProgress(int val);
     void on_pushButtonIDSearch_clicked();
     void addIDFrame(QVector<IDModel> frames);
     void updateIDProgess(int val);
-    void toggleIDEnable();
 
 private:
     Ui::MainWindow *ui;
+    StationaryView *stationaryView;
+    //EventView *eventView;
+    //WildView *wildView;
     IDView *idView;
 
 };

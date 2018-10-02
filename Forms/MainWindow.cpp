@@ -6,7 +6,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    stationaryView = new StationaryView();
+    //eventView = new EventView();
+    //wildView = new WildView();
     idView = new IDView();
+
+    ui->tableViewStationary->setModel(stationaryView);
+    ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewStationary->verticalHeader()->setVisible(false);
+
+    //ui->tableViewEvent->setModel(eventView);
+    ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewEvent->verticalHeader()->setVisible(false);
+
+    //ui->tableViewWild->setModel(wildView);
+    ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewWild->verticalHeader()->setVisible(false);
 
     ui->tableViewID->setModel(idView);
     ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -18,13 +34,31 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete stationaryView;
+    //delete eventView;
+    //delete wildView;
     delete idView;
+}
+
+void MainWindow::on_pushButtonStationarySearch_clicked()
+{
+    // TODO
+}
+
+void MainWindow::addStationaryFrame(QVector<StationaryModel> frames)
+{
+    stationaryView->addItems(frames);
+}
+
+void MainWindow::updateStationaryProgress(int val)
+{
+    ui->progressBarStationary->setValue(val);
 }
 
 void MainWindow::on_pushButtonIDSearch_clicked()
 {
-    QDateTime start = ui->dateTimeEditIDStart->dateTime();
-    QDateTime end = ui->dateTimeEditIDEnd->dateTime();
+    QDateTime start = ui->dateTimeEditIDStartDate->dateTime();
+    QDateTime end = ui->dateTimeEditIDEndDate->dateTime();
     u32 frameStart = ui->lineEditIDStartFrame->text().toUInt();
     u32 frameEnd = ui->lineEditIDEndFrame->text().toUInt();
 
@@ -91,7 +125,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     connect(search, &IDSearcher::resultReady, this, &MainWindow::addIDFrame);
     connect(search, &IDSearcher::updateProgress, this, &MainWindow::updateIDProgess);
     connect(search, &IDSearcher::finished, search, &QObject::deleteLater);
-    connect(search, &IDSearcher::finished, this, &MainWindow::toggleIDEnable);
+    connect(search, &IDSearcher::finished, this, [ = ] { ui->pushButtonIDSearch->setEnabled(true); ui->pushButtonIDCancel->setEnabled(false); });
     connect(ui->pushButtonIDCancel, &QPushButton::clicked, search, &IDSearcher::cancelSearch);
 
     ui->progressBarID->setMaximum(search->maxProgress());
@@ -107,10 +141,4 @@ void MainWindow::addIDFrame(QVector<IDModel> frames)
 void MainWindow::updateIDProgess(int val)
 {
     ui->progressBarID->setValue(val);
-}
-
-void MainWindow::toggleIDEnable()
-{
-    ui->pushButtonIDSearch->setEnabled(true);
-    ui->pushButtonIDCancel->setEnabled(false);
 }

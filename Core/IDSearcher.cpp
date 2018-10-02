@@ -74,6 +74,7 @@ void IDSearcher::run()
             id.setStart(target);
             results.append(id);
         }
+
         if (!results.isEmpty())
             emit resultReady(results);
         emit updateProgress(++progress);

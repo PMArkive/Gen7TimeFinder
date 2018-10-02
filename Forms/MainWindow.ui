@@ -24,13 +24,23 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabSelection">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabStationary">
        <attribute name="title">
         <string>Stationary</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
+        <item row="2" column="0" colspan="3">
+         <widget class="QTableView" name="tableViewStationary">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBoxStationaryRNGInfo">
           <property name="sizePolicy">
@@ -42,9 +52,158 @@
           <property name="title">
            <string>RNG Info</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelStationaryStartDate">
+             <property name="text">
+              <string>Start Date:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="4">
+            <widget class="QDateTimeEdit" name="dateTimeEditStationaryStartDate">
+             <property name="dateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="maximumDate">
+              <date>
+               <year>2099</year>
+               <month>12</month>
+               <day>31</day>
+              </date>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelStationaryEndDate">
+             <property name="text">
+              <string>End Date:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="4">
+            <widget class="QDateTimeEdit" name="dateTimeEditStationaryEndDate">
+             <property name="dateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2010</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>23</hour>
+               <minute>59</minute>
+               <second>59</second>
+               <year>2099</year>
+               <month>12</month>
+               <day>31</day>
+              </datetime>
+             </property>
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelStationaryFrame">
+             <property name="text">
+              <string>Frame:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineEditStationaryStartFrame">
+             <property name="text">
+              <string notr="true">478</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3" colspan="2">
+            <widget class="QLineEdit" name="lineEditStationaryEndFrame">
+             <property name="text">
+              <string notr="true">10000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxStationaryDelay">
+             <property name="text">
+              <string>Consider Delay</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2" colspan="2">
+            <widget class="QLineEdit" name="lineEditStationaryDelay">
+             <property name="text">
+              <string notr="true">0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QLabel" name="labelStationaryDelay">
+             <property name="text">
+              <string>+4f</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="5">
+            <widget class="QPushButton" name="pushButtonStationarySearch">
+             <property name="text">
+              <string>Search</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="5">
+            <widget class="QPushButton" name="pushButtonStationaryCancel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="0" column="2">
          <widget class="QGroupBox" name="groupBoxStationaryFilter">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -57,13 +216,23 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QTableView" name="tableViewStationary">
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
+            <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="title">
+           <string>GroupBox</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QProgressBar" name="progressBarStationary">
+          <property name="value">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -74,6 +243,16 @@
         <string>Event</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
+        <item row="2" column="0" colspan="2">
+         <widget class="QTableView" name="tableViewEvent">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBoxEventRNGInfo">
           <property name="sizePolicy">
@@ -101,12 +280,9 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="2">
-         <widget class="QTableView" name="tableViewEvent">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
+         <widget class="QProgressBar" name="progressBarEvent">
+          <property name="value">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -117,16 +293,13 @@
         <string>Wild</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBoxWildRNGInfo">
+        <item row="2" column="0" colspan="2">
+         <widget class="QTableView" name="tableViewWild">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>1</horstretch>
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
             <verstretch>1</verstretch>
            </sizepolicy>
-          </property>
-          <property name="title">
-           <string>RNG Info</string>
           </property>
          </widget>
         </item>
@@ -143,13 +316,23 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QTableView" name="tableViewWild">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBoxWildRNGInfo">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
             <verstretch>1</verstretch>
            </sizepolicy>
+          </property>
+          <property name="title">
+           <string>RNG Info</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QProgressBar" name="progressBarWild">
+          <property name="value">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -313,7 +496,7 @@
             </widget>
            </item>
            <item row="0" column="1" colspan="2">
-            <widget class="QDateTimeEdit" name="dateTimeEditIDStart">
+            <widget class="QDateTimeEdit" name="dateTimeEditIDStartDate">
              <property name="dateTime">
               <datetime>
                <hour>0</hour>
@@ -347,7 +530,7 @@
             </widget>
            </item>
            <item row="1" column="1" colspan="2">
-            <widget class="QDateTimeEdit" name="dateTimeEditIDEnd">
+            <widget class="QDateTimeEdit" name="dateTimeEditIDEndDate">
              <property name="dateTime">
               <datetime>
                <hour>0</hour>

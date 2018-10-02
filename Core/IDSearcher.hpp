@@ -4,8 +4,8 @@
 #include <QThread>
 #include <QVector>
 #include <QPair>
-#include <Header/Utility.hpp>
-#include <Header/SFMT.hpp>
+#include <Core/Utility.hpp>
+#include <Core/SFMT.hpp>
 #include <Models/IDModel.hpp>
 
 class IDSearcher : public QThread
