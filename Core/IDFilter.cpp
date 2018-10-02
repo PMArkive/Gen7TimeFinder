@@ -2,7 +2,7 @@
 
 IDFilter::IDFilter(QString idList, QString tsvList, int filterType)
 {
-    this->filterType = filterType;
+    this->filterType = static_cast<FilterType>(filterType);
     checkID = !idList.isEmpty();
     checkTSV = !tsvList.isEmpty();
 
@@ -10,21 +10,27 @@ IDFilter::IDFilter(QString idList, QString tsvList, int filterType)
     {
         for (QString in : idList.split("\n"))
         {
-            if (filterType == 0 || filterType == 1) // TID or SID
+            switch (this->filterType)
             {
-                tidFilter.append(filterType == 0 ? in.toUInt() : 0);
-                sidFilter.append(filterType == 0 ? 0 : in.toUInt());
-            }
-            else if (filterType == 2) // TID/SID
-            {
-                QStringList split = in.split("/");
-                tidFilter.append(split[0].toUInt());
-                sidFilter.append(split[1].toUInt());
-            }
-            else // G7 TID
-            {
-                tidFilter.append(in.toUInt());
-                sidFilter.append(0);
+                case FilterType::TID:
+                    tidFilter.append(in.toUInt());
+                    sidFilter.append(0);
+                    break;
+                case FilterType::SID:
+                    tidFilter.append(0);
+                    sidFilter.append(in.toUInt());
+                    break;
+                case FilterType::TIDSID:
+                    {
+                        QStringList split = in.split("/");
+                        tidFilter.append(split[0].toUInt());
+                        sidFilter.append(split[1].toUInt());
+                        break;
+                    }
+                case FilterType::G7TID:
+                    tidFilter.append(in.toUInt());
+                    sidFilter.append(0);
+                    break;
             }
         }
     }
@@ -42,25 +48,24 @@ bool IDFilter::compare(IDModel frame)
 {
     if (checkID)
     {
-        if (filterType == 0) // TID
+        switch (filterType)
         {
-            if (!tidFilter.contains(frame.getTID()))
-                return false;
-        }
-        else if (filterType == 1) // SID
-        {
-            if (!sidFilter.contains(frame.getSID()))
-                return false;
-        }
-        else if (filterType == 2) // TID/SID
-        {
-            if (!tidFilter.contains(frame.getTID()) || !sidFilter.contains(frame.getSID()))
-                return false;
-        }
-        else // G7 TID
-        {
-            if (!tidFilter.contains(frame.getDisplayTID()))
-                return false;
+            case FilterType::TID:
+                if (!tidFilter.contains(frame.getTID()))
+                    return false;
+                break;
+            case FilterType::SID:
+                if (!sidFilter.contains(frame.getSID()))
+                    return false;
+                break;
+            case FilterType::TIDSID:
+                if (!tidFilter.contains(frame.getTID()) || !sidFilter.contains(frame.getSID()))
+                    return false;
+                break;
+            case FilterType::G7TID:
+                if (!tidFilter.contains(frame.getDisplayTID()))
+                    return false;
+                break;
         }
     }
 
