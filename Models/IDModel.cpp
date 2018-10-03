@@ -1,7 +1,8 @@
 #include "IDModel.hpp"
 
-IDModel::IDModel(u32 frame, u32 rand)
+IDModel::IDModel(u32 seed, u32 frame, u32 rand)
 {
+    this->seed = seed;
     this->frame = frame;
     this->start = start;
     tid = rand & 0xffff;
@@ -13,6 +14,11 @@ IDModel::IDModel(u32 frame, u32 rand)
 QString IDModel::getDateTime()
 {
     return start.toString();
+}
+
+u32 IDModel::getSeed() const
+{
+    return seed;
 }
 
 u32 IDModel::getFrame() const

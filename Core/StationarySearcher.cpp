@@ -30,7 +30,7 @@ void StationarySearcher::run()
             if (cancel)
                 return;
 
-            StationaryModel result;
+            StationaryModel result(0);
 
             // TODO
 

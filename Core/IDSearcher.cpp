@@ -31,9 +31,7 @@ void IDSearcher::run()
             if (cancel)
                 return;
 
-            u32 seed = sfmt.nextULong() & 0xffffffff;
-            IDModel id(frame, seed);
-
+            IDModel id(initialSeed, frame, sfmt.nextULong() & 0xffffffff);
             if (!compare.compare(id))
                 continue;
 

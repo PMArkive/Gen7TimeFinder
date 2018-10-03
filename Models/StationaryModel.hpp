@@ -13,7 +13,7 @@ class StationaryModel
 
 private:
     QDateTime target;
-    u32 pid, ec, frame;
+    u32 seed, pid, ec, frame;
     u16 psv;
     u8 hiddenPower, ability, nature, gender;
     int ivs[6];
@@ -21,10 +21,11 @@ private:
     bool synch;
 
 public:
-    StationaryModel();
-
+    StationaryModel() {}
+    StationaryModel(u32 seed);
     QString getDateTime() const;
     void setTarget(const QDateTime &value);
+    u32 getSeed() const;
     u32 getPID() const;
     void setPID(const u32 &value);
     u32 getEC() const;

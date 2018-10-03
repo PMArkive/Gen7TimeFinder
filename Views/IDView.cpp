@@ -31,7 +31,7 @@ int IDView::rowCount(const QModelIndex &parent) const
 int IDView::columnCount(const QModelIndex &parent) const
 {
     (void) parent;
-    return 6;
+    return 7;
 }
 
 QVariant IDView::data(const QModelIndex &index, int role) const
@@ -44,14 +44,16 @@ QVariant IDView::data(const QModelIndex &index, int role) const
             case 0:
                 return frame.getDateTime();
             case 1:
-                return frame.getFrame();
+                return QString::number(frame.getSeed(), 16).toUpper();
             case 2:
-                return frame.getDisplayTID();
+                return frame.getFrame();
             case 3:
-                return frame.getTID();
+                return frame.getDisplayTID();
             case 4:
-                return frame.getSID();
+                return frame.getTID();
             case 5:
+                return frame.getSID();
+            case 6:
                 return frame.getTSV();
         }
     }
@@ -67,14 +69,16 @@ QVariant IDView::headerData(int section, Qt::Orientation orientation, int role) 
             case 0:
                 return tr("Date/Time");
             case 1:
-                return tr("Frame");
+                return tr("Initial Seed");
             case 2:
-                return tr("G7 TID");
+                return tr("Frame");
             case 3:
-                return tr("TID");
+                return tr("G7 TID");
             case 4:
-                return tr("SID");
+                return tr("TID");
             case 5:
+                return tr("SID");
+            case 6:
                 return tr("TSV");
         }
     }

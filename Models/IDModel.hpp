@@ -13,16 +13,17 @@ class IDModel
 
 private:
     QDateTime start;
-    u32 frame;
+    u32 seed, frame;
     u16 tid;
     u16 sid;
     u16 tsv;
     u32 displayTID;
 
 public:
-    IDModel(u32 frame, u32 rand);
+    IDModel(u32 seed, u32 frame, u32 rand);
     IDModel() {}
     QString getDateTime();
+    u32 getSeed() const;
     u32 getFrame() const;
     u16 getTID() const;
     u16 getSID() const;

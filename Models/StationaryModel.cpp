@@ -1,7 +1,8 @@
 #include "StationaryModel.hpp"
 
-StationaryModel::StationaryModel()
+StationaryModel::StationaryModel(u32 seed)
 {
+    this->seed = seed;
     for (int i = 0; i < 6; i++)
         ivs[i] = -1;
 }
@@ -14,6 +15,11 @@ QString StationaryModel::getDateTime() const
 void StationaryModel::setTarget(const QDateTime &value)
 {
     target = value;
+}
+
+u32 StationaryModel::getSeed() const
+{
+    return seed;
 }
 
 u32 StationaryModel::getPID() const

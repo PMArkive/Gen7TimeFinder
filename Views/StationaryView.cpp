@@ -31,7 +31,7 @@ int StationaryView::rowCount(const QModelIndex &parent) const
 int StationaryView::columnCount(const QModelIndex &parent) const
 {
     (void) parent;
-    return 14;
+    return 15;
 }
 
 QVariant StationaryView::data(const QModelIndex &index, int role) const
@@ -44,30 +44,32 @@ QVariant StationaryView::data(const QModelIndex &index, int role) const
             case 0:
                 return frame.getDateTime();
             case 1:
-                return frame.getFrame();
+                return QString::number(frame.getSeed(), 16).toUpper();
             case 2:
-                return frame.getIV(0);
+                return frame.getFrame();
             case 3:
-                return frame.getIV(1);
+                return frame.getIV(0);
             case 4:
-                return frame.getIV(2);
+                return frame.getIV(1);
             case 5:
-                return frame.getIV(3);
+                return frame.getIV(2);
             case 6:
-                return frame.getIV(4);
+                return frame.getIV(3);
             case 7:
-                return frame.getIV(5);
+                return frame.getIV(4);
             case 8:
-                return Utility::getNature(frame.getNature());
+                return frame.getIV(5);
             case 9:
-                return frame.getSynch();
+                return Utility::getNature(frame.getNature());
             case 10:
-                return Utility::getHiddenPower(frame.getHiddenPower());
+                return frame.getSynch();
             case 11:
-                return frame.getPSV();
+                return Utility::getHiddenPower(frame.getHiddenPower());
             case 12:
-                return "TODO";
+                return frame.getPSV();
             case 13:
+                return "TODO";
+            case 14:
                 return "TODO";
         }
     }
@@ -83,30 +85,32 @@ QVariant StationaryView::headerData(int section, Qt::Orientation orientation, in
             case 0:
                 return tr("Date/Time");
             case 1:
-                return tr("Frame");
+                return tr("Initial Seed");
             case 2:
-                return tr("HP");
+                return tr("Frame");
             case 3:
-                return tr("Atk");
+                return tr("HP");
             case 4:
-                return tr("Def");
+                return tr("Atk");
             case 5:
-                return tr("SpA");
+                return tr("Def");
             case 6:
-                return tr("SpD");
+                return tr("SpA");
             case 7:
-                return tr("Spe");
+                return tr("SpD");
             case 8:
-                return tr("Nature");
+                return tr("Spe");
             case 9:
-                return tr("Sync");
+                return tr("Nature");
             case 10:
-                return tr("HP Type");
+                return tr("Sync");
             case 11:
-                return tr("PSV");
+                return tr("HP Type");
             case 12:
-                return tr("Gender");
+                return tr("PSV");
             case 13:
+                return tr("Gender");
+            case 14:
                 return tr("Ability");
         }
     }
