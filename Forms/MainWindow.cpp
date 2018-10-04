@@ -40,6 +40,16 @@ MainWindow::~MainWindow()
     delete idView;
 }
 
+void MainWindow::on_pushButtonProfileManager_clicked()
+{
+
+}
+
+void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
+{
+
+}
+
 void MainWindow::on_pushButtonStationarySearch_clicked()
 {
     // TODO

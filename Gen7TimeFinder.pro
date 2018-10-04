@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    Forms/MainWindow.ui
+    Forms/MainWindow.ui \
+    Forms/ProfileManager.ui \
+    Forms/ProfileEditor.ui
 
 HEADERS += \
     Core/IDSearcher.hpp \
@@ -42,7 +44,12 @@ HEADERS += \
     Core/StationarySearcher.hpp \
     Models/StationaryModel.hpp \
     Views/StationaryView.hpp \
-    Core/IDFilter.hpp
+    Core/IDFilter.hpp \
+    Models/Profile.hpp \
+    Core/Game.hpp \
+    Forms/ProfileManager.hpp \
+    Views/ProfileView.hpp \
+    Forms/ProfileEditor.hpp
 
 SOURCES += \
     Core/IDSearcher.cpp \
@@ -55,4 +62,8 @@ SOURCES += \
     Core/StationarySearcher.cpp \
     Models/StationaryModel.cpp \
     Views/StationaryView.cpp \
-    Core/IDFilter.cpp
+    Core/IDFilter.cpp \
+    Models/Profile.cpp \
+    Forms/ProfileManager.cpp \
+    Views/ProfileView.cpp \
+    Forms/ProfileEditor.cpp

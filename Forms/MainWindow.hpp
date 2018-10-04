@@ -23,6 +23,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_pushButtonProfileManager_clicked();
+    void on_comboBoxProfiles_currentIndexChanged(int index);
     void on_pushButtonStationarySearch_clicked();
     void addStationaryFrame(QVector<StationaryModel> frames);
     void updateStationaryProgress(int val);
