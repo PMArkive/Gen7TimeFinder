@@ -238,6 +238,280 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="labelStationaryNature">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>Nature</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryNature">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Hardy</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Lonely</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Brave</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Adamant</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Naughty</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bold</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Docile</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Relaxed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Impish</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Lax</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Timid</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Hasty</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Serious</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Jolly</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Naive</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Modest</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Mild</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Quiet</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bashful</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Rash</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Calm</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Gentle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Sassy</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Careful</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Quirky</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="labelStationaryHiddenPower">
+             <property name="text">
+              <string>Hidden Power</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryHiddenPower">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fighting</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Flying</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Poison</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ground</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Rock</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bug</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ghost</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Steel</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Fire</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Water</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Grass</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Electric</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Psychic</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ice</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Dragon</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Dark</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="labelStationaryAbility">
+             <property name="text">
+              <string>Ability</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryAbility"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="labelStationaryGender">
+             <property name="text">
+              <string>Gender</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryGender"/>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="labelStationaryShiny">
+             <property name="text">
+              <string>Shiny</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QCheckBox" name="checkBoxStationaryShiny">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0" rowspan="4" colspan="2">
             <layout class="QGridLayout" name="gridLayout_10">
              <item row="0" column="0">
@@ -385,49 +659,6 @@
               </widget>
              </item>
             </layout>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="labelStationaryNature">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="text">
-              <string>Nature</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryNature"/>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="labelStationaryHiddenPower">
-             <property name="text">
-              <string>Hidden Power</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryHiddenPower"/>
-           </item>
-           <item row="3" column="2">
-            <widget class="QLabel" name="labelStationaryAbility">
-             <property name="text">
-              <string>Ability</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryAbility"/>
-           </item>
-           <item row="4" column="2">
-            <widget class="QLabel" name="labelStationaryGender">
-             <property name="text">
-              <string>Gender</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryGender"/>
            </item>
           </layout>
          </widget>

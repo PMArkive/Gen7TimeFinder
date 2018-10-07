@@ -1,10 +1,12 @@
 #include "StationaryFilter.hpp"
 
-StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, u8 nature)
+StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int nature, int hiddenPower, bool shiny)
 {
     this->minIV = minIV;
     this->maxIV = maxIV;
     this->nature = nature;
+    this->hiddenPower = hiddenPower;
+    this->shiny = shiny;
 }
 
 bool StationaryFilter::compare(StationaryModel frame)
@@ -13,6 +15,24 @@ bool StationaryFilter::compare(StationaryModel frame)
     {
         int iv = frame.getIV(i);
         if (iv < minIV[i] || iv > maxIV[i])
+            return false;
+    }
+
+    if (nature != -1)
+    {
+        if (nature != frame.getNature())
+            return false;
+    }
+
+    if (hiddenPower != -1)
+    {
+        if (hiddenPower != frame.getHiddenPower())
+            return false;
+    }
+
+    if (shiny)
+    {
+        if (!frame.getShiny())
             return false;
     }
 

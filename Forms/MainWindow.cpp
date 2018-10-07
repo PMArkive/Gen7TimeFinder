@@ -77,7 +77,7 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
                          ui->spinBoxStationaryMaxSpA->value(), ui->spinBoxStationaryMaxSpD->value(), ui->spinBoxStationaryMaxSpe->value()
                        };
 
-    StationaryFilter filter(min, max, 0);
+    StationaryFilter filter(min, max, ui->comboBoxStationaryNature->currentIndex() - 1, ui->comboBoxStationaryHiddenPower->currentIndex() - 1, ui->checkBoxStationaryShiny->isChecked());
 
     StationarySearcher *search = new StationarySearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], ui->spinBoxStationaryPerfectIVs->value(), filter);
     connect(search, &StationarySearcher::resultReady, this, &MainWindow::addStationaryFrame);

@@ -6,7 +6,6 @@
 
 typedef uint32_t u32;
 typedef uint16_t u16;
-typedef uint8_t u8;
 
 class StationaryModel
 {
@@ -14,15 +13,15 @@ class StationaryModel
 private:
     QDateTime target;
     u32 seed, pid, ec, frame;
-    u16 psv;
-    u8 hiddenPower, ability, nature, gender;
+    u16 psv, tsv;
+    int hiddenPower, ability, nature, gender;
     int ivs[6];
     bool shiny;
     bool synch;
 
 public:
     StationaryModel() {}
-    StationaryModel(u32 seed);
+    StationaryModel(u32 seed, u16 tid, u16 sid);
     QString getDateTime() const;
     void setTarget(const QDateTime &value);
     u32 getSeed() const;
@@ -33,14 +32,14 @@ public:
     u32 getFrame() const;
     void setFrame(const u32 &value);
     u16 getPSV() const;
-    u8 getHiddenPower() const;
+    int getHiddenPower() const;
     void calcHiddenPower();
-    u8 getAbility() const;
-    void setAbility(const u8 &value);
-    u8 getNature() const;
-    void setNature(const u8 &value);
-    u8 getGender() const;
-    void setGender(const u8 &value);
+    int getAbility() const;
+    void setAbility(const int &value);
+    int getNature() const;
+    void setNature(const int &value);
+    int getGender() const;
+    void setGender(const int &value);
     int getIV(int i) const;
     void setIV(const int &i, const int &value);
     bool getShiny() const;

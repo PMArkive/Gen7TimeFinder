@@ -37,8 +37,8 @@ void StationarySearcher::run()
             if (cancel)
                 return;
 
-            StationaryModel result(initialSeed);
-            int index = 0;
+            StationaryModel result(initialSeed, profile.getTID(), profile.getSID());
+            u32 index = 0;
 
             // TODO
             /*
@@ -52,7 +52,7 @@ void StationarySearcher::run()
             }*/
 
             //Encryption Constant
-            result.setEC(seeds[index++] & 0xffffffff);
+            result.setEC(seeds[frame + index++] & 0xffffffff);
 
 
             // TODO add pid roll count
@@ -73,12 +73,12 @@ void StationarySearcher::run()
                     rt.PID = (uint)((((TSV << 4) ^ (rt.PID & 0xFFFF)) << 16) + (rt.PID & 0xFFFF)); // Not accurate
                 }
             }*/
-            result.setPID(seeds[index++] & 0xffffffff);
+            result.setPID(seeds[frame + index++] & 0xffffffff);
 
             //IV
             for (int i = ivCount; i > 0;)
             {
-                int tmp = seeds[index++] % 6;
+                int tmp = seeds[frame + index++] % 6;
                 if (result.getIV(tmp) == -1)
                 {
                     result.setIV(tmp, 31);
@@ -88,14 +88,16 @@ void StationarySearcher::run()
 
             for (int i = 0; i < 6; i++)
                 if (result.getIV(i) == -1)
-                    result.setIV(i, seeds[index++] & 0x1f);
+                    result.setIV(i, seeds[frame + index++] & 0x1f);
+
+            result.calcHiddenPower();
 
             //Ability
-            result.setAbility((seeds[index++] & 1) + 1);
+            result.setAbility((seeds[frame + index++] & 1) + 1);
             //rt.Ability = Ability > 0 ? Ability : (byte)((getrand & 1) + 1);
 
             //Nature
-            result.setNature(seeds[index++] % 25);
+            result.setNature(seeds[frame + index++] % 25);
 
             // TODO Gender
             //rt.Gender = RandomGender ? (byte)(getrand % 252 >= Gender ? 1 : 2) : Gender;
@@ -104,6 +106,7 @@ void StationarySearcher::run()
             {
                 QDateTime target = QDateTime::fromMSecsSinceEpoch(static_cast<qlonglong>(Utility::getNormalTime(epoch, profile.getOffset())), Qt::UTC);
                 result.setTarget(target);
+                result.setFrame(frame + startFrame);
                 results.append(result);
             }
         }
