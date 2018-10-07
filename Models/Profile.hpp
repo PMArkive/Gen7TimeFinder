@@ -2,11 +2,6 @@
 #define PROFILE_HPP
 
 #include <QString>
-#include <QDomDocument>
-#include <QApplication>
-#include <QFile>
-#include <QTextStream>
-#include <QVector>
 #include <Core/Game.hpp>
 #include <cstdint>
 
@@ -31,10 +26,6 @@ public:
     u16 getSID() const;
     Game getVersion() const;
     QString getVersionString() const;
-    static QVector<Profile> loadProfileList();
-    void saveProfile();
-    void deleteProfile();
-    void updateProfile(Profile edit);
 
 };
 

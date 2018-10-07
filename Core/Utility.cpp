@@ -60,3 +60,216 @@ QString Utility::getHiddenPower(u8 hiddenPower)
                                      };
     return hiddenPowers[hiddenPower];
 }
+
+QVector<Profile> Utility::loadProfileList()
+{
+    QVector<Profile> profileList;
+
+    QDomDocument doc;
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    {
+        doc.setContent(&file);
+        file.close();
+
+        QDomElement profiles = doc.documentElement();
+        QDomNode domNode = profiles.firstChild();
+        while (!domNode.isNull())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (!domElement.isNull())
+            {
+                if (domElement.tagName() == "Gen7")
+                {
+                    QDomNode info = domElement.firstChild();
+                    QString name;
+                    u32 offset = 0;
+                    u16 tid = 0, sid = 0;
+                    Game version = Game::UltraSun;
+                    while (!info.isNull())
+                    {
+                        QDomElement infoElement = info.toElement();
+                        if (!infoElement.isNull())
+                        {
+                            const QString tagName(infoElement.tagName());
+                            if (tagName == "name")
+                            {
+                                name = infoElement.text();
+                            }
+                            else if (tagName == "offset")
+                            {
+                                offset = infoElement.text().toUInt();
+                            }
+                            else if (tagName == "tid")
+                            {
+                                tid = infoElement.text().toUShort();
+                            }
+                            else if (tagName == "sid")
+                            {
+                                sid = infoElement.text().toUShort();
+                            }
+                            else if (tagName == "version")
+                            {
+                                version = static_cast<Game>(infoElement.text().toInt());
+                            }
+
+                            info = info.nextSibling();
+                        }
+                    }
+                    profileList.append(Profile(name, offset, tid, sid, static_cast<Game>(version)));
+                }
+            }
+            domNode = domNode.nextSibling();
+        }
+    }
+
+    return profileList;
+}
+
+void Utility::saveProfile(Profile profile)
+{
+    QDomDocument doc;
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    {
+        doc.setContent(&file);
+        file.close();
+
+        QDomElement profiles = doc.documentElement();
+
+        QDomElement gen7 = doc.createElement("Gen7");
+        QDomElement name = doc.createElement("name");
+        QDomElement offset = doc.createElement("offset");
+        QDomElement tid = doc.createElement("tid");
+        QDomElement sid = doc.createElement("sid");
+        QDomElement version = doc.createElement("version");
+
+        name.appendChild(doc.createTextNode(profile.getName()));
+        offset.appendChild(doc.createTextNode(QString::number(profile.getOffset())));
+        tid.appendChild(doc.createTextNode(QString::number(profile.getTID())));
+        sid.appendChild(doc.createTextNode(QString::number(profile.getSID())));
+        version.appendChild(doc.createTextNode(QString::number(profile.getVersion())));
+
+        gen7.appendChild(name);
+        gen7.appendChild(offset);
+        gen7.appendChild(tid);
+        gen7.appendChild(sid);
+        gen7.appendChild(version);
+
+        if (profiles.isNull())
+        {
+            profiles = doc.createElement("Profiles");
+            profiles.appendChild(gen7);
+            doc.appendChild(profiles);
+        }
+        else
+        {
+            profiles.appendChild(gen7);
+        }
+
+        if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QFile::Text))
+        {
+            QTextStream stream(&file);
+            stream.setCodec("UTF-8");
+            stream << doc.toString();
+        }
+        file.close();
+    }
+}
+
+void Utility::deleteProfile(Profile profile)
+{
+    QDomDocument doc;
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    {
+        doc.setContent(&file);
+        file.close();
+
+        QDomElement profiles = doc.documentElement();
+        QDomNode domNode = profiles.firstChild();
+        while (!domNode.isNull())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (!domElement.isNull())
+            {
+                if (domElement.tagName() == "Gen7")
+                {
+                    QDomNode info = domElement.firstChild();
+                    while (!info.isNull())
+                    {
+                        QDomElement infoElement = info.toElement();
+                        if (!infoElement.isNull())
+                        {
+                            const QString tagName(infoElement.tagName());
+                            if (tagName == "name")
+                            {
+                                if (profile.getName() == infoElement.text())
+                                {
+                                    domNode.parentNode().removeChild(domNode);
+
+                                    if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QFile::Text))
+                                    {
+                                        QTextStream stream(&file);
+                                        stream.setCodec("UTF-8");
+                                        stream << doc.toString();
+                                    }
+                                    file.close();
+                                    return;
+                                }
+                            }
+                            info = info.nextSibling();
+                        }
+                    }
+                }
+            }
+            domNode = domNode.nextSibling();
+        }
+    }
+}
+
+void Utility::updateProfile(Profile original, Profile edit)
+{
+    QDomDocument doc;
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (file.open(QIODevice::ReadOnly | QFile::Text))
+    {
+        doc.setContent(&file);
+        file.close();
+
+        QDomElement profiles = doc.documentElement();
+        QDomNode domNode = profiles.firstChild();
+        while (!domNode.isNull())
+        {
+            QDomElement domElement = domNode.toElement();
+            if (!domElement.isNull() && domElement.tagName() == "Gen7")
+            {
+                QString name = domElement.childNodes().at(0).toElement().text();
+                u32 offset = domElement.childNodes().at(1).toElement().text().toUInt();
+                u16 tid = domElement.childNodes().at(2).toElement().text().toUShort();
+                u16 sid = domElement.childNodes().at(3).toElement().text().toUShort();
+                int version = domElement.childNodes().at(4).toElement().text().toInt();
+
+                if (original.getName() == name && original.getOffset() == offset && original.getTID() == tid && original.getSID() == sid && original.getVersion() == version)
+                {
+                    domElement.childNodes().at(0).toElement().firstChild().setNodeValue(edit.getName());
+                    domElement.childNodes().at(1).toElement().firstChild().setNodeValue(QString::number(edit.getOffset()));
+                    domElement.childNodes().at(3).toElement().firstChild().setNodeValue(QString::number(edit.getTID()));
+                    domElement.childNodes().at(4).toElement().firstChild().setNodeValue(QString::number(edit.getSID()));
+                    domElement.childNodes().at(1).toElement().firstChild().setNodeValue(QString::number(edit.getVersion()));
+
+                    if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QFile::Text))
+                    {
+                        QTextStream stream(&file);
+                        stream.setCodec("UTF-8");
+                        stream << doc.toString();
+                    }
+                    file.close();
+                    return;
+                }
+            }
+            domNode = domNode.nextSibling();
+        }
+    }
+}
+

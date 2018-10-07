@@ -4,7 +4,13 @@
 #include <QCryptographicHash>
 #include <QDateTime>
 #include <QString>
+#include <QDomDocument>
+#include <QApplication>
+#include <QFile>
+#include <QTextStream>
+#include <QVector>
 #include <cstdint>
+#include <Models/Profile.hpp>
 
 typedef uint64_t u64;
 typedef uint32_t u32;
@@ -18,6 +24,10 @@ namespace Utility
     u32 calcInitialSeed(u32 *values);
     QString getNature(u8 nature);
     QString getHiddenPower(u8 hiddenPower);
+    QVector<Profile> loadProfileList();
+    void saveProfile(Profile profile);
+    void deleteProfile(Profile profile);
+    void updateProfile(Profile original, Profile edit);
 
 }
 

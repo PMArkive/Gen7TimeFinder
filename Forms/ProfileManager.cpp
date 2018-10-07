@@ -6,9 +6,11 @@ ProfileManager::ProfileManager(QWidget *parent) :
     ui(new Ui::ProfileManager)
 {
     ui->setupUi(this);
-    model = new ProfileView();
+    setAttribute(Qt::WA_QuitOnClose, false);
+    setAttribute(Qt::WA_DeleteOnClose);
 
-    model->setModel(Profile::loadProfileList());
+    model = new ProfileView();
+    model->setModel(Utility::loadProfileList());
     ui->tableView->setModel(model);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -24,9 +26,9 @@ void ProfileManager::on_pushButtonNew_clicked()
     ProfileEditor *dialog = new ProfileEditor();
     if (dialog->exec() == QDialog::Accepted)
     {
-        //Profile profile = dialog->getNewProfile();
-        //profile.saveProfile();
-        //model->addItem(profile);
+        Profile profile = dialog->getNewProfile();
+        Utility::saveProfile(profile);
+        model->addItem(profile);
         emit updateProfiles();
     }
     delete dialog;
@@ -48,7 +50,7 @@ void ProfileManager::on_pushButtonEdit_clicked()
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile profile = dialog->getNewProfile();
-        profile.updateProfile(dialog->getOriginal());
+        Utility::updateProfile(dialog->getOriginal(), profile);
         int r = ui->tableView->currentIndex().row();
         model->updateProfile(profile, r);
         emit updateProfiles();
@@ -68,11 +70,8 @@ void ProfileManager::on_pushButtonDelete_clicked()
         return;
     }
 
-    Profile profile = model->getProfile(r);
-    profile.deleteProfile();
-
+    Utility::deleteProfile(model->getProfile(r));
     model->removeProfile(r);
-
     emit updateProfiles();
 }
 

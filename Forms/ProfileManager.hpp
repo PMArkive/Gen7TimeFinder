@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <Core/Utility.hpp>
 #include <Forms/ProfileEditor.hpp>
 #include <Views/ProfileView.hpp>
 

@@ -3,10 +3,13 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
-#include <Core/StationarySearcher.hpp>
-#include <Views/StationaryView.hpp>
+#include <QVector>
 #include <Core/IDSearcher.hpp>
 #include <Core/IDFilter.hpp>
+#include <Core/StationarySearcher.hpp>
+#include <Core/Utility.hpp>
+#include <Forms/ProfileManager.hpp>
+#include <Views/StationaryView.hpp>
 #include <Views/IDView.hpp>
 
 namespace Ui
@@ -31,6 +34,7 @@ private slots:
     void on_pushButtonIDSearch_clicked();
     void addIDFrame(QVector<IDModel> frames);
     void updateIDProgess(int val);
+    void updateProfiles();
 
 private:
     Ui::MainWindow *ui;
@@ -38,6 +42,10 @@ private:
     //EventView *eventView;
     //WildView *wildView;
     IDView *idView;
+    QVector<Profile> profiles;
+
+    void createProfileXML();
+    void setupModel();
 
 };
 

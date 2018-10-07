@@ -7,28 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    stationaryView = new StationaryView();
-    //eventView = new EventView();
-    //wildView = new WildView();
-    idView = new IDView();
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (!file.exists())
+        createProfileXML();
 
-    ui->tableViewStationary->setModel(stationaryView);
-    ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableViewStationary->verticalHeader()->setVisible(false);
-
-    //ui->tableViewEvent->setModel(eventView);
-    ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableViewEvent->verticalHeader()->setVisible(false);
-
-    //ui->tableViewWild->setModel(wildView);
-    ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableViewWild->verticalHeader()->setVisible(false);
-
-    ui->tableViewID->setModel(idView);
-    ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableViewID->verticalHeader()->setVisible(false);
-
-    qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
+    setupModel();
+    updateProfiles();
 }
 
 MainWindow::~MainWindow()
@@ -42,12 +26,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonProfileManager_clicked()
 {
-
+    ProfileManager *manager = new ProfileManager();
+    connect(manager, &ProfileManager::updateProfiles, this, &MainWindow::updateProfiles);
+    manager->show();
+    manager->raise();
 }
 
 void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
 {
-
+    if (index != -1)
+    {
+        auto profile = profiles[index];
+        ui->labelProfileOffsetValue->setText(QString::number(profile.getOffset()));
+        ui->labelProfileTIDValue->setText(QString::number(profile.getTID()));
+        ui->labelProfileSIDValue->setText(QString::number(profile.getSID()));
+        ui->labelProfileGameValue->setText(profile.getVersionString());
+    }
 }
 
 void MainWindow::on_pushButtonStationarySearch_clicked()
@@ -121,4 +115,60 @@ void MainWindow::addIDFrame(QVector<IDModel> frames)
 void MainWindow::updateIDProgess(int val)
 {
     ui->progressBarID->setValue(val);
+}
+
+void MainWindow::updateProfiles()
+{
+    profiles = Utility::loadProfileList();
+    profiles.insert(profiles.begin(), Profile());
+
+    ui->comboBoxProfiles->clear();
+
+    for (auto profile : profiles)
+        ui->comboBoxProfiles->addItem(profile.getName());
+
+    /*QSettings setting;
+    int val = setting.value("stationary3Profile").toInt();
+    if (val < ui->comboBoxProfiles->count())
+        ui->comboBoxProfiles->setCurrentIndex(val);*/
+}
+
+void MainWindow::createProfileXML()
+{
+    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QDomDocument doc;
+        QDomElement profiles = doc.createElement(QString("Profiles"));
+        doc.appendChild(profiles);
+        QTextStream stream(&file);
+        stream << doc.toString();
+        file.close();
+    }
+}
+
+void MainWindow::setupModel()
+{
+    stationaryView = new StationaryView();
+    //eventView = new EventView();
+    //wildView = new WildView();
+    idView = new IDView();
+
+    ui->tableViewStationary->setModel(stationaryView);
+    ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewStationary->verticalHeader()->setVisible(false);
+
+    //ui->tableViewEvent->setModel(eventView);
+    ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewEvent->verticalHeader()->setVisible(false);
+
+    //ui->tableViewWild->setModel(wildView);
+    ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewWild->verticalHeader()->setVisible(false);
+
+    ui->tableViewID->setModel(idView);
+    ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewID->verticalHeader()->setVisible(false);
+
+    qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
 }
