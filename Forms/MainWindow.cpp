@@ -197,19 +197,19 @@ void MainWindow::setupModel()
     idView = new IDView();
 
     ui->tableViewStationary->setModel(stationaryView);
-    ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewStationary->verticalHeader()->setVisible(false);
 
     //ui->tableViewEvent->setModel(eventView);
-    ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewEvent->verticalHeader()->setVisible(false);
 
     //ui->tableViewWild->setModel(wildView);
-    ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewWild->verticalHeader()->setVisible(false);
 
     ui->tableViewID->setModel(idView);
-    ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewID->verticalHeader()->setVisible(false);
 
     qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
