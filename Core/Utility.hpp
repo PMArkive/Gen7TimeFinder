@@ -19,8 +19,8 @@ typedef uint8_t u8;
 namespace Utility
 {
     u32 changeEndian(u32 num);
-    u64 getCitraTime(QDateTime dateTime);
-    u64 getNormalTime(u64 time);
+    u64 getCitraTime(QDateTime dateTime, u64 offset);
+    u64 getNormalTime(u64 time, u64 offset);
     u32 calcInitialSeed(u32 *values);
     QString getNature(u8 nature);
     QString getHiddenPower(u8 hiddenPower);

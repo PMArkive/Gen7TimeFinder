@@ -220,10 +220,220 @@
           <property name="title">
            <string>Filters</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelStationaryPerfectIVs">
+             <property name="text">
+              <string>Perfect IVs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="spinBoxStationaryPerfectIVs">
+             <property name="maximum">
+              <number>6</number>
+             </property>
+             <property name="value">
+              <number>3</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" rowspan="4" colspan="2">
+            <layout class="QGridLayout" name="gridLayout_10">
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelStationaryHP">
+               <property name="text">
+                <string>HP</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelStationaryAtk">
+               <property name="text">
+                <string>Atk</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelStationaryDef">
+               <property name="text">
+                <string>Def</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelStationarySpA">
+               <property name="text">
+                <string>SpA</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="labelStationarySpD">
+               <property name="text">
+                <string>SpD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinSpD">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpD">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="labelStationarySpe">
+               <property name="text">
+                <string>Spe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="labelStationaryNature">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>Nature</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryNature"/>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="labelStationaryHiddenPower">
+             <property name="text">
+              <string>Hidden Power</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryHiddenPower"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="labelStationaryAbility">
+             <property name="text">
+              <string>Ability</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryAbility"/>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="labelStationaryGender">
+             <property name="text">
+              <string>Gender</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QComboBox" name="comboBoxStationaryGender"/>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="groupBoxStationarySettings">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>1</horstretch>
@@ -231,7 +441,7 @@
            </sizepolicy>
           </property>
           <property name="title">
-           <string>GroupBox</string>
+           <string>Settings</string>
           </property>
          </widget>
         </item>

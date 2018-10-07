@@ -12,7 +12,7 @@ class IDModel
 {
 
 private:
-    QDateTime start;
+    QDateTime target;
     u32 seed, frame;
     u16 tid;
     u16 sid;
@@ -29,7 +29,7 @@ public:
     u16 getSID() const;
     u16 getTSV() const;
     u32 getDisplayTID() const;
-    void setStart(const QDateTime &value);
+    void setTarget(const QDateTime &value);
 
 };
 

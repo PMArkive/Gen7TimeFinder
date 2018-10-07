@@ -4,7 +4,6 @@ IDModel::IDModel(u32 seed, u32 frame, u32 rand)
 {
     this->seed = seed;
     this->frame = frame;
-    this->start = start;
     tid = rand & 0xffff;
     sid = rand >> 16;
     tsv = (tid ^ sid) >> 4;
@@ -13,7 +12,7 @@ IDModel::IDModel(u32 seed, u32 frame, u32 rand)
 
 QString IDModel::getDateTime()
 {
-    return start.toString();
+    return target.toString();
 }
 
 u32 IDModel::getSeed() const
@@ -46,7 +45,7 @@ u32 IDModel::getDisplayTID() const
     return displayTID;
 }
 
-void IDModel::setStart(const QDateTime &value)
+void IDModel::setTarget(const QDateTime &value)
 {
-    start = value;
+    target = value;
 }

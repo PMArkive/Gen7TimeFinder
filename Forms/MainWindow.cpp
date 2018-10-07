@@ -46,7 +46,49 @@ void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
 
 void MainWindow::on_pushButtonStationarySearch_clicked()
 {
-    // TODO
+    QDateTime start = ui->dateTimeEditStationaryStartDate->dateTime();
+    QDateTime end = ui->dateTimeEditStationaryEndDate->dateTime();
+    u32 frameStart = ui->lineEditStationaryStartFrame->text().toUInt();
+    u32 frameEnd = ui->lineEditStationaryEndFrame->text().toUInt();
+
+    if (start > end)
+    {
+        QMessageBox error;
+        error.setText(tr("Set end date to be after start date."));
+        error.exec();
+        return;
+    }
+    else if (frameStart > frameEnd)
+    {
+        QMessageBox error;
+        error.setText(tr("Set end frame to be after start frame"));
+        error.exec();
+        return;
+    }
+
+    stationaryView->clear();
+    ui->pushButtonStationarySearch->setEnabled(false);
+    ui->pushButtonStationaryCancel->setEnabled(true);
+
+    QVector<int> min = { ui->spinBoxStationaryMinHP->value(), ui->spinBoxStationaryMinAtk->value(), ui->spinBoxStationaryMinDef->value(),
+                         ui->spinBoxStationaryMinSpA->value(), ui->spinBoxStationaryMinSpD->value(), ui->spinBoxStationaryMinSpe->value()
+                       };
+    QVector<int> max = { ui->spinBoxStationaryMaxHP->value(), ui->spinBoxStationaryMaxAtk->value(), ui->spinBoxStationaryMaxDef->value(),
+                         ui->spinBoxStationaryMaxSpA->value(), ui->spinBoxStationaryMaxSpD->value(), ui->spinBoxStationaryMaxSpe->value()
+                       };
+
+    StationaryFilter filter(min, max, 0);
+
+    StationarySearcher *search = new StationarySearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], ui->spinBoxStationaryPerfectIVs->value(), filter);
+    connect(search, &StationarySearcher::resultReady, this, &MainWindow::addStationaryFrame);
+    connect(search, &StationarySearcher::updateProgress, this, &MainWindow::updateStationaryProgress);
+    connect(search, &StationarySearcher::finished, search, &QObject::deleteLater);
+    connect(search, &StationarySearcher::finished, this, [ = ] { ui->pushButtonStationarySearch->setEnabled(true); ui->pushButtonStationaryCancel->setEnabled(false); });
+    connect(ui->pushButtonStationaryCancel, &QPushButton::clicked, search, &StationarySearcher::cancelSearch);
+
+    ui->progressBarStationary->setMaximum(search->maxProgress());
+
+    search->start();
 }
 
 void MainWindow::addStationaryFrame(QVector<StationaryModel> frames)
@@ -95,7 +137,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     else
         filterType = 3;
 
-    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, 0x383e329, IDFilter(ui->textEditIDFilter->toPlainText(), ui->textEditTSVFilter->toPlainText(), filterType));
+    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], IDFilter(ui->textEditIDFilter->toPlainText(), ui->textEditTSVFilter->toPlainText(), filterType));
     connect(search, &IDSearcher::resultReady, this, &MainWindow::addIDFrame);
     connect(search, &IDSearcher::updateProgress, this, &MainWindow::updateIDProgess);
     connect(search, &IDSearcher::finished, search, &QObject::deleteLater);
@@ -171,4 +213,5 @@ void MainWindow::setupModel()
     ui->tableViewID->verticalHeader()->setVisible(false);
 
     qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
+    qRegisterMetaType<QVector<StationaryModel>>("QVector<StationaryModel>");
 }

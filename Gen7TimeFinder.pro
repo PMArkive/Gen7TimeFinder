@@ -49,7 +49,8 @@ HEADERS += \
     Core/Game.hpp \
     Forms/ProfileManager.hpp \
     Views/ProfileView.hpp \
-    Forms/ProfileEditor.hpp
+    Forms/ProfileEditor.hpp \
+    Core/StationaryFilter.hpp
 
 SOURCES += \
     Core/IDSearcher.cpp \
@@ -66,4 +67,5 @@ SOURCES += \
     Models/Profile.cpp \
     Forms/ProfileManager.cpp \
     Views/ProfileView.cpp \
-    Forms/ProfileEditor.cpp
+    Forms/ProfileEditor.cpp \
+    Core/StationaryFilter.cpp

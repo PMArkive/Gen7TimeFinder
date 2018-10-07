@@ -8,15 +8,15 @@ u32 Utility::changeEndian(u32 num)
            ((num << 24) & 0xff000000);
 }
 
-u64 Utility::getCitraTime(QDateTime dateTime)
+u64 Utility::getCitraTime(QDateTime dateTime, u64 offset)
 {
-    u64 val = static_cast<u64>(dateTime.toMSecsSinceEpoch()) + 17017;
+    u64 val = static_cast<u64>(dateTime.toMSecsSinceEpoch()) + offset;
     return val - 946684800000;
 }
 
-u64 Utility::getNormalTime(u64 time)
+u64 Utility::getNormalTime(u64 time, u64 offset)
 {
-    return time + 946684800000 - 17017;
+    return time + 946684800000 - offset;
 }
 
 u32 Utility::calcInitialSeed(u32 *values)

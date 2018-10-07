@@ -3,9 +3,13 @@
 
 #include <QThread>
 #include <QVector>
-#include <Core/Utility.hpp>
 #include <Core/SFMT.hpp>
+#include <Core/StationaryFilter.hpp>
+#include <Core/Utility.hpp>
 #include <Models/StationaryModel.hpp>
+#include <Models/Profile.hpp>
+
+typedef uint64_t u64;
 
 class StationarySearcher : public QThread
 {
@@ -18,11 +22,13 @@ signals:
 private:
     bool cancel, alwaysSynch;
     QDateTime startTime, endTime;
-    u32 startFrame, endFrame, tick;
-    int progress;
+    u32 startFrame, endFrame;
+    int progress, ivCount;
+    Profile profile;
+    StationaryFilter filter;
 
 public:
-    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick);
+    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, int ivCount, StationaryFilter filter);
     void run();
     int maxProgress();
 

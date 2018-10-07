@@ -4,10 +4,11 @@
 #include <QThread>
 #include <QVector>
 #include <QPair>
-#include <Core/Utility.hpp>
-#include <Core/SFMT.hpp>
 #include <Core/IDFilter.hpp>
+#include <Core/SFMT.hpp>
+#include <Core/Utility.hpp>
 #include <Models/IDModel.hpp>
+#include <Models/Profile.hpp>
 
 class IDSearcher : public QThread
 {
@@ -20,12 +21,13 @@ signals:
 private:
     bool cancel;
     QDateTime startTime, endTime;
-    u32 startFrame, endFrame, tick;
+    u32 startFrame, endFrame;
     int progress;
-    IDFilter compare;
+    IDFilter filter;
+    Profile profile;
 
 public:
-    IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, u32 tick, IDFilter compare);
+    IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, IDFilter filter);
     void run();
     int maxProgress();
 
