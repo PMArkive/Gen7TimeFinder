@@ -1,6 +1,6 @@
 #include "StationaryFilter.hpp"
 
-StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int nature, int hiddenPower, int ability, bool shiny)
+StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int nature, int hiddenPower, int ability, bool shiny, int gender)
 {
     this->minIV = minIV;
     this->maxIV = maxIV;
@@ -8,6 +8,7 @@ StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int n
     this->hiddenPower = hiddenPower;
     this->ability = ability;
     this->shiny = shiny;
+    this->gender = gender;
 }
 
 bool StationaryFilter::compare(StationaryModel frame)
@@ -40,6 +41,12 @@ bool StationaryFilter::compare(StationaryModel frame)
     if (shiny)
     {
         if (!frame.getShiny())
+            return false;
+    }
+
+    if (gender != 0)
+    {
+        if (gender != frame.getGender() && frame.getGender() != 0)
             return false;
     }
 

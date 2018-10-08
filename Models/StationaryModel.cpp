@@ -92,7 +92,7 @@ void StationaryModel::setNature(const int &value)
 
 QString StationaryModel::getGenderString() const
 {
-    return gender == 0 ? "Genderless" : gender == 1 ? "♂" : "♀";
+    return gender == 0 ? "-" : gender == 1 ? "♂" : "♀";
 }
 
 int StationaryModel::getGender() const

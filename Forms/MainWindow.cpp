@@ -82,7 +82,7 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
                        };
 
     StationaryFilter filter(min, max, ui->comboBoxStationaryNature->currentIndex() - 1, ui->comboBoxStationaryHiddenPower->currentIndex() - 1,
-                            ui->comboBoxStationaryAbility->currentIndex() - 1, ui->checkBoxStationaryShiny->isChecked());
+                            ui->comboBoxStationaryAbility->currentIndex() - 1, ui->checkBoxStationaryShiny->isChecked(), ui->comboBoxStationaryGender->currentIndex());
 
     StationarySearcher *search = new StationarySearcher(start, end, frameStart, frameEnd, ui->checkBoxStationary3IVs->isChecked(),
             ui->checkBoxStationaryAbilityLock->isChecked() ? ui->comboBoxStationaryAbilityLock->currentIndex() : -1, ui->comboBoxStationarySynchNature->currentIndex() - 1,
@@ -228,13 +228,13 @@ void MainWindow::setupModel()
     ui->comboBoxStationaryGenderRatio->addItems(Utility::getGenderRatios());
 
     ui->comboBoxStationaryGenderRatio->setItemData(0, 0);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 126);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 30);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 62);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 190);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 224);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 1);
-    ui->comboBoxStationaryGenderRatio->setItemData(0, 2);
+    ui->comboBoxStationaryGenderRatio->setItemData(1, 126);
+    ui->comboBoxStationaryGenderRatio->setItemData(2, 30);
+    ui->comboBoxStationaryGenderRatio->setItemData(3, 62);
+    ui->comboBoxStationaryGenderRatio->setItemData(4, 190);
+    ui->comboBoxStationaryGenderRatio->setItemData(5, 224);
+    ui->comboBoxStationaryGenderRatio->setItemData(6, 1);
+    ui->comboBoxStationaryGenderRatio->setItemData(7, 2);
 
     qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
     qRegisterMetaType<QVector<StationaryModel>>("QVector<StationaryModel>");
