@@ -224,23 +224,6 @@
            <string>Filters</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_11">
-           <item row="0" column="0">
-            <widget class="QLabel" name="labelStationaryPerfectIVs">
-             <property name="text">
-              <string>Perfect IVs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBoxStationaryPerfectIVs">
-             <property name="maximum">
-              <number>6</number>
-             </property>
-             <property name="value">
-              <number>3</number>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="2">
             <widget class="QLabel" name="labelStationaryNature">
              <property name="frameShape">
@@ -252,138 +235,7 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryNature">
-             <item>
-              <property name="text">
-               <string>None</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Hardy</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Lonely</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Brave</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Adamant</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Naughty</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Bold</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Docile</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Relaxed</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Impish</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Lax</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Timid</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Hasty</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Serious</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Jolly</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Naive</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Modest</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Mild</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Quiet</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Bashful</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Rash</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Calm</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Gentle</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Sassy</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Careful</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Quirky</string>
-              </property>
-             </item>
-            </widget>
+            <widget class="QComboBox" name="comboBoxStationaryNature"/>
            </item>
            <item row="1" column="2">
             <widget class="QLabel" name="labelStationaryHiddenPower">
@@ -393,93 +245,7 @@
             </widget>
            </item>
            <item row="1" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryHiddenPower">
-             <item>
-              <property name="text">
-               <string>None</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Fighting</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Flying</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Poison</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Ground</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Rock</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Bug</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Ghost</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Steel</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Fire</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Water</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Grass</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Electric</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Psychic</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Ice</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Dragon</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </item>
-            </widget>
+            <widget class="QComboBox" name="comboBoxStationaryHiddenPower"/>
            </item>
            <item row="2" column="2">
             <widget class="QLabel" name="labelStationaryAbility">
@@ -489,7 +255,28 @@
             </widget>
            </item>
            <item row="2" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryAbility"/>
+            <widget class="QComboBox" name="comboBoxStationaryAbility">
+             <item>
+              <property name="text">
+               <string>Any</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">H</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item row="3" column="2">
             <widget class="QLabel" name="labelStationaryGender">
@@ -499,7 +286,23 @@
             </widget>
            </item>
            <item row="3" column="3">
-            <widget class="QComboBox" name="comboBoxStationaryGender"/>
+            <widget class="QComboBox" name="comboBoxStationaryGender">
+             <item>
+              <property name="text">
+               <string>Any</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♂</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♀</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item row="4" column="2">
             <widget class="QLabel" name="labelStationaryShiny">
@@ -515,8 +318,62 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0" rowspan="4" colspan="2">
+           <item row="0" column="0" rowspan="5" colspan="2">
             <layout class="QGridLayout" name="gridLayout_10">
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="labelStationarySpD">
+               <property name="text">
+                <string>SpD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="labelStationaryHP">
                <property name="text">
@@ -524,19 +381,16 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="spinBoxStationaryMinHP">
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinSpD">
                <property name="maximum">
                 <number>31</number>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxHP">
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinHP">
                <property name="maximum">
-                <number>31</number>
-               </property>
-               <property name="value">
                 <number>31</number>
                </property>
               </widget>
@@ -555,8 +409,15 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxAtk">
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelStationaryDef">
+               <property name="text">
+                <string>Def</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxDef">
                <property name="maximum">
                 <number>31</number>
                </property>
@@ -565,22 +426,22 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="labelStationaryDef">
-               <property name="text">
-                <string>Def</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSpinBox" name="spinBoxStationaryMinDef">
+             <item row="5" column="1">
+              <widget class="QSpinBox" name="spinBoxStationaryMinSpe">
                <property name="maximum">
                 <number>31</number>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxDef">
+             <item row="5" column="0">
+              <widget class="QLabel" name="labelStationarySpe">
+               <property name="text">
+                <string>Spe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QSpinBox" name="spinBoxStationaryMaxSpD">
                <property name="maximum">
                 <number>31</number>
                </property>
@@ -603,80 +464,9 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxSpA">
-               <property name="maximum">
-                <number>31</number>
-               </property>
-               <property name="value">
-                <number>31</number>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="labelStationarySpD">
-               <property name="text">
-                <string>SpD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QSpinBox" name="spinBoxStationaryMinSpD">
-               <property name="maximum">
-                <number>31</number>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxSpD">
-               <property name="maximum">
-                <number>31</number>
-               </property>
-               <property name="value">
-                <number>31</number>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="labelStationarySpe">
-               <property name="text">
-                <string>Spe</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QSpinBox" name="spinBoxStationaryMinSpe">
-               <property name="maximum">
-                <number>31</number>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QSpinBox" name="spinBoxStationaryMaxSpe">
-               <property name="maximum">
-                <number>31</number>
-               </property>
-               <property name="value">
-                <number>31</number>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBoxStationarySettings">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>1</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string>Settings</string>
-          </property>
          </widget>
         </item>
         <item row="1" column="0" colspan="3">
@@ -684,6 +474,129 @@
           <property name="value">
            <number>0</number>
           </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBoxStationarySettings">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>2</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Settings</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="2" column="1">
+            <widget class="QComboBox" name="comboBoxStationaryAbilityLock">
+             <item>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">H</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="checkBoxStationaryAbilityLock">
+             <property name="text">
+              <string>Ability Locked</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="0" colspan="3">
+            <layout class="QGridLayout" name="gridLayout_13">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxStationaryAlwaysSynch">
+               <property name="text">
+                <string>Always Synched</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBoxStationary3IVs">
+               <property name="text">
+                <string>3 IVs</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="checkBoxStationaryShinyLock">
+               <property name="text">
+                <string>Shiny Locked</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="0" colspan="3">
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelStationaryCategory">
+               <property name="text">
+                <string>Category</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBoxStationaryCategory"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="labelStationaryPokemon">
+               <property name="text">
+                <string>Pokemon</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="comboBoxStationaryPokemon"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelStationarySynchNature">
+               <property name="text">
+                <string>Synch Nature</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBoxStationarySynchNature"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="labelStationaryGenderRatio">
+               <property name="text">
+                <string>Gender Ratio</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QComboBox" name="comboBoxStationaryGenderRatio"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -1044,7 +957,7 @@
        <string>Profiles</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_9">
-       <item row="0" column="0" rowspan="2">
+       <item row="0" column="0">
         <widget class="QLabel" name="labelProfile">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -1088,35 +1001,49 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1" rowspan="2">
+       <item row="0" column="6">
+        <widget class="QLabel" name="labelProfileShinyCharm">
+         <property name="text">
+          <string>Shiny Charm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QLabel" name="labelProfileShinyCharmValue">
+         <property name="text">
+          <string>No</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
         <widget class="QPushButton" name="pushButtonProfileManager">
          <property name="text">
           <string>Manager</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="1" column="2">
         <widget class="QLabel" name="labelProfileSID">
          <property name="text">
           <string>SID</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="3">
+       <item row="1" column="3">
         <widget class="QLabel" name="labelProfileSIDValue">
          <property name="text">
           <string notr="true">54321</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="1" column="4">
         <widget class="QLabel" name="labelProfileOffset">
          <property name="text">
           <string>Offset</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="5">
+       <item row="1" column="5">
         <widget class="QLabel" name="labelProfileOffsetValue">
          <property name="text">
           <string>17017</string>

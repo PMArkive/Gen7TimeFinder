@@ -90,6 +90,11 @@ void StationaryModel::setNature(const int &value)
     nature = value;
 }
 
+QString StationaryModel::getGenderString() const
+{
+    return gender == 0 ? "Genderless" : gender == 1 ? "♂" : "♀";
+}
+
 int StationaryModel::getGender() const
 {
     return gender;

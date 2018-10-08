@@ -33,6 +33,7 @@ ProfileEditor::ProfileEditor(Profile profile, QWidget *parent) :
     ui->lineEditProfileOffset->setText(QString::number(profile.getOffset()));
     ui->lineEditProfileTID->setText(QString::number(profile.getTID()));
     ui->lineEditProfileSID->setText(QString::number(profile.getSID()));
+    ui->checkBoxShinyCharm->setChecked(profile.getShinyCharm());
 
     isEditing = true;
     original = profile;
@@ -65,7 +66,7 @@ void ProfileEditor::on_buttonBox_accepted()
     }
 
     fresh = Profile(input, ui->lineEditProfileOffset->text().toUInt(), ui->lineEditProfileTID->text().toUShort(),
-                    ui->lineEditProfileSID->text().toUShort(), static_cast<Game>(ui->comboBoxProfileVersion->currentData().toInt()));
+                    ui->lineEditProfileSID->text().toUShort(), static_cast<Game>(ui->comboBoxProfileVersion->currentData().toInt()), ui->checkBoxShinyCharm->isChecked());
 
     done(QDialog::Accepted);
 }

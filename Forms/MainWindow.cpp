@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    QSettings settings;
+    settings.setValue("profile", ui->comboBoxProfiles->currentIndex());
+
     delete ui;
     delete stationaryView;
     //delete eventView;
@@ -41,6 +44,7 @@ void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
         ui->labelProfileTIDValue->setText(QString::number(profile.getTID()));
         ui->labelProfileSIDValue->setText(QString::number(profile.getSID()));
         ui->labelProfileGameValue->setText(profile.getVersionString());
+        ui->labelProfileShinyCharmValue->setText(profile.getShinyCharm() ? "Yes" : "No");
     }
 }
 
@@ -77,9 +81,13 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
                          ui->spinBoxStationaryMaxSpA->value(), ui->spinBoxStationaryMaxSpD->value(), ui->spinBoxStationaryMaxSpe->value()
                        };
 
-    StationaryFilter filter(min, max, ui->comboBoxStationaryNature->currentIndex() - 1, ui->comboBoxStationaryHiddenPower->currentIndex() - 1, ui->checkBoxStationaryShiny->isChecked());
+    StationaryFilter filter(min, max, ui->comboBoxStationaryNature->currentIndex() - 1, ui->comboBoxStationaryHiddenPower->currentIndex() - 1,
+                            ui->comboBoxStationaryAbility->currentIndex() - 1, ui->checkBoxStationaryShiny->isChecked());
 
-    StationarySearcher *search = new StationarySearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], ui->spinBoxStationaryPerfectIVs->value(), filter);
+    StationarySearcher *search = new StationarySearcher(start, end, frameStart, frameEnd, ui->checkBoxStationary3IVs->isChecked(),
+            ui->checkBoxStationaryAbilityLock->isChecked() ? ui->comboBoxStationaryAbilityLock->currentIndex() : -1, ui->comboBoxStationarySynchNature->currentIndex() - 1,
+            ui->comboBoxStationaryGenderRatio->currentData().toInt(), ui->checkBoxStationaryAlwaysSynch->isChecked(), ui->checkBoxStationaryShinyLock->isChecked(),
+            profiles[ui->comboBoxProfiles->currentIndex()], filter);
     connect(search, &StationarySearcher::resultReady, this, &MainWindow::addStationaryFrame);
     connect(search, &StationarySearcher::updateProgress, this, &MainWindow::updateStationaryProgress);
     connect(search, &StationarySearcher::finished, search, &QObject::deleteLater);
@@ -137,7 +145,9 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     else
         filterType = 3;
 
-    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], IDFilter(ui->textEditIDFilter->toPlainText(), ui->textEditTSVFilter->toPlainText(), filterType));
+    IDFilter filter(ui->textEditIDFilter->toPlainText(), ui->textEditTSVFilter->toPlainText(), filterType);
+
+    IDSearcher *search = new IDSearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], filter);
     connect(search, &IDSearcher::resultReady, this, &MainWindow::addIDFrame);
     connect(search, &IDSearcher::updateProgress, this, &MainWindow::updateIDProgess);
     connect(search, &IDSearcher::finished, search, &QObject::deleteLater);
@@ -169,10 +179,10 @@ void MainWindow::updateProfiles()
     for (auto profile : profiles)
         ui->comboBoxProfiles->addItem(profile.getName());
 
-    /*QSettings setting;
-    int val = setting.value("stationary3Profile").toInt();
+    QSettings setting;
+    int val = setting.value("profile").toInt();
     if (val < ui->comboBoxProfiles->count())
-        ui->comboBoxProfiles->setCurrentIndex(val);*/
+        ui->comboBoxProfiles->setCurrentIndex(val);
 }
 
 void MainWindow::createProfileXML()
@@ -211,6 +221,20 @@ void MainWindow::setupModel()
     ui->tableViewID->setModel(idView);
     ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewID->verticalHeader()->setVisible(false);
+
+    ui->comboBoxStationaryNature->addItems(Utility::getNatures());
+    ui->comboBoxStationaryHiddenPower->addItems(Utility::getHiddenPowers());
+    ui->comboBoxStationarySynchNature->addItems(Utility::getNatures());
+    ui->comboBoxStationaryGenderRatio->addItems(Utility::getGenderRatios());
+
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 0);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 126);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 30);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 62);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 190);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 224);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 1);
+    ui->comboBoxStationaryGenderRatio->setItemData(0, 2);
 
     qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
     qRegisterMetaType<QVector<StationaryModel>>("QVector<StationaryModel>");

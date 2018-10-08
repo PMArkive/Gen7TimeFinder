@@ -31,7 +31,7 @@ int StationaryView::rowCount(const QModelIndex &parent) const
 int StationaryView::columnCount(const QModelIndex &parent) const
 {
     (void) parent;
-    return 15;
+    return 14;
 }
 
 QVariant StationaryView::data(const QModelIndex &index, int role) const
@@ -62,15 +62,13 @@ QVariant StationaryView::data(const QModelIndex &index, int role) const
             case 9:
                 return Utility::getNature(frame.getNature());
             case 10:
-                return frame.getSynch();
-            case 11:
                 return Utility::getHiddenPower(frame.getHiddenPower());
-            case 12:
+            case 11:
                 return frame.getPSV();
+            case 12:
+                return frame.getGenderString();
             case 13:
-                return "TODO";
-            case 14:
-                return "TODO";
+                return frame.getAbility();
         }
     }
     return QVariant();
@@ -103,14 +101,12 @@ QVariant StationaryView::headerData(int section, Qt::Orientation orientation, in
             case 9:
                 return tr("Nature");
             case 10:
-                return tr("Sync");
-            case 11:
                 return tr("HP Type");
-            case 12:
+            case 11:
                 return tr("PSV");
-            case 13:
+            case 12:
                 return tr("Gender");
-            case 14:
+            case 13:
                 return tr("Ability");
         }
     }

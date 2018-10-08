@@ -38,20 +38,20 @@ u32 Utility::calcInitialSeed(u32 *values)
     return changeEndian(seed);
 }
 
-QString Utility::getNature(u8 nature)
+QString Utility::getNature(int nature)
 {
-    const QStringList natures = {"Hardy", "Lonely", "Brave", "Adamant",
-                                 "Naughty", "Bold", "Docile", "Relaxed",
-                                 "Impish", "Lax", "Timid", "Hasty",
-                                 "Serious", "Jolly", "Naive", "Modest",
-                                 "Mild", "Quiet", "Bashful", "Rash",
-                                 "Calm", "Gentle", "Sassy", "Careful",
-                                 "Quirky"
+    const QStringList natures = { "Hardy", "Lonely", "Brave", "Adamant",
+                                  "Naughty", "Bold", "Docile", "Relaxed",
+                                  "Impish", "Lax", "Timid", "Hasty",
+                                  "Serious", "Jolly", "Naive", "Modest",
+                                  "Mild", "Quiet", "Bashful", "Rash",
+                                  "Calm", "Gentle", "Sassy", "Careful",
+                                  "Quirky"
                                 };
     return natures[nature];
 }
 
-QString Utility::getHiddenPower(u8 hiddenPower)
+QString Utility::getHiddenPower(int hiddenPower)
 {
     const QStringList hiddenPowers = { "Fighting", "Flying", "Poison", "Ground",
                                        "Rock", "Bug", "Ghost", "Steel",
@@ -86,6 +86,8 @@ QVector<Profile> Utility::loadProfileList()
                     u32 offset = 0;
                     u16 tid = 0, sid = 0;
                     Game version = Game::UltraSun;
+                    bool charm = false;
+
                     while (!info.isNull())
                     {
                         QDomElement infoElement = info.toElement();
@@ -112,11 +114,15 @@ QVector<Profile> Utility::loadProfileList()
                             {
                                 version = static_cast<Game>(infoElement.text().toInt());
                             }
+                            else if (tagName == "charm")
+                            {
+                                charm = infoElement.text().toInt();
+                            }
 
                             info = info.nextSibling();
                         }
                     }
-                    profileList.append(Profile(name, offset, tid, sid, static_cast<Game>(version)));
+                    profileList.append(Profile(name, offset, tid, sid, version, charm));
                 }
             }
             domNode = domNode.nextSibling();
@@ -143,18 +149,21 @@ void Utility::saveProfile(Profile profile)
         QDomElement tid = doc.createElement("tid");
         QDomElement sid = doc.createElement("sid");
         QDomElement version = doc.createElement("version");
+        QDomElement charm = doc.createElement("charm");
 
         name.appendChild(doc.createTextNode(profile.getName()));
         offset.appendChild(doc.createTextNode(QString::number(profile.getOffset())));
         tid.appendChild(doc.createTextNode(QString::number(profile.getTID())));
         sid.appendChild(doc.createTextNode(QString::number(profile.getSID())));
         version.appendChild(doc.createTextNode(QString::number(profile.getVersion())));
+        charm.appendChild(doc.createTextNode(QString::number(profile.getShinyCharm())));
 
         gen7.appendChild(name);
         gen7.appendChild(offset);
         gen7.appendChild(tid);
         gen7.appendChild(sid);
         gen7.appendChild(version);
+        gen7.appendChild(charm);
 
         if (profiles.isNull())
         {
@@ -249,14 +258,17 @@ void Utility::updateProfile(Profile original, Profile edit)
                 u16 tid = domElement.childNodes().at(2).toElement().text().toUShort();
                 u16 sid = domElement.childNodes().at(3).toElement().text().toUShort();
                 int version = domElement.childNodes().at(4).toElement().text().toInt();
+                bool charm = domElement.childNodes().at(5).toElement().text().toInt();
 
-                if (original.getName() == name && original.getOffset() == offset && original.getTID() == tid && original.getSID() == sid && original.getVersion() == version)
+                if (original.getName() == name && original.getOffset() == offset && original.getTID() == tid &&
+                        original.getSID() == sid && original.getVersion() == version && original.getShinyCharm() == charm)
                 {
                     domElement.childNodes().at(0).toElement().firstChild().setNodeValue(edit.getName());
                     domElement.childNodes().at(1).toElement().firstChild().setNodeValue(QString::number(edit.getOffset()));
-                    domElement.childNodes().at(3).toElement().firstChild().setNodeValue(QString::number(edit.getTID()));
-                    domElement.childNodes().at(4).toElement().firstChild().setNodeValue(QString::number(edit.getSID()));
-                    domElement.childNodes().at(1).toElement().firstChild().setNodeValue(QString::number(edit.getVersion()));
+                    domElement.childNodes().at(2).toElement().firstChild().setNodeValue(QString::number(edit.getTID()));
+                    domElement.childNodes().at(3).toElement().firstChild().setNodeValue(QString::number(edit.getSID()));
+                    domElement.childNodes().at(4).toElement().firstChild().setNodeValue(QString::number(edit.getVersion()));
+                    domElement.childNodes().at(5).toElement().firstChild().setNodeValue(QString::number(edit.getShinyCharm()));
 
                     if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QFile::Text))
                     {
@@ -273,3 +285,32 @@ void Utility::updateProfile(Profile original, Profile edit)
     }
 }
 
+
+QStringList Utility::getNatures()
+{
+    QStringList natures = { "None", "Hardy", "Lonely", "Brave", "Adamant",
+                            "Naughty", "Bold", "Docile", "Relaxed", "Impish",
+                            "Lax", "Timid", "Hasty", "Serious", "Jolly",
+                            "Naive", "Modest", "Mild", "Quiet", "Bashful",
+                            "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"
+                          };
+    return natures;
+}
+
+QStringList Utility::getHiddenPowers()
+{
+    QStringList hiddenPowers = { "None", "Fighting", "Flying", "Poison",
+                                 "Ground", "Rock", "Bug", "Ghost",
+                                 "Steel", "Fire", "Water", "Grass",
+                                 "Electric", "Psychic", "Ice", "Dragon", "Dark"
+                               };
+    return hiddenPowers;
+}
+
+QStringList Utility::getGenderRatios()
+{
+    QStringList genderRatios = { "Genderless", "♂1 : ♀1", "♂7 : ♀1", "♂3 : ♀1",
+                                 "♂1 : ♀3", "♂1 : ♀7", "♂ Only", "♀ Only"
+                               };
+    return genderRatios;
+}

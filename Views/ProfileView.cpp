@@ -37,7 +37,7 @@ int ProfileView::rowCount(const QModelIndex &parent) const
 int ProfileView::columnCount(const QModelIndex &parent) const
 {
     (void) parent;
-    return 5;
+    return 6;
 }
 
 QVariant ProfileView::data(const QModelIndex &index, int role) const
@@ -56,6 +56,8 @@ QVariant ProfileView::data(const QModelIndex &index, int role) const
             case 3:
                 return profile.getSID();
             case 4:
+                return profile.getShinyCharm() ? "Yes" : "No";
+            case 5:
                 return profile.getOffset();
         }
     }
@@ -77,6 +79,8 @@ QVariant ProfileView::headerData(int section, Qt::Orientation orientation, int r
             case 3:
                 return tr("SID");
             case 4:
+                return tr("Shiny Charm");
+            case 5:
                 return tr("Offset");
         }
     }

@@ -38,6 +38,7 @@ public:
     void setAbility(const int &value);
     int getNature() const;
     void setNature(const int &value);
+    QString getGenderString() const;
     int getGender() const;
     void setGender(const int &value);
     int getIV(int i) const;

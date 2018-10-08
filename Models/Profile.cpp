@@ -7,15 +7,17 @@ Profile::Profile()
     tid = 12345;
     sid = 54321;
     version = Game::UltraSun;
+    shinyCharm = false;
 }
 
-Profile::Profile(QString name, u32 offset, u16 tid, u16 sid, Game version)
+Profile::Profile(QString name, u32 offset, u16 tid, u16 sid, Game version, bool shinyCharm)
 {
     this->name = name;
     this->offset = offset;
     this->tid = tid;
     this->sid = sid;
     this->version = version;
+    this->shinyCharm = shinyCharm;
 }
 
 QString Profile::getName() const
@@ -56,4 +58,9 @@ QString Profile::getVersionString() const
         case Game::UltraMoon:
             return "Ultra Moon";
     }
+}
+
+bool Profile::getShinyCharm() const
+{
+    return shinyCharm;
 }

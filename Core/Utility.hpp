@@ -14,7 +14,6 @@
 
 typedef uint64_t u64;
 typedef uint32_t u32;
-typedef uint8_t u8;
 
 namespace Utility
 {
@@ -22,12 +21,15 @@ namespace Utility
     u64 getCitraTime(QDateTime dateTime, u64 offset);
     u64 getNormalTime(u64 time, u64 offset);
     u32 calcInitialSeed(u32 *values);
-    QString getNature(u8 nature);
-    QString getHiddenPower(u8 hiddenPower);
+    QString getNature(int nature);
+    QString getHiddenPower(int hiddenPower);
     QVector<Profile> loadProfileList();
     void saveProfile(Profile profile);
     void deleteProfile(Profile profile);
     void updateProfile(Profile original, Profile edit);
+    QStringList getNatures();
+    QStringList getHiddenPowers();
+    QStringList getGenderRatios();
 
 }
 

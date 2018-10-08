@@ -20,15 +20,19 @@ signals:
     void updateProgress(int val);
 
 private:
-    bool cancel, alwaysSynch;
-    QDateTime startTime, endTime;
-    u32 startFrame, endFrame;
-    int progress, ivCount;
     Profile profile;
     StationaryFilter filter;
+    QDateTime startTime, endTime;
+    u32 startFrame, endFrame;
+    int progress;
+    bool cancel;
+
+    int ivCount, ability, synchNature, pidCount, gender;
+    bool alwaysSynch, shinyLocked;
 
 public:
-    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, int ivCount, StationaryFilter filter);
+    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
+                       int gender, bool alwaysSynch, bool shinyLocked, Profile profile, StationaryFilter filter);
     void run();
     int maxProgress();
 

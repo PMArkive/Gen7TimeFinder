@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QSettings>
 #include <QVector>
 #include <Core/IDSearcher.hpp>
 #include <Core/IDFilter.hpp>

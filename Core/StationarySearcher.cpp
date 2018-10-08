@@ -1,14 +1,22 @@
 #include "StationarySearcher.hpp"
 
-StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, int ivCount, StationaryFilter filter)
+StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
+                                       int gender, bool alwaysSynch, bool shinyLocked, Profile profile, StationaryFilter filter)
 {
     startTime = start;
     endTime = end;
     this->startFrame = startFrame;
     this->endFrame = endFrame;
+    this->ivCount = ivCount ? 3 : 0;
+    this->ability = ability;
+    this->synchNature = synchNature;
+    this->gender = gender;
+    this->alwaysSynch = alwaysSynch;
+    this->shinyLocked = shinyLocked;
     this->profile = profile;
-    this->ivCount = ivCount;
     this->filter = filter;
+
+    pidCount = profile.getShinyCharm() ? 3 : 1;
     cancel = false;
     progress = 0;
 }
@@ -51,31 +59,25 @@ void StationarySearcher::run()
                 Advance(60);
             }*/
 
-            //Encryption Constant
             result.setEC(seeds[frame + index++] & 0xffffffff);
 
-
-            // TODO add pid roll count
-            /*for (int i = PIDroll_count; i > 0; i--)
+            for (int i = pidCount; i > 0; i--)
             {
-                rt.PID = (uint)getrand;
-                if (rt.PSV == TSV)
+                result.setPID(seeds[frame + index++] & 0xffffffff);
+                if (result.getShiny())
                 {
-                    if (IsShinyLocked)
-                        rt.PID ^= 0x10000000;
-                    else
-                        rt.Shiny = true;
+                    if (shinyLocked)
+                        result.setPID(result.getPID() ^ 0x10000000);
                     break;
                 }
-                else if (IsForcedShiny)
+                // Handle eventually ???
+                /*else if (IsForcedShiny)
                 {
                     rt.Shiny = true;
                     rt.PID = (uint)((((TSV << 4) ^ (rt.PID & 0xFFFF)) << 16) + (rt.PID & 0xFFFF)); // Not accurate
-                }
-            }*/
-            result.setPID(seeds[frame + index++] & 0xffffffff);
+                }*/
+            }
 
-            //IV
             for (int i = ivCount; i > 0;)
             {
                 int tmp = seeds[frame + index++] % 6;
@@ -92,15 +94,11 @@ void StationarySearcher::run()
 
             result.calcHiddenPower();
 
-            //Ability
-            result.setAbility((seeds[frame + index++] & 1) + 1);
-            //rt.Ability = Ability > 0 ? Ability : (byte)((getrand & 1) + 1);
+            result.setAbility(ability == -1 ? ((seeds[frame + index++] & 1) + 1) : ability);
 
-            //Nature
-            result.setNature(seeds[frame + index++] % 25);
+            result.setNature(alwaysSynch ? synchNature : seeds[frame + index++] % 25);
 
-            // TODO Gender
-            //rt.Gender = RandomGender ? (byte)(getrand % 252 >= Gender ? 1 : 2) : Gender;
+            result.setGender(gender > 2 ? (seeds[frame + index++] % 252 >= gender ? 1 : 2) : gender);
 
             if (filter.compare(result))
             {

@@ -16,16 +16,18 @@ private:
     u32 offset;
     u16 tid, sid;
     Game version;
+    bool shinyCharm;
 
 public:
     Profile();
-    Profile(QString name, u32 offset, u16 tid, u16 sid, Game version);
+    Profile(QString name, u32 offset, u16 tid, u16 sid, Game version, bool shinyCharm);
     QString getName() const;
     u32 getOffset() const;
     u16 getTID() const;
     u16 getSID() const;
     Game getVersion() const;
     QString getVersionString() const;
+    bool getShinyCharm() const;
 
 };
 
