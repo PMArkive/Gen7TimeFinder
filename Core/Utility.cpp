@@ -1,3 +1,22 @@
+/*
+ * This file is part of Gen7TimeFinder
+ * Copyright (C) 2018 by Admiral_Fish
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 #include "Utility.hpp"
 
 u32 Utility::changeEndian(u32 num)
@@ -10,8 +29,7 @@ u32 Utility::changeEndian(u32 num)
 
 u64 Utility::getCitraTime(QDateTime dateTime, u64 offset)
 {
-    u64 val = static_cast<u64>(dateTime.toMSecsSinceEpoch()) + offset;
-    return val - 946684800000;
+    return static_cast<u64>(dateTime.toMSecsSinceEpoch()) + offset - 946684800000;
 }
 
 u64 Utility::getNormalTime(u64 time, u64 offset)
@@ -83,7 +101,7 @@ QVector<Profile> Utility::loadProfileList()
                 {
                     QDomNode info = domElement.firstChild();
                     QString name;
-                    u32 offset = 0;
+                    u32 offset = 0, tick = 0;
                     u16 tid = 0, sid = 0;
                     Game version = Game::UltraSun;
                     bool charm = false;
@@ -101,6 +119,10 @@ QVector<Profile> Utility::loadProfileList()
                             else if (tagName == "offset")
                             {
                                 offset = infoElement.text().toUInt();
+                            }
+                            else if (tagName == "tick")
+                            {
+                                tick = infoElement.text().toUInt(nullptr, 16);
                             }
                             else if (tagName == "tid")
                             {
@@ -122,7 +144,7 @@ QVector<Profile> Utility::loadProfileList()
                             info = info.nextSibling();
                         }
                     }
-                    profileList.append(Profile(name, offset, tid, sid, version, charm));
+                    profileList.append(Profile(name, offset, tick, tid, sid, version, charm));
                 }
             }
             domNode = domNode.nextSibling();
@@ -146,6 +168,7 @@ void Utility::saveProfile(Profile profile)
         QDomElement gen7 = doc.createElement("Gen7");
         QDomElement name = doc.createElement("name");
         QDomElement offset = doc.createElement("offset");
+        QDomElement tick = doc.createElement("tick");
         QDomElement tid = doc.createElement("tid");
         QDomElement sid = doc.createElement("sid");
         QDomElement version = doc.createElement("version");
@@ -153,6 +176,7 @@ void Utility::saveProfile(Profile profile)
 
         name.appendChild(doc.createTextNode(profile.getName()));
         offset.appendChild(doc.createTextNode(QString::number(profile.getOffset())));
+        tick.appendChild(doc.createTextNode(QString::number(profile.getTick(), 16)));
         tid.appendChild(doc.createTextNode(QString::number(profile.getTID())));
         sid.appendChild(doc.createTextNode(QString::number(profile.getSID())));
         version.appendChild(doc.createTextNode(QString::number(profile.getVersion())));
@@ -160,6 +184,7 @@ void Utility::saveProfile(Profile profile)
 
         gen7.appendChild(name);
         gen7.appendChild(offset);
+        gen7.appendChild(tick);
         gen7.appendChild(tid);
         gen7.appendChild(sid);
         gen7.appendChild(version);
@@ -255,20 +280,22 @@ void Utility::updateProfile(Profile original, Profile edit)
             {
                 QString name = domElement.childNodes().at(0).toElement().text();
                 u32 offset = domElement.childNodes().at(1).toElement().text().toUInt();
-                u16 tid = domElement.childNodes().at(2).toElement().text().toUShort();
-                u16 sid = domElement.childNodes().at(3).toElement().text().toUShort();
-                int version = domElement.childNodes().at(4).toElement().text().toInt();
-                bool charm = domElement.childNodes().at(5).toElement().text().toInt();
+                u32 tick = domElement.childNodes().at(2).toElement().text().toUInt(nullptr, 16);
+                u16 tid = domElement.childNodes().at(3).toElement().text().toUShort();
+                u16 sid = domElement.childNodes().at(4).toElement().text().toUShort();
+                int version = domElement.childNodes().at(5).toElement().text().toInt();
+                bool charm = domElement.childNodes().at(6).toElement().text().toInt();
 
-                if (original.getName() == name && original.getOffset() == offset && original.getTID() == tid &&
+                if (original.getName() == name && original.getOffset() == offset && original.getTick() == tick && original.getTID() == tid &&
                         original.getSID() == sid && original.getVersion() == version && original.getShinyCharm() == charm)
                 {
                     domElement.childNodes().at(0).toElement().firstChild().setNodeValue(edit.getName());
                     domElement.childNodes().at(1).toElement().firstChild().setNodeValue(QString::number(edit.getOffset()));
-                    domElement.childNodes().at(2).toElement().firstChild().setNodeValue(QString::number(edit.getTID()));
-                    domElement.childNodes().at(3).toElement().firstChild().setNodeValue(QString::number(edit.getSID()));
-                    domElement.childNodes().at(4).toElement().firstChild().setNodeValue(QString::number(edit.getVersion()));
-                    domElement.childNodes().at(5).toElement().firstChild().setNodeValue(QString::number(edit.getShinyCharm()));
+                    domElement.childNodes().at(2).toElement().firstChild().setNodeValue(QString::number(edit.getTick(), 16));
+                    domElement.childNodes().at(3).toElement().firstChild().setNodeValue(QString::number(edit.getTID()));
+                    domElement.childNodes().at(4).toElement().firstChild().setNodeValue(QString::number(edit.getSID()));
+                    domElement.childNodes().at(5).toElement().firstChild().setNodeValue(QString::number(edit.getVersion()));
+                    domElement.childNodes().at(6).toElement().firstChild().setNodeValue(QString::number(edit.getShinyCharm()));
 
                     if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QFile::Text))
                     {

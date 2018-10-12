@@ -26,7 +26,7 @@
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
-        <verstretch>8</verstretch>
+        <verstretch>6</verstretch>
        </sizepolicy>
       </property>
       <property name="currentIndex">
@@ -81,6 +81,23 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
              <property name="minimumDateTime">
               <datetime>
                <hour>0</hour>
@@ -93,13 +110,37 @@
              </property>
              <property name="maximumDate">
               <date>
-               <year>2099</year>
-               <month>12</month>
-               <day>31</day>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
               </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
              </property>
              <property name="calendarPopup">
               <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
              </property>
             </widget>
            </item>
@@ -122,14 +163,28 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="date">
+              <date>
+               <year>2010</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
              <property name="maximumDateTime">
               <datetime>
-               <hour>23</hour>
-               <minute>59</minute>
-               <second>59</second>
-               <year>2099</year>
-               <month>12</month>
-               <day>31</day>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
               </datetime>
              </property>
              <property name="minimumDateTime">
@@ -142,8 +197,39 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="maximumDate">
+              <date>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
              <property name="calendarPopup">
               <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
              </property>
             </widget>
            </item>
@@ -879,6 +965,23 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
              <property name="minimumDateTime">
               <datetime>
                <hour>0</hour>
@@ -891,13 +994,37 @@
              </property>
              <property name="maximumDate">
               <date>
-               <year>2099</year>
-               <month>12</month>
-               <day>31</day>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
               </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
              </property>
              <property name="calendarPopup">
               <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
              </property>
             </widget>
            </item>
@@ -913,14 +1040,28 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="date">
+              <date>
+               <year>2010</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
              <property name="maximumDateTime">
               <datetime>
-               <hour>23</hour>
-               <minute>59</minute>
-               <second>59</second>
-               <year>2099</year>
-               <month>12</month>
-               <day>31</day>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
               </datetime>
              </property>
              <property name="minimumDateTime">
@@ -933,8 +1074,32 @@
                <day>1</day>
               </datetime>
              </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
              <property name="calendarPopup">
               <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
              </property>
             </widget>
            </item>
@@ -956,101 +1121,204 @@
       <property name="title">
        <string>Profiles</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_9">
-       <item row="0" column="0">
-        <widget class="QLabel" name="labelProfile">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Profile</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="comboBoxProfiles"/>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="labelProfileTID">
-         <property name="text">
-          <string>TID</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="labelProfileTIDValue">
-         <property name="text">
-          <string notr="true">12345</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QLabel" name="labelProfileGame">
-         <property name="text">
-          <string>Game</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QLabel" name="labelProfileGameValue">
-         <property name="text">
-          <string>Ultra Sun</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <widget class="QLabel" name="labelProfileShinyCharm">
-         <property name="text">
-          <string>Shiny Charm</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="7">
-        <widget class="QLabel" name="labelProfileShinyCharmValue">
-         <property name="text">
-          <string>No</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="pushButtonProfileManager">
-         <property name="text">
-          <string>Manager</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="labelProfileSID">
-         <property name="text">
-          <string>SID</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLabel" name="labelProfileSIDValue">
-         <property name="text">
-          <string notr="true">54321</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QLabel" name="labelProfileOffset">
-         <property name="text">
-          <string>Offset</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QLabel" name="labelProfileOffsetValue">
-         <property name="text">
-          <string>17017</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="labelProfile">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>23</y>
+         <width>30</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Profile</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBoxProfiles">
+       <property name="geometry">
+        <rect>
+         <x>46</x>
+         <y>23</y>
+         <width>71</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileTID">
+       <property name="geometry">
+        <rect>
+         <x>179</x>
+         <y>23</y>
+         <width>17</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TID</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileTIDValue">
+       <property name="geometry">
+        <rect>
+         <x>312</x>
+         <y>23</y>
+         <width>30</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string notr="true">12345</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileGame">
+       <property name="geometry">
+        <rect>
+         <x>445</x>
+         <y>23</y>
+         <width>27</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Game</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileGameValue">
+       <property name="geometry">
+        <rect>
+         <x>579</x>
+         <y>23</y>
+         <width>44</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ultra Sun</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileShinyCharm">
+       <property name="geometry">
+        <rect>
+         <x>447</x>
+         <y>50</y>
+         <width>60</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Shiny Charm</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileShinyCharmValue">
+       <property name="geometry">
+        <rect>
+         <x>580</x>
+         <y>50</y>
+         <width>16</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonProfileManager">
+       <property name="geometry">
+        <rect>
+         <x>46</x>
+         <y>49</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Manager</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileSID">
+       <property name="geometry">
+        <rect>
+         <x>179</x>
+         <y>49</y>
+         <width>17</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>SID</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileSIDValue">
+       <property name="geometry">
+        <rect>
+         <x>312</x>
+         <y>49</y>
+         <width>30</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string notr="true">54321</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileOffset">
+       <property name="geometry">
+        <rect>
+         <x>716</x>
+         <y>49</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Offset</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileOffsetValue">
+       <property name="geometry">
+        <rect>
+         <x>850</x>
+         <y>49</y>
+         <width>30</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>17017</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileTick">
+       <property name="geometry">
+        <rect>
+         <x>710</x>
+         <y>20</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Tick</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelProfileTickValue">
+       <property name="geometry">
+        <rect>
+         <x>850</x>
+         <y>20</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>383e329</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1064,7 +1332,19 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCalibrate_Profile">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionCalibrate_Profile"/>
+   </widget>
+   <addaction name="menuCalibrate_Profile"/>
   </widget>
+  <action name="actionCalibrate_Profile">
+   <property name="text">
+    <string>Calibrate Profile</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

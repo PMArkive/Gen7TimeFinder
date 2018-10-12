@@ -32,7 +32,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 FORMS += \
     Forms/MainWindow.ui \
     Forms/ProfileManager.ui \
-    Forms/ProfileEditor.ui
+    Forms/ProfileEditor.ui \
+    Forms/ProfileSearcher.ui
 
 HEADERS += \
     Core/IDSearcher.hpp \
@@ -50,7 +51,8 @@ HEADERS += \
     Forms/ProfileManager.hpp \
     Views/ProfileView.hpp \
     Forms/ProfileEditor.hpp \
-    Core/StationaryFilter.hpp
+    Core/StationaryFilter.hpp \
+    Forms/ProfileSearcher.hpp
 
 SOURCES += \
     Core/IDSearcher.cpp \
@@ -68,4 +70,5 @@ SOURCES += \
     Forms/ProfileManager.cpp \
     Views/ProfileView.cpp \
     Forms/ProfileEditor.cpp \
-    Core/StationaryFilter.cpp
+    Core/StationaryFilter.cpp \
+    Forms/ProfileSearcher.cpp

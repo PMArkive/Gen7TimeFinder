@@ -17,41 +17,63 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef STATIONARYSEARCHER_HPP
-#define STATIONARYSEARCHER_HPP
+#ifndef PROFILESEARCHER_HPP
+#define PROFILESEARCHER_HPP
 
+#include <QMainWindow>
+#include <QDateTime>
 #include <QThread>
-#include <QVector>
-#include <Core/SFMT.hpp>
-#include <Core/StationaryFilter.hpp>
+#include <QList>
+#include <QStandardItem>
+#include <QStandardItemModel>
+#include <QPair>
 #include <Core/Utility.hpp>
-#include <Models/StationaryModel.hpp>
-#include <Models/Profile.hpp>
 
-typedef uint64_t u64;
+namespace Ui
+{
+    class ProfileSearcher;
+}
 
-class StationarySearcher : public QThread
+class ProfileSearch;
+
+class ProfileSearcher : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit ProfileSearcher(QWidget *parent = nullptr);
+    ~ProfileSearcher();
+
+private slots:
+    void on_pushButtonSearch_clicked();
+    void addResult(QPair<u32, u32> result);
+    void updateProgressBar(int num);
+    void on_comboBox_currentIndexChanged(int index);
+
+private:
+    Ui::ProfileSearcher *ui;
+    QStandardItemModel *model;
+
+};
+
+class ProfileSearch : public QThread
 {
     Q_OBJECT
 
 signals:
-    void resultReady(QVector<StationaryModel> frames);
+    void resultReady(QPair<u32, u32> result);
     void updateProgress(int val);
 
 private:
-    Profile profile;
-    StationaryFilter filter;
-    QDateTime startTime, endTime;
-    u32 startFrame, endFrame;
-    int progress;
     bool cancel;
-
-    int ivCount, ability, synchNature, pidCount, gender;
-    bool alwaysSynch, shinyLocked;
+    QDateTime startDate;
+    u32 initialSeed;
+    u32 baseTick, baseOffset;
+    u32 tickRange, offsetRange;
+    int progress;
 
 public:
-    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
-                       int gender, bool alwaysSynch, bool shinyLocked, Profile profile, StationaryFilter filter);
+    ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
     void run();
     int maxProgress();
 
@@ -60,4 +82,4 @@ public slots:
 
 };
 
-#endif // STATIONARYSEARCHER_HPP
+#endif // PROFILESEARCHER_HPP
