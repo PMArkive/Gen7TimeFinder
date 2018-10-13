@@ -22,7 +22,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <Models/Profile.hpp>
+#include <Results/Profile.hpp>
 
 namespace Ui
 {
@@ -39,14 +39,13 @@ signals:
 
 public:
     explicit ProfileEditor(QWidget *parent = nullptr);
-    explicit ProfileEditor(Profile profile, QWidget *parent = nullptr);
-    ~ProfileEditor();
+    explicit ProfileEditor(const Profile &profile, QWidget *parent = nullptr);
+    ~ProfileEditor() override;
     Profile getNewProfile();
     Profile getOriginal();
 
 private slots:
     void on_buttonBox_accepted();
-
     void on_buttonBox_rejected();
 
 private:

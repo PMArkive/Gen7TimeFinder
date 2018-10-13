@@ -21,8 +21,8 @@
 
 StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int nature, int hiddenPower, int ability, bool shiny, int gender)
 {
-    this->minIV = minIV;
-    this->maxIV = maxIV;
+    this->minIV = std::move(minIV);
+    this->maxIV = std::move(maxIV);
     this->nature = nature;
     this->hiddenPower = hiddenPower;
     this->ability = ability;
@@ -30,7 +30,7 @@ StationaryFilter::StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int n
     this->gender = gender;
 }
 
-bool StationaryFilter::compare(StationaryModel frame)
+bool StationaryFilter::compare(const StationaryResult &frame)
 {
     for (int i = 0; i < 6; i++)
     {

@@ -20,35 +20,24 @@
 #ifndef IDMODEL_HPP
 #define IDMODEL_HPP
 
-#include <QDateTime>
-#include <QString>
-#include <cstdint>
+#include <QAbstractTableModel>
+#include <QVector>
+#include <Results/IDResult.hpp>
 
-typedef uint32_t u32;
-typedef uint16_t u16;
-
-class IDModel
+class IDModel : public QAbstractTableModel
 {
 
 private:
-    QDateTime target;
-    u32 seed, frame;
-    u16 tid;
-    u16 sid;
-    u16 tsv;
-    u32 displayTID;
+    QVector<IDResult> model;
 
 public:
-    IDModel(u32 seed, u32 frame, u32 rand);
-    IDModel() {}
-    QString getDateTime();
-    u32 getSeed() const;
-    u32 getFrame() const;
-    u16 getTID() const;
-    u16 getSID() const;
-    u16 getTSV() const;
-    u32 getDisplayTID() const;
-    void setTarget(const QDateTime &value);
+    IDModel(QObject *parent = nullptr);
+    void addItems(const QVector<IDResult> &frames);
+    void clear();
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
 };
 

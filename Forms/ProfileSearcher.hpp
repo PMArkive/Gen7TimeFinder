@@ -42,7 +42,7 @@ class ProfileSearcher : public QMainWindow
 
 public:
     explicit ProfileSearcher(QWidget *parent = nullptr);
-    ~ProfileSearcher();
+    ~ProfileSearcher() override;
 
 private slots:
     void on_pushButtonSearch_clicked();
@@ -74,7 +74,7 @@ private:
 
 public:
     ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
-    void run();
+    void run() override;
     int maxProgress();
 
 public slots:

@@ -19,137 +19,115 @@
 
 #include "StationaryModel.hpp"
 
-StationaryModel::StationaryModel(u32 seed, u16 tid, u16 sid)
+StationaryModel::StationaryModel(QObject *parent) : QAbstractTableModel(parent)
 {
-    this->seed = seed;
-    tsv = (tid ^ sid) >> 4;
-    for (int i = 0; i < 6; i++)
-        ivs[i] = -1;
 }
 
-QString StationaryModel::getDateTime() const
+void StationaryModel::addItems(const QVector<StationaryResult> &frames)
 {
-    return target.toString(Qt::DefaultLocaleShortDate);
+    int i = rowCount();
+    emit beginInsertRows(QModelIndex(), i, i + frames.size() - 1);
+    model.append(frames);
+    emit endInsertRows();
 }
 
-void StationaryModel::setTarget(const QDateTime &value)
+void StationaryModel::clear()
 {
-    target = value;
+    if (model.empty())
+        return;
+    emit beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
+    model.clear();
+    model.squeeze();
+    emit endRemoveRows();
 }
 
-u32 StationaryModel::getSeed() const
+int StationaryModel::rowCount(const QModelIndex &parent) const
 {
-    return seed;
+    (void) parent;
+    return model.size();
 }
 
-u32 StationaryModel::getPID() const
+int StationaryModel::columnCount(const QModelIndex &parent) const
 {
-    return pid;
+    (void) parent;
+    return 14;
 }
 
-void StationaryModel::setPID(const u32 &value)
+QVariant StationaryModel::data(const QModelIndex &index, int role) const
 {
-    pid = value;
-    psv = ((pid >> 16) ^ (pid & 0xffff)) >> 4;
-    shiny = psv == tsv;
+    if (role == Qt::DisplayRole)
+    {
+        const StationaryResult &frame = model.at(index.row());
+        switch (index.column())
+        {
+            case 0:
+                return frame.getDateTime();
+            case 1:
+                return QString::number(frame.getSeed(), 16).toUpper();
+            case 2:
+                return frame.getFrame();
+            case 3:
+                return frame.getIV(0);
+            case 4:
+                return frame.getIV(1);
+            case 5:
+                return frame.getIV(2);
+            case 6:
+                return frame.getIV(3);
+            case 7:
+                return frame.getIV(4);
+            case 8:
+                return frame.getIV(5);
+            case 9:
+                return Utility::getNature(frame.getNature());
+            case 10:
+                return Utility::getHiddenPower(frame.getHiddenPower());
+            case 11:
+                return frame.getPSV();
+            case 12:
+                return frame.getGenderString();
+            case 13:
+                return frame.getAbility();
+        }
+    }
+    return QVariant();
 }
 
-u32 StationaryModel::getEC() const
+QVariant StationaryModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    return ec;
-}
-
-void StationaryModel::setEC(const u32 &value)
-{
-    ec = value;
-}
-
-u32 StationaryModel::getFrame() const
-{
-    return frame;
-}
-
-void StationaryModel::setFrame(const u32 &value)
-{
-    frame = value;
-}
-
-u16 StationaryModel::getPSV() const
-{
-    return psv;
-}
-
-int StationaryModel::getHiddenPower() const
-{
-    return hiddenPower;
-}
-
-void StationaryModel::calcHiddenPower()
-{
-    hiddenPower = ((((ivs[0] & 1) + 2 * (ivs[1] & 1) + 4 * (ivs[2] & 1) + 8 * (ivs[5] & 1) + 16 * (ivs[3] & 1) + 32 * (ivs[4] & 1)) * 15) / 63);
-}
-
-int StationaryModel::getAbility() const
-{
-    return ability;
-}
-
-void StationaryModel::setAbility(const int &value)
-{
-    ability = value;
-}
-
-int StationaryModel::getNature() const
-{
-    return nature;
-}
-
-void StationaryModel::setNature(const int &value)
-{
-    nature = value;
-}
-
-QString StationaryModel::getGenderString() const
-{
-    return gender == 0 ? "-" : gender == 1 ? "♂" : "♀";
-}
-
-int StationaryModel::getGender() const
-{
-    return gender;
-}
-
-void StationaryModel::setGender(const int &value)
-{
-    gender = value;
-}
-
-int StationaryModel::getIV(int i) const
-{
-    return ivs[i];
-}
-
-void StationaryModel::setIV(const int &i, const int &value)
-{
-    ivs[i] = value;
-}
-
-bool StationaryModel::getShiny() const
-{
-    return shiny;
-}
-
-void StationaryModel::setShiny(bool value)
-{
-    shiny = value;
-}
-
-bool StationaryModel::getSynch() const
-{
-    return synch;
-}
-
-void StationaryModel::setSynch(bool value)
-{
-    synch = value;
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
+    {
+        switch (section)
+        {
+            case 0:
+                return tr("Date/Time");
+            case 1:
+                return tr("Initial Seed");
+            case 2:
+                return tr("Frame");
+            case 3:
+                return tr("HP");
+            case 4:
+                return tr("Atk");
+            case 5:
+                return tr("Def");
+            case 6:
+                return tr("SpA");
+            case 7:
+                return tr("SpD");
+            case 8:
+                return tr("Spe");
+            case 9:
+                return tr("Nature");
+            case 10:
+                return tr("HP Type");
+            case 11:
+                return tr("PSV");
+            case 12:
+                return tr("Gender");
+            case 13:
+                return tr("Ability");
+        }
+    }
+    return QVariant();
 }

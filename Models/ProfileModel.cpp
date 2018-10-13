@@ -17,13 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "ProfileView.hpp"
+#include "ProfileModel.hpp"
 
-ProfileView::ProfileView(QObject *parent) : QAbstractTableModel(parent)
+ProfileModel::ProfileModel(QObject *parent) : QAbstractTableModel(parent)
 {
 }
 
-void ProfileView::setModel(QVector<Profile> profiles)
+void ProfileModel::setModel(const QVector<Profile> &profiles)
 {
     if (profiles.empty())
         return;
@@ -33,7 +33,7 @@ void ProfileView::setModel(QVector<Profile> profiles)
     emit endInsertRows();
 }
 
-void ProfileView::addItem(Profile profile)
+void ProfileModel::addItem(const Profile &profile)
 {
     int i = rowCount();
     emit beginInsertRows(QModelIndex(), i, i);
@@ -41,29 +41,29 @@ void ProfileView::addItem(Profile profile)
     emit endInsertRows();
 }
 
-void ProfileView::updateProfile(Profile profile, int row)
+void ProfileModel::updateProfile(Profile profile, int row)
 {
-    model[row] = profile;
+    model[row] = std::move(profile);
     emit dataChanged(index(row, 0), index(row, columnCount()));
 }
 
-int ProfileView::rowCount(const QModelIndex &parent) const
+int ProfileModel::rowCount(const QModelIndex &parent) const
 {
     (void) parent;
     return model.size();
 }
 
-int ProfileView::columnCount(const QModelIndex &parent) const
+int ProfileModel::columnCount(const QModelIndex &parent) const
 {
     (void) parent;
     return 7;
 }
 
-QVariant ProfileView::data(const QModelIndex &index, int role) const
+QVariant ProfileModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        Profile profile = model[index.row()];
+        const Profile &profile = model.at(index.row());
         switch (index.column())
         {
             case 0:
@@ -85,7 +85,7 @@ QVariant ProfileView::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QVariant ProfileView::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant ProfileModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
     {
@@ -110,12 +110,12 @@ QVariant ProfileView::headerData(int section, Qt::Orientation orientation, int r
     return QVariant();
 }
 
-Profile ProfileView::getProfile(int index)
+Profile ProfileModel::getProfile(int index)
 {
     return model[index];
 }
 
-void ProfileView::removeProfile(int index)
+void ProfileModel::removeProfile(int index)
 {
     emit beginRemoveRows(QModelIndex(), index, index);
     model.erase(model.begin() + index);

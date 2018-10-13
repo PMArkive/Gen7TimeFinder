@@ -27,7 +27,7 @@ u32 Utility::changeEndian(u32 num)
            ((num << 24) & 0xff000000);
 }
 
-u64 Utility::getCitraTime(QDateTime dateTime, u64 offset)
+u64 Utility::getCitraTime(const QDateTime& dateTime, u64 offset)
 {
     return static_cast<u64>(dateTime.toMSecsSinceEpoch()) + offset - 946684800000;
 }
@@ -154,7 +154,7 @@ QVector<Profile> Utility::loadProfileList()
     return profileList;
 }
 
-void Utility::saveProfile(Profile profile)
+void Utility::saveProfile(const Profile& profile)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");
@@ -211,7 +211,7 @@ void Utility::saveProfile(Profile profile)
     }
 }
 
-void Utility::deleteProfile(Profile profile)
+void Utility::deleteProfile(const Profile& profile)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");
@@ -262,7 +262,7 @@ void Utility::deleteProfile(Profile profile)
     }
 }
 
-void Utility::updateProfile(Profile original, Profile edit)
+void Utility::updateProfile(const Profile& original, const Profile& edit)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");

@@ -32,7 +32,7 @@ Profile::Profile()
 
 Profile::Profile(QString name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm)
 {
-    this->name = name;
+    this->name = std::move(name);
     this->offset = offset;
     this->tick = tick;
     this->tid = tid;

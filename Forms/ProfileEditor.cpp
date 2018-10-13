@@ -34,7 +34,7 @@ ProfileEditor::ProfileEditor(QWidget *parent) :
     ui->comboBoxProfileVersion->setItemData(3, Game::UltraMoon);
 }
 
-ProfileEditor::ProfileEditor(Profile profile, QWidget *parent) :
+ProfileEditor::ProfileEditor(const Profile& profile, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProfileEditor)
 {

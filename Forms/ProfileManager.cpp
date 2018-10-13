@@ -28,7 +28,7 @@ ProfileManager::ProfileManager(QWidget *parent) :
     setAttribute(Qt::WA_QuitOnClose, false);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    model = new ProfileView();
+    model = new ProfileModel();
     model->setModel(Utility::loadProfileList());
     ui->tableView->setModel(model);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -42,7 +42,7 @@ ProfileManager::~ProfileManager()
 
 void ProfileManager::on_pushButtonNew_clicked()
 {
-    ProfileEditor *dialog = new ProfileEditor();
+    auto *dialog = new ProfileEditor();
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile profile = dialog->getNewProfile();

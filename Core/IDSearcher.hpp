@@ -26,15 +26,15 @@
 #include <Core/IDFilter.hpp>
 #include <Core/SFMT.hpp>
 #include <Core/Utility.hpp>
-#include <Models/IDModel.hpp>
-#include <Models/Profile.hpp>
+#include <Results/IDResult.hpp>
+#include <Results/Profile.hpp>
 
 class IDSearcher : public QThread
 {
     Q_OBJECT
 
 signals:
-    void resultReady(QVector<IDModel> frames);
+    void resultReady(QVector<IDResult> frames);
     void updateProgress(int val);
 
 private:
@@ -47,7 +47,7 @@ private:
 
 public:
     IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, IDFilter filter);
-    void run();
+    void run() override;
     int maxProgress();
 
 public slots:

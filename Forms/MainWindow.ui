@@ -69,85 +69,17 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1" colspan="4">
-            <widget class="QDateTimeEdit" name="dateTimeEditStationaryStartDate">
-             <property name="dateTime">
-              <datetime>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-               <year>2000</year>
-               <month>1</month>
-               <day>1</day>
-              </datetime>
-             </property>
-             <property name="time">
-              <time>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-              </time>
-             </property>
-             <property name="maximumDateTime">
-              <datetime>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-               <year>2100</year>
-               <month>1</month>
-               <day>1</day>
-              </datetime>
-             </property>
-             <property name="minimumDateTime">
-              <datetime>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-               <year>2000</year>
-               <month>1</month>
-               <day>1</day>
-              </datetime>
-             </property>
-             <property name="maximumDate">
-              <date>
-               <year>2100</year>
-               <month>1</month>
-               <day>1</day>
-              </date>
-             </property>
-             <property name="minimumDate">
-              <date>
-               <year>2000</year>
-               <month>1</month>
-               <day>1</day>
-              </date>
-             </property>
-             <property name="maximumTime">
-              <time>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-              </time>
-             </property>
-             <property name="minimumTime">
-              <time>
-               <hour>0</hour>
-               <minute>0</minute>
-               <second>0</second>
-              </time>
-             </property>
-             <property name="calendarPopup">
-              <bool>true</bool>
-             </property>
-             <property name="timeSpec">
-              <enum>Qt::LocalTime</enum>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="labelStationaryEndDate">
              <property name="text">
               <string>End Date:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelStationaryFrame">
+             <property name="text">
+              <string>Frame:</string>
              </property>
             </widget>
            </item>
@@ -233,17 +165,92 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="labelStationaryFrame">
-             <property name="text">
-              <string>Frame:</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1" colspan="2">
             <widget class="QLineEdit" name="lineEditStationaryStartFrame">
              <property name="text">
               <string notr="true">478</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="4">
+            <widget class="QDateTimeEdit" name="dateTimeEditStationaryStartDate">
+             <property name="dateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="maximumDate">
+              <date>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="5">
+            <widget class="QPushButton" name="pushButtonStationarySearch">
+             <property name="text">
+              <string>Search</string>
              </property>
             </widget>
            </item>
@@ -254,38 +261,7 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxStationaryDelay">
-             <property name="text">
-              <string>Consider Delay</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2" colspan="2">
-            <widget class="QLineEdit" name="lineEditStationaryDelay">
-             <property name="text">
-              <string notr="true">0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QLabel" name="labelStationaryDelay">
-             <property name="text">
-              <string>+4f</string>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="0" colspan="5">
-            <widget class="QPushButton" name="pushButtonStationarySearch">
-             <property name="text">
-              <string>Search</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0" colspan="5">
             <widget class="QPushButton" name="pushButtonStationaryCancel">
              <property name="enabled">
               <bool>false</bool>
@@ -567,7 +543,7 @@
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>2</horstretch>
-            <verstretch>0</verstretch>
+            <verstretch>1</verstretch>
            </sizepolicy>
           </property>
           <property name="title">
@@ -692,7 +668,488 @@
         <string>Event</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="2" column="0" colspan="2">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBoxEventRNGInfo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>RNG Info</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelEventStartDate">
+             <property name="text">
+              <string>Start Date:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QDateTimeEdit" name="dateTimeEditEventStartDate">
+             <property name="dateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="maximumDate">
+              <date>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelEventEndDate">
+             <property name="text">
+              <string>End Date:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QDateTimeEdit" name="dateTimeEditEventEndDate">
+             <property name="dateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2010</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="date">
+              <date>
+               <year>2010</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="time">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="maximumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="minimumDateTime">
+              <datetime>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </datetime>
+             </property>
+             <property name="maximumDate">
+              <date>
+               <year>2100</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="maximumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="minimumTime">
+              <time>
+               <hour>0</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::LocalTime</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelEventFrame">
+             <property name="text">
+              <string>Frame:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEditEventStartFrame">
+             <property name="text">
+              <string notr="true">478</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="lineEditEventEndFrame">
+             <property name="text">
+              <string notr="true">10000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="3">
+            <widget class="QPushButton" name="pushButtonEventSearch">
+             <property name="text">
+              <string>Search</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="3">
+            <widget class="QPushButton" name="pushButtonEventCancel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QGroupBox" name="groupBoxEventFilter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>2</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Filters</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_16">
+           <item row="0" column="1">
+            <widget class="QLabel" name="labelEventNature">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="text">
+              <string>Nature</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QComboBox" name="comboBoxEventNature"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="labelEventHiddenPower">
+             <property name="text">
+              <string>Hidden Power</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="comboBoxEventHiddenPower"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="labelEventAbility">
+             <property name="text">
+              <string>Ability</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QComboBox" name="comboBoxEventAbility">
+             <item>
+              <property name="text">
+               <string>Any</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">H</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="labelEventGender">
+             <property name="text">
+              <string>Gender</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QComboBox" name="comboBoxEventGender">
+             <item>
+              <property name="text">
+               <string>Any</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♂</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♀</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="labelEventShiny">
+             <property name="text">
+              <string>Shiny</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QCheckBox" name="checkBoxEventShiny">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" rowspan="5">
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="0" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="labelEventSpD">
+               <property name="text">
+                <string>SpD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelEventHP">
+               <property name="text">
+                <string>HP</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinSpD">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelEventAtk">
+               <property name="text">
+                <string>Atk</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelEventDef">
+               <property name="text">
+                <string>Def</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="labelEventSpe">
+               <property name="text">
+                <string>Spe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QSpinBox" name="spinBoxEventMaxSpD">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+               <property name="value">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelEventSpA">
+               <property name="text">
+                <string>SpA</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="spinBoxEventMinSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
          <widget class="QTableView" name="tableViewEvent">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -705,21 +1162,15 @@
           </attribute>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBoxEventRNGInfo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>1</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string>RNG Info</string>
+        <item row="1" column="0" colspan="3">
+         <widget class="QProgressBar" name="progressBarEvent">
+          <property name="value">
+           <number>0</number>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBoxEventFilter">
+         <widget class="QGroupBox" name="groupBoxEventSettings">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>2</horstretch>
@@ -727,15 +1178,188 @@
            </sizepolicy>
           </property>
           <property name="title">
-           <string>Filters</string>
+           <string>Settings</string>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QProgressBar" name="progressBarEvent">
-          <property name="value">
-           <number>0</number>
-          </property>
+          <layout class="QGridLayout" name="gridLayout_18">
+           <item row="0" column="1">
+            <widget class="QLabel" name="labelEventRandomIVs">
+             <property name="text">
+              <string># of Random 31 IVs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QSpinBox" name="spinBoxEventRandomIVs"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="checkBoxEventYourID">
+             <property name="text">
+              <string>Your ID</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QCheckBox" name="checkBoxEventEgg">
+             <property name="text">
+              <string>Egg</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="labelEventPIDType">
+             <property name="text">
+              <string>PID Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QComboBox" name="comboBoxEventPIDType"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="checkBoxEventAbilityLock">
+             <property name="text">
+              <string>Ability Locked</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QComboBox" name="comboBox_2"/>
+           </item>
+           <item row="4" column="1">
+            <widget class="QCheckBox" name="checkBox_9">
+             <property name="text">
+              <string>Nature Locked</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QComboBox" name="comboBox_3"/>
+           </item>
+           <item row="5" column="1">
+            <widget class="QCheckBox" name="checkBox_10">
+             <property name="text">
+              <string>Gender Locked</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QComboBox" name="comboBox_4">
+             <item>
+              <property name="text">
+               <string notr="true">-</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♂</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">♀</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="labelEventGenderRatio">
+             <property name="text">
+              <string>Gender Ratio</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QComboBox" name="comboBoxEventGenderRatio"/>
+           </item>
+           <item row="0" column="0" rowspan="7">
+            <layout class="QGridLayout" name="gridLayout_17">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxEventHP">
+               <property name="text">
+                <string>HP</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spinBoxEventHP">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxEventAtk">
+               <property name="text">
+                <string>Atk</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBoxEventAtk">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxEventDef">
+               <property name="text">
+                <string>Def</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="spinBoxEventDef">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxEventSpA">
+               <property name="text">
+                <string>SpA</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="spinBoxEventSpA">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxEventSpD">
+               <property name="text">
+                <string>SpD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="spinBoxEventSpD">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxEventSpe">
+               <property name="text">
+                <string>Spe</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QSpinBox" name="spinBoxEventSpe">
+               <property name="maximum">
+                <number>31</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

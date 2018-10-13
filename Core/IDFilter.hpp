@@ -22,7 +22,7 @@
 
 #include <QVector>
 #include <QPair>
-#include <Models/IDModel.hpp>
+#include <Results/IDResult.hpp>
 
 enum FilterType
 {
@@ -39,14 +39,14 @@ private:
     QVector<u32> tidFilter;
     QVector<u32> sidFilter;
     QVector<u32> tsvFilter;
-    FilterType filterType;
-    bool checkID;
-    bool checkTSV;
+    FilterType filterType{};
+    bool checkID{};
+    bool checkTSV{};
 
 public:
-    IDFilter() {}
-    IDFilter(QString idList, QString tsvList, int filterType);
-    bool compare(IDModel frame);
+    IDFilter() = default;
+    IDFilter(const QString &idList, const QString &tsvList, int filterType);
+    bool compare(const IDResult &frame);
 
 };
 

@@ -17,28 +17,38 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef IDVIEW_HPP
-#define IDVIEW_HPP
+#ifndef PROFILE_HPP
+#define PROFILE_HPP
 
-#include <QAbstractTableModel>
-#include <QVector>
-#include <Models/IDModel.hpp>
+#include <QString>
+#include <Core/Game.hpp>
+#include <cstdint>
 
-class IDView : public QAbstractTableModel
+using u32 = uint32_t;
+using u16 = uint16_t;
+
+class Profile
 {
 
 private:
-    QVector<IDModel> model;
+    QString name;
+    u32 offset, tick;
+    u16 tid, sid;
+    Game version;
+    bool shinyCharm;
 
 public:
-    IDView(QObject *parent = nullptr);
-    void addItems(QVector<IDModel> frames);
-    void clear();
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    Profile();
+    Profile(QString name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm);
+    QString getName() const;
+    u32 getOffset() const;
+    u32 getTick() const;
+    u16 getTID() const;
+    u16 getSID() const;
+    Game getVersion() const;
+    QString getVersionString() const;
+    bool getShinyCharm() const;
 
 };
 
-#endif // IDVIEW_HPP
+#endif // PROFILE_HPP

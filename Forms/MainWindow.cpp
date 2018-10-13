@@ -40,15 +40,15 @@ MainWindow::~MainWindow()
     settings.setValue("profile", ui->comboBoxProfiles->currentIndex());
 
     delete ui;
-    delete stationaryView;
-    //delete eventView;
-    //delete wildView;
-    delete idView;
+    delete stationaryModel;
+    //delete eventModel;
+    //delete wildModel;
+    delete idModel;
 }
 
 void MainWindow::on_pushButtonProfileManager_clicked()
 {
-    ProfileManager *manager = new ProfileManager();
+    auto *manager = new ProfileManager();
     connect(manager, &ProfileManager::updateProfiles, this, &MainWindow::updateProfiles);
     manager->show();
     manager->raise();
@@ -58,7 +58,7 @@ void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
 {
     if (index != -1)
     {
-        auto profile = profiles[index];
+        auto profile = profiles.at(index);
         ui->labelProfileOffsetValue->setText(QString::number(profile.getOffset()));
         ui->labelProfileTickValue->setText(QString::number(profile.getTick(), 16));
         ui->labelProfileTIDValue->setText(QString::number(profile.getTID()));
@@ -82,7 +82,7 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
         error.exec();
         return;
     }
-    else if (frameStart > frameEnd)
+    if (frameStart > frameEnd)
     {
         QMessageBox error;
         error.setText(tr("Set end frame to be after start frame"));
@@ -90,7 +90,7 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
         return;
     }
 
-    stationaryView->clear();
+    stationaryModel->clear();
     ui->pushButtonStationarySearch->setEnabled(false);
     ui->pushButtonStationaryCancel->setEnabled(true);
 
@@ -119,9 +119,9 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
     search->start();
 }
 
-void MainWindow::addStationaryFrame(QVector<StationaryModel> frames)
+void MainWindow::addStationaryFrame(const QVector<StationaryResult> &frames)
 {
-    stationaryView->addItems(frames);
+    stationaryModel->addItems(frames);
 }
 
 void MainWindow::updateStationaryProgress(int val)
@@ -143,7 +143,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
         error.exec();
         return;
     }
-    else if (frameStart > frameEnd)
+    if (frameStart > frameEnd)
     {
         QMessageBox error;
         error.setText(tr("Set end frame to be after start frame"));
@@ -151,7 +151,7 @@ void MainWindow::on_pushButtonIDSearch_clicked()
         return;
     }
 
-    idView->clear();
+    idModel->clear();
     ui->pushButtonIDSearch->setEnabled(false);
     ui->pushButtonIDCancel->setEnabled(true);
 
@@ -179,9 +179,9 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     search->start();
 }
 
-void MainWindow::addIDFrame(QVector<IDModel> frames)
+void MainWindow::addIDFrame(const QVector<IDResult> &frames)
 {
-    idView->addItems(frames);
+    idModel->addItems(frames);
 }
 
 void MainWindow::updateIDProgess(int val)
@@ -196,7 +196,7 @@ void MainWindow::updateProfiles()
 
     ui->comboBoxProfiles->clear();
 
-    for (auto profile : profiles)
+    for (const auto &profile : profiles)
         ui->comboBoxProfiles->addItem(profile.getName());
 
     QSettings setting;
@@ -221,24 +221,24 @@ void MainWindow::createProfileXML()
 
 void MainWindow::setupModel()
 {
-    stationaryView = new StationaryView();
-    //eventView = new EventView();
-    //wildView = new WildView();
-    idView = new IDView();
+    stationaryModel = new StationaryModel();
+    //eventModel = new EventModel();
+    //wildModel = new WildModel();
+    idModel = new IDModel();
 
-    ui->tableViewStationary->setModel(stationaryView);
+    ui->tableViewStationary->setModel(stationaryModel);
     ui->tableViewStationary->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewStationary->verticalHeader()->setVisible(false);
 
-    //ui->tableViewEvent->setModel(eventView);
+    //ui->tableViewEvent->setModel(eventModel);
     ui->tableViewEvent->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewEvent->verticalHeader()->setVisible(false);
 
-    //ui->tableViewWild->setModel(wildView);
+    //ui->tableViewWild->setModel(wildModel);
     ui->tableViewWild->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewWild->verticalHeader()->setVisible(false);
 
-    ui->tableViewID->setModel(idView);
+    ui->tableViewID->setModel(idModel);
     ui->tableViewID->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     ui->tableViewID->verticalHeader()->setVisible(false);
 
@@ -256,13 +256,13 @@ void MainWindow::setupModel()
     ui->comboBoxStationaryGenderRatio->setItemData(6, 1);
     ui->comboBoxStationaryGenderRatio->setItemData(7, 2);
 
-    qRegisterMetaType<QVector<IDModel>>("QVector<IDModel>");
-    qRegisterMetaType<QVector<StationaryModel>>("QVector<StationaryModel>");
+    qRegisterMetaType<QVector<IDResult>>("QVector<IDResult>");
+    qRegisterMetaType<QVector<StationaryResult>>("QVector<StationaryResult>");
 }
 
 void MainWindow::on_actionCalibrate_Profile_triggered()
 {
-    ProfileSearcher *searcher = new ProfileSearcher();
+    auto *searcher = new ProfileSearcher();
     searcher->show();
     searcher->raise();
 }

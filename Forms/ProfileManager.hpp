@@ -24,7 +24,7 @@
 #include <QMessageBox>
 #include <Core/Utility.hpp>
 #include <Forms/ProfileEditor.hpp>
-#include <Views/ProfileView.hpp>
+#include <Models/ProfileModel.hpp>
 
 namespace Ui
 {
@@ -40,7 +40,7 @@ signals:
 
 public:
     explicit ProfileManager(QWidget *parent = nullptr);
-    ~ProfileManager();
+    ~ProfileManager() override;
 
 private slots:
     void on_pushButtonNew_clicked();
@@ -50,7 +50,7 @@ private slots:
 
 private:
     Ui::ProfileManager *ui;
-    ProfileView *model;
+    ProfileModel *model;
 
 };
 

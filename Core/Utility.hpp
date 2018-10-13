@@ -29,23 +29,23 @@
 #include <QTextStream>
 #include <QVector>
 #include <cstdint>
-#include <Models/Profile.hpp>
+#include <Results/Profile.hpp>
 
-typedef uint64_t u64;
-typedef uint32_t u32;
+using u64 = uint64_t;
+using u32 = uint32_t;
 
 namespace Utility
 {
     u32 changeEndian(u32 num);
-    u64 getCitraTime(QDateTime dateTime, u64 offset);
+    u64 getCitraTime(const QDateTime &dateTime, u64 offset);
     u64 getNormalTime(u64 time, u64 offset);
     u32 calcInitialSeed(u32 *values);
     QString getNature(int nature);
     QString getHiddenPower(int hiddenPower);
     QVector<Profile> loadProfileList();
-    void saveProfile(Profile profile);
-    void deleteProfile(Profile profile);
-    void updateProfile(Profile original, Profile edit);
+    void saveProfile(const Profile &profile);
+    void deleteProfile(const Profile &profile);
+    void updateProfile(const Profile &original, const Profile &edit);
     QStringList getNatures();
     QStringList getHiddenPowers();
     QStringList getGenderRatios();

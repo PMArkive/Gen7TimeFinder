@@ -25,17 +25,17 @@
 #include <Core/SFMT.hpp>
 #include <Core/StationaryFilter.hpp>
 #include <Core/Utility.hpp>
-#include <Models/StationaryModel.hpp>
-#include <Models/Profile.hpp>
+#include <Results/StationaryResult.hpp>
+#include <Results/Profile.hpp>
 
-typedef uint64_t u64;
+using u64 = uint64_t;
 
 class StationarySearcher : public QThread
 {
     Q_OBJECT
 
 signals:
-    void resultReady(QVector<StationaryModel> frames);
+    void resultReady(QVector<StationaryResult> frames);
     void updateProgress(int val);
 
 private:
@@ -51,8 +51,8 @@ private:
 
 public:
     StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
-                       int gender, bool alwaysSynch, bool shinyLocked, Profile profile, StationaryFilter filter);
-    void run();
+                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, StationaryFilter filter);
+    void run() override;
     int maxProgress();
 
 public slots:

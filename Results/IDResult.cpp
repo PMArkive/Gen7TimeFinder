@@ -17,29 +17,54 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef STATIONARYVIEW_HPP
-#define STATIONARYVIEW_HPP
+#include "IDResult.hpp"
 
-#include <QAbstractTableModel>
-#include <QVector>
-#include <Core/Utility.hpp>
-#include <Models/StationaryModel.hpp>
-
-class StationaryView : public QAbstractTableModel
+IDResult::IDResult(u32 seed, u32 frame, u32 rand)
 {
+    this->seed = seed;
+    this->frame = frame;
+    tid = rand & 0xffff;
+    sid = rand >> 16;
+    tsv = (tid ^ sid) >> 4;
+    displayTID = rand % 1000000;
+}
 
-private:
-    QVector<StationaryModel> model;
+QString IDResult::getDateTime() const
+{
+    return target.toString(Qt::DefaultLocaleShortDate);
+}
 
-public:
-    StationaryView(QObject *parent = nullptr);
-    void addItems(QVector<StationaryModel> frames);
-    void clear();
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+u32 IDResult::getSeed() const
+{
+    return seed;
+}
 
-};
+u32 IDResult::getFrame() const
+{
+    return frame;
+}
 
-#endif // STATIONARYVIEW_HPP
+u16 IDResult::getTID() const
+{
+    return tid;
+}
+
+u16 IDResult::getSID() const
+{
+    return sid;
+}
+
+u16 IDResult::getTSV() const
+{
+    return tsv;
+}
+
+u32 IDResult::getDisplayTID() const
+{
+    return displayTID;
+}
+
+void IDResult::setTarget(const QDateTime &value)
+{
+    target = value;
+}

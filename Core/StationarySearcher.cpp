@@ -20,10 +20,10 @@
 #include "StationarySearcher.hpp"
 
 StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
-                                       int gender, bool alwaysSynch, bool shinyLocked, Profile profile, StationaryFilter filter)
+                                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, StationaryFilter filter)
 {
-    startTime = start;
-    endTime = end;
+    startTime = std::move(start);
+    endTime = std::move(end);
     this->startFrame = startFrame;
     this->endFrame = endFrame;
     this->ivCount = ivCount ? 3 : 0;
@@ -33,7 +33,7 @@ StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 start
     this->alwaysSynch = alwaysSynch;
     this->shinyLocked = shinyLocked;
     this->profile = profile;
-    this->filter = filter;
+    this->filter = std::move(filter);
 
     pidCount = profile.getShinyCharm() ? 3 : 1;
     cancel = false;
@@ -54,17 +54,17 @@ void StationarySearcher::run()
         SFMT sfmt(initialSeed);
         sfmt.advanceFrames(startFrame);
 
-        u64 *seeds = new u64[endFrame];
+        auto *seeds = new u64[endFrame];
         for (u32 i = 0; i < endFrame; i++)
             seeds[i] = sfmt.nextULong();
 
-        QVector<StationaryModel> results;
+        QVector<StationaryResult> results;
         for (u32 frame = 0; frame <= (endFrame - startFrame); frame++)
         {
             if (cancel)
                 return;
 
-            StationaryModel result(initialSeed, profile.getTID(), profile.getSID());
+            StationaryResult result(initialSeed, profile.getTID(), profile.getSID());
             u32 index = 0;
 
             // TODO
@@ -138,7 +138,7 @@ void StationarySearcher::run()
 
 int StationarySearcher::maxProgress()
 {
-    int val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 60000);
+    auto val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 60000);
     return val;
 }
 

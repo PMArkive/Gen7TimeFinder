@@ -17,31 +17,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PROFILEVIEW_HPP
-#define PROFILEVIEW_HPP
+#ifndef PROFILEMODEL_HPP
+#define PROFILEMODEL_HPP
 
 #include <QAbstractTableModel>
 #include <QVector>
-#include <Models/Profile.hpp>
+#include <Results/Profile.hpp>
 
-class ProfileView : public QAbstractTableModel
+class ProfileModel : public QAbstractTableModel
 {
 
 private:
     QVector<Profile> model;
 
 public:
-    ProfileView(QObject *parent = nullptr);
-    void setModel(QVector<Profile> profiles);
-    void addItem(Profile profile);
+    ProfileModel(QObject *parent = nullptr);
+    void setModel(const QVector<Profile> &profiles);
+    void addItem(const Profile &profile);
     void updateProfile(Profile profile, int row);
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     Profile getProfile(int index);
     void removeProfile(int index);
 
 };
 
-#endif // PROFILEVIEW_HPP
+#endif // PROFILEMODEL_HPP

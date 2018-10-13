@@ -17,38 +17,39 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PROFILE_HPP
-#define PROFILE_HPP
+#ifndef IDRESULT_HPP
+#define IDRESULT_HPP
 
+#include <QDateTime>
 #include <QString>
-#include <Core/Game.hpp>
 #include <cstdint>
 
-typedef uint32_t u32;
-typedef uint16_t u16;
+using u32 = uint32_t;
+using u16 = uint16_t;
 
-class Profile
+class IDResult
 {
 
 private:
-    QString name;
-    u32 offset, tick;
-    u16 tid, sid;
-    Game version;
-    bool shinyCharm;
+    QDateTime target;
+    u32 seed{}, frame{};
+    u16 tid{};
+    u16 sid{};
+    u16 tsv{};
+    u32 displayTID{};
 
 public:
-    Profile();
-    Profile(QString name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm);
-    QString getName() const;
-    u32 getOffset() const;
-    u32 getTick() const;
+    IDResult(u32 seed, u32 frame, u32 rand);
+    IDResult() = default;
+    QString getDateTime() const;
+    u32 getSeed() const;
+    u32 getFrame() const;
     u16 getTID() const;
     u16 getSID() const;
-    Game getVersion() const;
-    QString getVersionString() const;
-    bool getShinyCharm() const;
+    u16 getTSV() const;
+    u32 getDisplayTID() const;
+    void setTarget(const QDateTime &value);
 
 };
 
-#endif // PROFILE_HPP
+#endif // IDRESULT_HPP

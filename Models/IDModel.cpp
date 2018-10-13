@@ -19,52 +19,87 @@
 
 #include "IDModel.hpp"
 
-IDModel::IDModel(u32 seed, u32 frame, u32 rand)
+IDModel::IDModel(QObject *parent) : QAbstractTableModel(parent)
 {
-    this->seed = seed;
-    this->frame = frame;
-    tid = rand & 0xffff;
-    sid = rand >> 16;
-    tsv = (tid ^ sid) >> 4;
-    displayTID = rand % 1000000;
 }
 
-QString IDModel::getDateTime()
+void IDModel::addItems(const QVector<IDResult> &frames)
 {
-    return target.toString(Qt::DefaultLocaleShortDate);
+    int i = rowCount();
+    emit beginInsertRows(QModelIndex(), i, i + frames.size() - 1);
+    model.append(frames);
+    emit endInsertRows();
 }
 
-u32 IDModel::getSeed() const
+void IDModel::clear()
 {
-    return seed;
+    if (model.empty())
+        return;
+    emit beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
+    model.clear();
+    model.squeeze();
+    emit endRemoveRows();
 }
 
-u32 IDModel::getFrame() const
+int IDModel::rowCount(const QModelIndex &parent) const
 {
-    return frame;
+    (void) parent;
+    return model.size();
 }
 
-u16 IDModel::getTID() const
+int IDModel::columnCount(const QModelIndex &parent) const
 {
-    return tid;
+    (void) parent;
+    return 7;
 }
 
-u16 IDModel::getSID() const
+QVariant IDModel::data(const QModelIndex &index, int role) const
 {
-    return sid;
+    if (role == Qt::DisplayRole)
+    {
+        const IDResult &frame = model.at(index.row());
+        switch (index.column())
+        {
+            case 0:
+                return frame.getDateTime();
+            case 1:
+                return QString::number(frame.getSeed(), 16).toUpper();
+            case 2:
+                return frame.getFrame();
+            case 3:
+                return frame.getDisplayTID();
+            case 4:
+                return frame.getTID();
+            case 5:
+                return frame.getSID();
+            case 6:
+                return frame.getTSV();
+        }
+    }
+    return QVariant();
 }
 
-u16 IDModel::getTSV() const
+QVariant IDModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    return tsv;
-}
-
-u32 IDModel::getDisplayTID() const
-{
-    return displayTID;
-}
-
-void IDModel::setTarget(const QDateTime &value)
-{
-    target = value;
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
+    {
+        switch (section)
+        {
+            case 0:
+                return tr("Date/Time");
+            case 1:
+                return tr("Initial Seed");
+            case 2:
+                return tr("Frame");
+            case 3:
+                return tr("G7 TID");
+            case 4:
+                return tr("TID");
+            case 5:
+                return tr("SID");
+            case 6:
+                return tr("TSV");
+        }
+    }
+    return QVariant();
 }

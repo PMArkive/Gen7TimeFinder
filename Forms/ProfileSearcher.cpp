@@ -80,7 +80,7 @@ void ProfileSearcher::updateProgressBar(int num)
 
 ProfileSearch::ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange)
 {
-    startDate = start;
+    startDate = std::move(start);
     this->initialSeed = initialSeed;
     this->baseTick = baseTick;
     this->baseOffset = baseOffset;
