@@ -295,6 +295,18 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEditBaseTick</tabstop>
+  <tabstop>lineEditBaseOffset</tabstop>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>lineEditTickRange</tabstop>
+  <tabstop>lineEditInitialSeed</tabstop>
+  <tabstop>lineEditOffsetRange</tabstop>
+  <tabstop>pushButtonSearch</tabstop>
+  <tabstop>pushButtonCancel</tabstop>
+  <tabstop>tableView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -52,6 +52,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="maxLength">
+      <number>5</number>
+     </property>
     </widget>
    </item>
    <item row="1" column="0">
@@ -100,6 +103,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="maxLength">
+      <number>5</number>
+     </property>
     </widget>
    </item>
    <item row="2" column="0">
@@ -110,7 +116,11 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QLineEdit" name="lineEditProfileTick"/>
+    <widget class="QLineEdit" name="lineEditProfileTick">
+     <property name="maxLength">
+      <number>5</number>
+     </property>
+    </widget>
    </item>
    <item row="2" column="2" colspan="2">
     <widget class="QCheckBox" name="checkBoxShinyCharm">
@@ -134,6 +144,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="maxLength">
+      <number>8</number>
+     </property>
     </widget>
    </item>
    <item row="3" column="3">
@@ -154,9 +167,11 @@
  <tabstops>
   <tabstop>lineEditProfileName</tabstop>
   <tabstop>comboBoxProfileVersion</tabstop>
+  <tabstop>lineEditProfileTick</tabstop>
   <tabstop>lineEditProfileOffset</tabstop>
   <tabstop>lineEditProfileTID</tabstop>
   <tabstop>lineEditProfileSID</tabstop>
+  <tabstop>checkBoxShinyCharm</tabstop>
  </tabstops>
  <resources/>
  <connections/>
