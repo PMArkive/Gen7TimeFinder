@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>783</width>
-    <height>334</height>
+    <width>820</width>
+    <height>330</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>820</width>
+    <height>330</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Profile Searcher</string>
@@ -85,6 +91,9 @@
            <minute>0</minute>
            <second>0</second>
           </time>
+         </property>
+         <property name="displayFormat">
+          <string>M/d/yyyy H:mm:ss</string>
          </property>
          <property name="calendarPopup">
           <bool>true</bool>

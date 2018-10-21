@@ -36,7 +36,7 @@ void IDSearcher::run()
     u64 epochStart = Utility::getCitraTime(startTime, profile.getOffset());
     u64 epochEnd = Utility::getCitraTime(endTime, profile.getOffset());
 
-    for (u64 epoch = epochStart; epoch <= epochEnd; epoch += 60000)
+    for (u64 epoch = epochStart; epoch <= epochEnd; epoch += 1000)
     {
         u32 values[4] = { profile.getTick(), 0, static_cast<u32>(epoch & 0xffffffff), static_cast<u32>(epoch >> 32)};
 
@@ -67,7 +67,7 @@ void IDSearcher::run()
 
 int IDSearcher::maxProgress()
 {
-    auto val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 60000);
+    auto val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 1000);
     return val;
 }
 
