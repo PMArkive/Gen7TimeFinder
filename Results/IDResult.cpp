@@ -31,7 +31,7 @@ IDResult::IDResult(u32 seed, u32 frame, u32 rand)
 
 QString IDResult::getDateTime() const
 {
-    return target.toString(Qt::DefaultLocaleShortDate);
+    return target.toString("dd/MM/yyyy hh:mm:ss");
 }
 
 u32 IDResult::getSeed() const

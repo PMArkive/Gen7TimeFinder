@@ -29,7 +29,7 @@ StationaryResult::StationaryResult(u32 seed, u16 tid, u16 sid)
 
 QString StationaryResult::getDateTime() const
 {
-    return target.toString(Qt::DefaultLocaleShortDate);
+    return target.toString("dd/MM/yyyy hh:mm:ss");
 }
 
 void StationaryResult::setTarget(const QDateTime &value)
