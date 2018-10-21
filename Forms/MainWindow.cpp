@@ -71,7 +71,9 @@ void MainWindow::on_comboBoxProfiles_currentIndexChanged(int index)
 void MainWindow::on_pushButtonStationarySearch_clicked()
 {
     QDateTime start = ui->dateTimeEditStationaryStartDate->dateTime();
+    start.setTimeSpec(Qt::UTC);
     QDateTime end = ui->dateTimeEditStationaryEndDate->dateTime();
+    end.setTimeSpec(Qt::UTC);
     u32 frameStart = ui->lineEditStationaryStartFrame->text().toUInt();
     u32 frameEnd = ui->lineEditStationaryEndFrame->text().toUInt();
 
@@ -132,7 +134,9 @@ void MainWindow::updateStationaryProgress(int val)
 void MainWindow::on_pushButtonIDSearch_clicked()
 {
     QDateTime start = ui->dateTimeEditIDStartDate->dateTime();
+    start.setTimeSpec(Qt::UTC);
     QDateTime end = ui->dateTimeEditIDEndDate->dateTime();
+    end.setTimeSpec(Qt::UTC);
     u32 frameStart = ui->lineEditIDStartFrame->text().toUInt();
     u32 frameEnd = ui->lineEditIDEndFrame->text().toUInt();
 
