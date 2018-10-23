@@ -27,7 +27,7 @@ u32 Utility::changeEndian(u32 num)
            ((num << 24) & 0xff000000);
 }
 
-u64 Utility::getCitraTime(const QDateTime& dateTime, u64 offset)
+u64 Utility::getCitraTime(const QDateTime &dateTime, u64 offset)
 {
     return static_cast<u64>(dateTime.toMSecsSinceEpoch()) + offset - 946684800000;
 }
@@ -37,22 +37,20 @@ u64 Utility::getNormalTime(u64 time, u64 offset)
     return time + 946684800000 - offset;
 }
 
-u32 Utility::calcInitialSeed(u32 *values)
+u32 Utility::calcInitialSeed(u32 tick, u64 epoch)
 {
+    u32 values[4] = { tick, 0, static_cast<u32>(epoch & 0xffffffff), static_cast<u32>(epoch >> 32) };
     QByteArray input;
-    for (int i = 0; i < 4; i++)
+    for (u32 &value : values)
     {
-        u32 val = changeEndian(values[i]);
+        u32 val = changeEndian(value);
         input.append(static_cast<char>(val >> 24));
         input.append(static_cast<char>((val >> 16) & 0xff));
         input.append(static_cast<char>((val >> 8) & 0xff));
         input.append(static_cast<char>(val & 0xff));
     }
 
-    QByteArray hash = QCryptographicHash::hash(input, QCryptographicHash::Sha256);
-    hash = hash.toHex().left(8);
-
-    u32 seed = hash.toUInt(nullptr, 16);
+    u32 seed = QCryptographicHash::hash(input, QCryptographicHash::Sha256).toHex().left(8).toUInt(nullptr, 16);
     return changeEndian(seed);
 }
 
@@ -154,7 +152,7 @@ QVector<Profile> Utility::loadProfileList()
     return profileList;
 }
 
-void Utility::saveProfile(const Profile& profile)
+void Utility::saveProfile(const Profile &profile)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");
@@ -211,7 +209,7 @@ void Utility::saveProfile(const Profile& profile)
     }
 }
 
-void Utility::deleteProfile(const Profile& profile)
+void Utility::deleteProfile(const Profile &profile)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");
@@ -262,7 +260,7 @@ void Utility::deleteProfile(const Profile& profile)
     }
 }
 
-void Utility::updateProfile(const Profile& original, const Profile& edit)
+void Utility::updateProfile(const Profile &original, const Profile &edit)
 {
     QDomDocument doc;
     QFile file(QApplication::applicationDirPath() + "/profiles.xml");

@@ -47,10 +47,7 @@ void StationarySearcher::run()
 
     for (u64 epoch = epochStart; epoch <= epochEnd; epoch += 1000)
     {
-        // TODO change to also work for SM
-        u32 values[4] = { profile.getTick(), 0, static_cast<u32>(epoch & 0xffffffff), static_cast<u32>(epoch >> 32)};
-
-        u32 initialSeed = Utility::calcInitialSeed(values);
+        u32 initialSeed = Utility::calcInitialSeed(profile.getTick(), epoch);
         SFMT sfmt(initialSeed);
         sfmt.advanceFrames(startFrame);
 

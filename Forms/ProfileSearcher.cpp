@@ -101,8 +101,7 @@ void ProfileSearch::run()
 
             // Plus offset
             u64 epochPlus = Utility::getCitraTime(startDate, baseOffset + offset);
-            u32 valuesPlus[4] = { baseTick + tick, 0, static_cast<u32>(epochPlus & 0xffffffff), static_cast<u32>(epochPlus >> 32) };
-            u32 seedPlus = Utility::calcInitialSeed(valuesPlus);
+            u32 seedPlus = Utility::calcInitialSeed(baseTick + tick, epochPlus);
             if (seedPlus == initialSeed)
             {
                 emit resultReady(QPair<u32, u32>(baseTick + tick, baseOffset + offset));
@@ -110,8 +109,7 @@ void ProfileSearch::run()
 
             // Minus offset
             u64 epochMinus = Utility::getCitraTime(startDate, baseOffset - offset);
-            u32 valuesMinus[4] = { baseTick - tick, 0, static_cast<u32>(epochMinus & 0xffffffff), static_cast<u32>(epochMinus >> 32) };
-            u32 seedMinus = Utility::calcInitialSeed(valuesMinus);
+            u32 seedMinus = Utility::calcInitialSeed(baseTick - tick, epochMinus);
             if (seedMinus == initialSeed)
             {
                 emit resultReady(QPair<u32, u32>(baseTick - tick, baseOffset - offset));

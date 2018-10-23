@@ -39,7 +39,7 @@ namespace Utility
     u32 changeEndian(u32 num);
     u64 getCitraTime(const QDateTime &dateTime, u64 offset);
     u64 getNormalTime(u64 time, u64 offset);
-    u32 calcInitialSeed(u32 *values);
+    u32 calcInitialSeed(u32 tick, u64 epoch);
     QString getNature(int nature);
     QString getHiddenPower(int hiddenPower);
     QVector<Profile> loadProfileList();
