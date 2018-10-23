@@ -22,7 +22,7 @@
 Profile::Profile()
 {
     name = "None";
-    offset = 17017;
+    offset = 17;
     tick = 0x383e329;
     tid = 12345;
     sid = 54321;

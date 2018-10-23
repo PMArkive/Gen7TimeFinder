@@ -126,7 +126,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>10000</string>
+          <string>1000</string>
          </property>
          <property name="maxLength">
           <number>8</number>
@@ -162,10 +162,10 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>100</string>
+          <string>10</string>
          </property>
          <property name="maxLength">
-          <number>4</number>
+          <number>3</number>
          </property>
         </widget>
        </item>
@@ -274,7 +274,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>17017</string>
+          <string>17</string>
          </property>
          <property name="maxLength">
           <number>5</number>
