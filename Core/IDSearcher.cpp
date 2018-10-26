@@ -42,7 +42,6 @@ void IDSearcher::run()
         SFMT sfmt(initialSeed);
         sfmt.advanceFrames(startFrame);
 
-        QVector<IDResult> results;
         for (u32 frame = startFrame; frame <= endFrame; frame++)
         {
             if (cancel)
@@ -53,20 +52,36 @@ void IDSearcher::run()
             {
                 QDateTime target = QDateTime::fromMSecsSinceEpoch(static_cast<qlonglong>(Utility::getNormalTime(epoch, profile.getOffset())), Qt::UTC);
                 id.setTarget(target);
+
+                mutex.lock();
                 results.append(id);
+                mutex.unlock();
             }
         }
 
-        if (!results.isEmpty())
-            emit resultReady(results);
-        emit updateProgress(++progress);
+        progress++;
     }
 }
 
 int IDSearcher::maxProgress()
 {
     auto val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 1000);
-    return val;
+    return val + 1;
+}
+
+int IDSearcher::currentProgress()
+{
+    return progress;
+}
+
+QVector<IDResult> IDSearcher::getResults()
+{
+    mutex.lock();
+    auto data = results;
+    results.clear();
+    mutex.unlock();
+
+    return data;
 }
 
 void IDSearcher::cancelSearch()

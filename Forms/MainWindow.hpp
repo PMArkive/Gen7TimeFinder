@@ -23,6 +23,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QSettings>
+#include <QTimer>
 #include <QVector>
 #include <Core/IDFilter.hpp>
 #include <Core/IDSearcher.hpp>
@@ -50,10 +51,10 @@ private slots:
     void on_pushButtonProfileManager_clicked();
     void on_comboBoxProfiles_currentIndexChanged(int index);
     void on_pushButtonStationarySearch_clicked();
-    void addStationaryFrame(const QVector<StationaryResult> &frames);
+    void addStationaryFrames(const QVector<StationaryResult> &frames);
     void updateStationaryProgress(int val);
     void on_pushButtonIDSearch_clicked();
-    void addIDFrame(const QVector<IDResult> &frames);
+    void addIDFrames(const QVector<IDResult> &frames);
     void updateIDProgess(int val);
     void updateProfiles();
     void on_actionCalibrate_Profile_triggered();

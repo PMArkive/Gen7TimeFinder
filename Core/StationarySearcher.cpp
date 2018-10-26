@@ -121,22 +121,38 @@ void StationarySearcher::run()
                 QDateTime target = QDateTime::fromMSecsSinceEpoch(static_cast<qlonglong>(Utility::getNormalTime(epoch, profile.getOffset())), Qt::UTC);
                 result.setTarget(target);
                 result.setFrame(frame + startFrame);
+
+                mutex.lock();
                 results.append(result);
+                mutex.unlock();
             }
         }
 
         delete[] seeds;
 
-        if (!results.isEmpty())
-            emit resultReady(results);
-        emit updateProgress(++progress);
+        progress++;
     }
 }
 
 int StationarySearcher::maxProgress()
 {
     auto val = static_cast<int>((Utility::getCitraTime(endTime, profile.getOffset()) - Utility::getCitraTime(startTime, profile.getOffset())) / 1000);
-    return val;
+    return val + 1;
+}
+
+int StationarySearcher::currentProgress()
+{
+    return progress;
+}
+
+QVector<StationaryResult> StationarySearcher::getResults()
+{
+    mutex.lock();
+    auto data = results;
+    results.clear();
+    mutex.unlock();
+
+    return data;
 }
 
 void StationarySearcher::cancelSearch()

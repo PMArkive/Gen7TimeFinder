@@ -20,9 +20,9 @@
 #ifndef IDSEARCHER_HPP
 #define IDSEARCHER_HPP
 
+#include <QMutex>
 #include <QThread>
 #include <QVector>
-#include <QPair>
 #include <Core/IDFilter.hpp>
 #include <Core/SFMT.hpp>
 #include <Core/Utility.hpp>
@@ -33,10 +33,6 @@ class IDSearcher : public QThread
 {
     Q_OBJECT
 
-signals:
-    void resultReady(QVector<IDResult> frames);
-    void updateProgress(int val);
-
 private:
     bool cancel;
     QDateTime startTime, endTime;
@@ -45,10 +41,15 @@ private:
     IDFilter filter;
     Profile profile;
 
+    QVector<IDResult> results;
+    QMutex mutex;
+
 public:
     IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, IDFilter filter);
     void run() override;
     int maxProgress();
+    int currentProgress();
+    QVector<IDResult> getResults();
 
 public slots:
     void cancelSearch();
