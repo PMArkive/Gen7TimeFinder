@@ -55,15 +55,15 @@ void ProfileCalibrater::on_pushButtonSearch_clicked()
     u32 tickRange = ui->lineEditTickRange->text().toUInt();
     u32 offsetRange = ui->lineEditOffsetRange->text().toUInt();
 
-    auto *search = new ProfileSearch(dateTime, initialSeed, baseTick, baseOffset, tickRange, offsetRange);
+    auto *search = new ProfileSearcher(dateTime, initialSeed, baseTick, baseOffset, tickRange, offsetRange);
     auto *timer = new QTimer();
 
-    connect(search, &ProfileSearch::finished, timer, &QTimer::deleteLater);
-    connect(search, &ProfileSearch::finished, timer, &QTimer::stop);
-    connect(search, &ProfileSearch::finished, this, [ = ] { ui->pushButtonSearch->setEnabled(true); ui->pushButtonCancel->setEnabled(false); });
-    connect(search, &ProfileSearch::finished, this, [ = ] { updateResults(search->getResults(), search->currentProgress()); });
+    connect(search, &ProfileSearcher::finished, timer, &QTimer::deleteLater);
+    connect(search, &ProfileSearcher::finished, timer, &QTimer::stop);
+    connect(search, &ProfileSearcher::finished, this, [ = ] { ui->pushButtonSearch->setEnabled(true); ui->pushButtonCancel->setEnabled(false); });
+    connect(search, &ProfileSearcher::finished, this, [ = ] { updateResults(search->getResults(), search->currentProgress()); });
     connect(timer, &QTimer::timeout, this, [ = ] { updateResults(search->getResults(), search->currentProgress()); });
-    connect(ui->pushButtonCancel, &QPushButton::clicked, search, &ProfileSearch::cancelSearch);
+    connect(ui->pushButtonCancel, &QPushButton::clicked, search, &ProfileSearcher::cancelSearch);
 
     ui->progressBar->setMaximum(search->maxProgress());
 
@@ -92,76 +92,4 @@ void ProfileCalibrater::on_comboBox_currentIndexChanged(int index)
     {
         ui->lineEditBaseTick->setText("383e329");
     }
-}
-
-ProfileSearch::ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange)
-{
-    startDate = std::move(start);
-    this->initialSeed = initialSeed;
-    this->baseTick = baseTick;
-    this->baseOffset = baseOffset;
-    this->tickRange = tickRange;
-    this->offsetRange = offsetRange;
-    progress = 0;
-    cancel = false;
-
-    connect(this, &ProfileSearch::finished, this, &QObject::deleteLater);
-}
-
-void ProfileSearch::run()
-{
-    for (u32 tick = 0; tick <= tickRange; tick++)
-    {
-        for (u32 offset = 0; offset <= offsetRange; offset++)
-        {
-            if (cancel)
-                return;
-
-            // Plus offset
-            u64 epochPlus = Utility::getCitraTime(startDate, baseOffset + offset);
-            u32 seedPlus = Utility::calcInitialSeed(baseTick + tick, epochPlus);
-            if (seedPlus == initialSeed)
-            {
-                mutex.lock();
-                results.append(QPair<u32, u32>(baseTick + tick, baseOffset + offset));
-                mutex.unlock();
-            }
-
-            // Minus offset
-            u64 epochMinus = Utility::getCitraTime(startDate, baseOffset - offset);
-            u32 seedMinus = Utility::calcInitialSeed(baseTick - tick, epochMinus);
-            if (seedMinus == initialSeed)
-            {
-                mutex.lock();
-                results.append(QPair<u32, u32>(baseTick - tick, baseOffset - offset));
-                mutex.unlock();
-            }
-        }
-        progress++;
-    }
-}
-
-int ProfileSearch::maxProgress()
-{
-    return static_cast<int>(tickRange + 1);
-}
-
-int ProfileSearch::currentProgress()
-{
-    return progress;
-}
-
-QVector<QPair<u32, u32> > ProfileSearch::getResults()
-{
-    mutex.lock();
-    auto data(results);
-    results.clear();
-    mutex.unlock();
-
-    return data;
-}
-
-void ProfileSearch::cancelSearch()
-{
-    cancel = true;
 }

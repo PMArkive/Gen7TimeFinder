@@ -39,6 +39,7 @@ HEADERS += \
     Core/Game.hpp \
     Core/IDFilter.hpp \
     Core/IDSearcher.hpp \
+    Core/ProfileSearcher.hpp \
     Core/SFMT.hpp \
     Core/StationaryFilter.hpp \
     Core/StationarySearcher.hpp \
@@ -57,6 +58,7 @@ HEADERS += \
 SOURCES += \
     Core/IDFilter.cpp \
     Core/IDSearcher.cpp \
+    Core/ProfileSearcher.cpp \
     Core/SFMT.cpp \
     Core/StationaryFilter.cpp \
     Core/StationarySearcher.cpp \

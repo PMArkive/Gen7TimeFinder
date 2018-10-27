@@ -21,12 +21,9 @@
 #define PROFILECALIBRATER_HPP
 
 #include <QMainWindow>
-#include <QDateTime>
-#include <QThread>
-#include <QMutex>
 #include <QStandardItemModel>
 #include <QTimer>
-#include <Core/Utility.hpp>
+#include <Core/ProfileSearcher.hpp>
 
 namespace Ui
 {
@@ -51,33 +48,6 @@ private slots:
 private:
     Ui::ProfileCalibrater *ui;
     QStandardItemModel *model;
-
-};
-
-class ProfileSearch : public QThread
-{
-    Q_OBJECT
-
-private:
-    bool cancel;
-    QDateTime startDate;
-    u32 initialSeed;
-    u32 baseTick, baseOffset;
-    u32 tickRange, offsetRange;
-    int progress;
-
-    QVector<QPair<u32, u32>> results;
-    QMutex mutex;
-
-public:
-    ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
-    void run() override;
-    int maxProgress();
-    int currentProgress();
-    QVector<QPair<u32, u32>> getResults();
-
-public slots:
-    void cancelSearch();
 
 };
 
