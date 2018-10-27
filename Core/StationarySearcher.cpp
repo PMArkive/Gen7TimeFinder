@@ -57,7 +57,6 @@ void StationarySearcher::run()
         for (u32 i = 0; i < endFrame; i++)
             seeds[i] = sfmt.nextULong();
 
-        QVector<StationaryResult> results;
         for (u32 frame = 0; frame <= (endFrame - startFrame); frame++)
         {
             if (cancel)
