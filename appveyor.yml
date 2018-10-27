@@ -43,10 +43,11 @@ after_build:
     # Windows
     - cmd: md Gen7TimeFinder-windows
     - cmd: move release\Gen7TimeFinder.exe Gen7TimeFinder-windows\Gen7TimeFinder.exe 
-    - cmd: windeployqt --release --no-translations --no-angle --no-opengl-sw Gen7TimeFinder-windows\Gen7TimeFinder.exe
+    - cmd: windeployqt --release --no-translations --no-angle --no-plugins --no-opengl-sw Gen7TimeFinder-windows\Gen7TimeFinder.exe
     - cmd: del Gen7TimeFinder-windows\vcredist*.exe
     - cmd: del Gen7TimeFinder-windows\vc_redist*.exe
-    #- cmd: xcopy /I %QTDIR%\plugins\platforms\qwindows.dll Gen7TimeFinder-windows\platforms\
+    - cmd: xcopy /I %QTDIR%\plugins\platforms\qwindows.dll Gen7TimeFinder-windows\platforms\
+    - cmd: xcopy /I %QTDIR%\plugins\styles\qwindowsvistastyle.dll Gen7TimeFinder-windows\styles\
     - cmd: 7z a Gen7TimeFinder-windows-%ARCH%.zip Gen7TimeFinder-windows\
     # Linux
     - sh: zip -r Gen7TimeFinder-linux-x64.zip Gen7TimeFinder
