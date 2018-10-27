@@ -38,6 +38,8 @@ StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 start
     pidCount = profile.getShinyCharm() ? 3 : 1;
     cancel = false;
     progress = 0;
+
+    connect(this, &StationarySearcher::finished, this, &QObject::deleteLater);
 }
 
 void StationarySearcher::run()
@@ -59,7 +61,10 @@ void StationarySearcher::run()
         for (u32 frame = 0; frame <= (endFrame - startFrame); frame++)
         {
             if (cancel)
+            {
+                delete[] seeds;
                 return;
+            }
 
             StationaryResult result(initialSeed, profile.getTID(), profile.getSID());
             u32 index = 0;
@@ -148,7 +153,7 @@ int StationarySearcher::currentProgress()
 QVector<StationaryResult> StationarySearcher::getResults()
 {
     mutex.lock();
-    auto data = results;
+    auto data(results);
     results.clear();
     mutex.unlock();
 

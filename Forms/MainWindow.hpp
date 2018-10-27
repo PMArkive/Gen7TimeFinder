@@ -29,8 +29,8 @@
 #include <Core/IDSearcher.hpp>
 #include <Core/StationarySearcher.hpp>
 #include <Core/Utility.hpp>
+#include <Forms/ProfileCalibrater.hpp>
 #include <Forms/ProfileManager.hpp>
-#include <Forms/ProfileSearcher.hpp>
 #include <Models/StationaryModel.hpp>
 #include <Models/IDModel.hpp>
 
@@ -51,11 +51,9 @@ private slots:
     void on_pushButtonProfileManager_clicked();
     void on_comboBoxProfiles_currentIndexChanged(int index);
     void on_pushButtonStationarySearch_clicked();
-    void addStationaryFrames(const QVector<StationaryResult> &frames);
-    void updateStationaryProgress(int val);
+    void updateStationary(const QVector<StationaryResult> &frames, int val);
     void on_pushButtonIDSearch_clicked();
-    void addIDFrames(const QVector<IDResult> &frames);
-    void updateIDProgess(int val);
+    void updateID(const QVector<IDResult> &frames, int val);
     void updateProfiles();
     void on_actionCalibrate_Profile_triggered();
 

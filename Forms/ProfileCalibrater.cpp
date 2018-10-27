@@ -17,12 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "ProfileSearcher.hpp"
-#include "ui_ProfileSearcher.h"
+#include "ProfileCalibrater.hpp"
+#include "ui_ProfileCalibrater.h"
 
-ProfileSearcher::ProfileSearcher(QWidget *parent) :
+ProfileCalibrater::ProfileCalibrater(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ProfileSearcher)
+    ui(new Ui::ProfileCalibrater)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_QuitOnClose, false);
@@ -35,13 +35,13 @@ ProfileSearcher::ProfileSearcher(QWidget *parent) :
     qRegisterMetaType<QPair<u32, u32>>("QPair<u32, u32>");
 }
 
-ProfileSearcher::~ProfileSearcher()
+ProfileCalibrater::~ProfileCalibrater()
 {
     delete ui;
     delete model;
 }
 
-void ProfileSearcher::on_pushButtonSearch_clicked()
+void ProfileCalibrater::on_pushButtonSearch_clicked()
 {
     model->removeRows(0, model->rowCount());
     ui->pushButtonSearch->setEnabled(false);
@@ -55,27 +55,43 @@ void ProfileSearcher::on_pushButtonSearch_clicked()
     u32 tickRange = ui->lineEditTickRange->text().toUInt();
     u32 offsetRange = ui->lineEditOffsetRange->text().toUInt();
 
-    ProfileSearch *search = new ProfileSearch(dateTime, initialSeed, baseTick, baseOffset, tickRange, offsetRange);
-    connect(search, &ProfileSearch::resultReady, this, &ProfileSearcher::addResult);
-    connect(search, &ProfileSearch::updateProgress, this, &ProfileSearcher::updateProgressBar);
-    connect(search, &ProfileSearch::finished, search, &QObject::deleteLater);
+    auto *search = new ProfileSearch(dateTime, initialSeed, baseTick, baseOffset, tickRange, offsetRange);
+    auto *timer = new QTimer();
+
+    connect(search, &ProfileSearch::finished, timer, &QTimer::deleteLater);
+    connect(search, &ProfileSearch::finished, timer, &QTimer::stop);
     connect(search, &ProfileSearch::finished, this, [ = ] { ui->pushButtonSearch->setEnabled(true); ui->pushButtonCancel->setEnabled(false); });
+    connect(search, &ProfileSearch::finished, this, [ = ] { updateResults(search->getResults(), search->currentProgress()); });
+    connect(timer, &QTimer::timeout, this, [ = ] { updateResults(search->getResults(), search->currentProgress()); });
     connect(ui->pushButtonCancel, &QPushButton::clicked, search, &ProfileSearch::cancelSearch);
 
     ui->progressBar->setMaximum(search->maxProgress());
+
     search->start();
+    timer->start(1000);
 }
 
-void ProfileSearcher::addResult(QPair<u32, u32> result)
+void ProfileCalibrater::updateResults(QVector<QPair<u32, u32>> results, int val)
 {
-    QList<QStandardItem *> item;
-    item << new QStandardItem(QString::number(result.first, 16)) << new QStandardItem(QString::number(result.second));
-    model->appendRow(item);
+    for (const auto &result : results)
+    {
+        auto list = { new QStandardItem(QString::number(result.first, 16)), new QStandardItem(QString::number(result.second)) };
+        model->appendRow(list);
+    }
+
+    ui->progressBar->setValue(val);
 }
 
-void ProfileSearcher::updateProgressBar(int num)
+void ProfileCalibrater::on_comboBox_currentIndexChanged(int index)
 {
-    ui->progressBar->setValue(num);
+    if (index == 0)
+    {
+        ui->lineEditBaseTick->setText("2b942c5");
+    }
+    else if (index == 1)
+    {
+        ui->lineEditBaseTick->setText("383e329");
+    }
 }
 
 ProfileSearch::ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange)
@@ -88,6 +104,8 @@ ProfileSearch::ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32
     this->offsetRange = offsetRange;
     progress = 0;
     cancel = false;
+
+    connect(this, &ProfileSearch::finished, this, &QObject::deleteLater);
 }
 
 void ProfileSearch::run()
@@ -104,7 +122,9 @@ void ProfileSearch::run()
             u32 seedPlus = Utility::calcInitialSeed(baseTick + tick, epochPlus);
             if (seedPlus == initialSeed)
             {
-                emit resultReady(QPair<u32, u32>(baseTick + tick, baseOffset + offset));
+                mutex.lock();
+                results.append(QPair<u32, u32>(baseTick + tick, baseOffset + offset));
+                mutex.unlock();
             }
 
             // Minus offset
@@ -112,10 +132,12 @@ void ProfileSearch::run()
             u32 seedMinus = Utility::calcInitialSeed(baseTick - tick, epochMinus);
             if (seedMinus == initialSeed)
             {
-                emit resultReady(QPair<u32, u32>(baseTick - tick, baseOffset - offset));
+                mutex.lock();
+                results.append(QPair<u32, u32>(baseTick - tick, baseOffset - offset));
+                mutex.unlock();
             }
         }
-        emit updateProgress(++progress);
+        progress++;
     }
 }
 
@@ -124,19 +146,22 @@ int ProfileSearch::maxProgress()
     return static_cast<int>(tickRange + 1);
 }
 
+int ProfileSearch::currentProgress()
+{
+    return progress;
+}
+
+QVector<QPair<u32, u32> > ProfileSearch::getResults()
+{
+    mutex.lock();
+    auto data(results);
+    results.clear();
+    mutex.unlock();
+
+    return data;
+}
+
 void ProfileSearch::cancelSearch()
 {
     cancel = true;
-}
-
-void ProfileSearcher::on_comboBox_currentIndexChanged(int index)
-{
-    if (index == 0)
-    {
-        ui->lineEditBaseTick->setText("2b942c5");
-    }
-    else if (index == 1)
-    {
-        ui->lineEditBaseTick->setText("383e329");
-    }
 }

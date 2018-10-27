@@ -110,13 +110,11 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
                                           profiles[ui->comboBoxProfiles->currentIndex()], filter);
     auto *timer = new QTimer();
 
-    connect(search, &StationarySearcher::finished, search, &QObject::deleteLater);
     connect(search, &StationarySearcher::finished, timer, &QTimer::deleteLater);
     connect(search, &StationarySearcher::finished, timer, &QTimer::stop);
-    connect(search, &StationarySearcher::finished, this, [ = ] { updateStationaryProgress(search->currentProgress()); });
     connect(search, &StationarySearcher::finished, this, [ = ] { ui->pushButtonStationarySearch->setEnabled(true); ui->pushButtonStationaryCancel->setEnabled(false); });
-    connect(timer, &QTimer::timeout, this, [ = ] { addStationaryFrames(search->getResults()); });
-    connect(timer, &QTimer::timeout, this, [ = ] { updateStationaryProgress(search->currentProgress()); });
+    connect(search, &StationarySearcher::finished, this, [ = ] { updateStationary(search->getResults(), search->currentProgress()); });
+    connect(timer, &QTimer::timeout, this, [ = ] { updateStationary(search->getResults(), search->currentProgress()); });
     connect(ui->pushButtonStationaryCancel, &QPushButton::clicked, search, &StationarySearcher::cancelSearch);
 
     ui->progressBarStationary->setMaximum(search->maxProgress());
@@ -125,14 +123,11 @@ void MainWindow::on_pushButtonStationarySearch_clicked()
     timer->start(1000);
 }
 
-void MainWindow::addStationaryFrames(const QVector<StationaryResult> &frames)
+void MainWindow::updateStationary(const QVector<StationaryResult> &frames, int val)
 {
     if (!frames.isEmpty())
         stationaryModel->addItems(frames);
-}
 
-void MainWindow::updateStationaryProgress(int val)
-{
     ui->progressBarStationary->setValue(val);
 }
 
@@ -177,13 +172,11 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     auto *search = new IDSearcher(start, end, frameStart, frameEnd, profiles[ui->comboBoxProfiles->currentIndex()], filter);
     auto *timer = new QTimer();
 
-    connect(search, &IDSearcher::finished, search, &QObject::deleteLater);
     connect(search, &IDSearcher::finished, timer, &QTimer::deleteLater);
     connect(search, &IDSearcher::finished, timer, &QTimer::stop);
-    connect(search, &IDSearcher::finished, this, [ = ] { updateIDProgess(search->currentProgress()); });
     connect(search, &IDSearcher::finished, this, [ = ] { ui->pushButtonIDSearch->setEnabled(true); ui->pushButtonIDCancel->setEnabled(false); });
-    connect(timer, &QTimer::timeout, this, [ = ] { addIDFrames(search->getResults()); });
-    connect(timer, &QTimer::timeout, this, [ = ] { updateIDProgess(search->currentProgress()); });
+    connect(search, &IDSearcher::finished, this, [ = ] { updateID(search->getResults(), search->currentProgress()); });
+    connect(timer, &QTimer::timeout, this, [ = ] { updateID(search->getResults(), search->currentProgress()); });
     connect(ui->pushButtonIDCancel, &QPushButton::clicked, search, &IDSearcher::cancelSearch);
 
     ui->progressBarID->setMaximum(search->maxProgress());
@@ -192,14 +185,11 @@ void MainWindow::on_pushButtonIDSearch_clicked()
     timer->start(1000);
 }
 
-void MainWindow::addIDFrames(const QVector<IDResult> &frames)
+void MainWindow::updateID(const QVector<IDResult> &frames, int val)
 {
     if (!frames.isEmpty())
         idModel->addItems(frames);
-}
 
-void MainWindow::updateIDProgess(int val)
-{
     ui->progressBarID->setValue(val);
 }
 
@@ -276,7 +266,7 @@ void MainWindow::setupModel()
 
 void MainWindow::on_actionCalibrate_Profile_triggered()
 {
-    auto *searcher = new ProfileSearcher();
+    auto *searcher = new ProfileCalibrater();
     searcher->show();
     searcher->raise();
 }

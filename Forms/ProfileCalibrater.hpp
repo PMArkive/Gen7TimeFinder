@@ -17,41 +17,39 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PROFILESEARCHER_HPP
-#define PROFILESEARCHER_HPP
+#ifndef PROFILECALIBRATER_HPP
+#define PROFILECALIBRATER_HPP
 
 #include <QMainWindow>
 #include <QDateTime>
 #include <QThread>
-#include <QList>
-#include <QStandardItem>
+#include <QMutex>
 #include <QStandardItemModel>
-#include <QPair>
+#include <QTimer>
 #include <Core/Utility.hpp>
 
 namespace Ui
 {
-    class ProfileSearcher;
+    class ProfileCalibrater;
 }
 
 class ProfileSearch;
 
-class ProfileSearcher : public QMainWindow
+class ProfileCalibrater : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit ProfileSearcher(QWidget *parent = nullptr);
-    ~ProfileSearcher() override;
+    explicit ProfileCalibrater(QWidget *parent = nullptr);
+    ~ProfileCalibrater() override;
 
 private slots:
     void on_pushButtonSearch_clicked();
-    void addResult(QPair<u32, u32> result);
-    void updateProgressBar(int num);
+    void updateResults(QVector<QPair<u32, u32>> results, int val);
     void on_comboBox_currentIndexChanged(int index);
 
 private:
-    Ui::ProfileSearcher *ui;
+    Ui::ProfileCalibrater *ui;
     QStandardItemModel *model;
 
 };
@@ -59,10 +57,6 @@ private:
 class ProfileSearch : public QThread
 {
     Q_OBJECT
-
-signals:
-    void resultReady(QPair<u32, u32> result);
-    void updateProgress(int val);
 
 private:
     bool cancel;
@@ -72,14 +66,19 @@ private:
     u32 tickRange, offsetRange;
     int progress;
 
+    QVector<QPair<u32, u32>> results;
+    QMutex mutex;
+
 public:
     ProfileSearch(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
     void run() override;
     int maxProgress();
+    int currentProgress();
+    QVector<QPair<u32, u32>> getResults();
 
 public slots:
     void cancelSearch();
 
 };
 
-#endif // PROFILESEARCHER_HPP
+#endif // PROFILECALIBRATER_HPP

@@ -29,6 +29,8 @@ IDSearcher::IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFr
     this->filter = std::move(filter);
     cancel = false;
     progress = 0;
+
+    connect(this, &IDSearcher::finished, this, &QObject::deleteLater);
 }
 
 void IDSearcher::run()
@@ -77,7 +79,7 @@ int IDSearcher::currentProgress()
 QVector<IDResult> IDSearcher::getResults()
 {
     mutex.lock();
-    auto data = results;
+    auto data(results);
     results.clear();
     mutex.unlock();
 

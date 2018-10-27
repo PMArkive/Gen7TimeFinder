@@ -31,9 +31,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 FORMS += \
     Forms/MainWindow.ui \
+    Forms/ProfileCalibrater.ui \
     Forms/ProfileEditor.ui \
-    Forms/ProfileManager.ui \
-    Forms/ProfileSearcher.ui
+    Forms/ProfileManager.ui
 
 HEADERS += \
     Core/Game.hpp \
@@ -44,14 +44,14 @@ HEADERS += \
     Core/StationarySearcher.hpp \
     Core/Utility.hpp \
     Forms/MainWindow.hpp \
+    Forms/ProfileCalibrater.hpp \
     Forms/ProfileEditor.hpp \
     Forms/ProfileManager.hpp \
-    Forms/ProfileSearcher.hpp \
     Models/IDModel.hpp \
     Models/ProfileModel.hpp \
     Models/StationaryModel.hpp \
-    Results/Profile.hpp \
     Results/IDResult.hpp \
+    Results/Profile.hpp \
     Results/StationaryResult.hpp
 
 SOURCES += \
@@ -62,14 +62,13 @@ SOURCES += \
     Core/StationarySearcher.cpp \
     Core/Utility.cpp \
     Forms/MainWindow.cpp \
+    Forms/ProfileCalibrater.cpp \
     Forms/ProfileEditor.cpp \
     Forms/ProfileManager.cpp \
-    Forms/ProfileSearcher.cpp \
     Models/IDModel.cpp \
     Models/ProfileModel.cpp \
     Models/StationaryModel.cpp \
-    Results/Profile.cpp \
-    main.cpp \
     Results/IDResult.cpp \
-    Results/StationaryResult.cpp
-
+    Results/Profile.cpp \
+    Results/StationaryResult.cpp \
+    main.cpp
