@@ -42,29 +42,31 @@ StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 start
     connect(this, &StationarySearcher::finished, this, &QObject::deleteLater);
 }
 
+StationarySearcher::~StationarySearcher()
+{
+    delete[] seeds;
+}
+
 void StationarySearcher::run()
 {
     u64 epochStart = Utility::getCitraTime(startTime, profile.getOffset());
     u64 epochEnd = Utility::getCitraTime(endTime, profile.getOffset());
+    seeds = new u64[endFrame - startFrame + 50];
 
     for (u64 epoch = epochStart; epoch <= epochEnd; epoch += 1000)
     {
+        if (cancel)
+            return;
+
         u32 initialSeed = Utility::calcInitialSeed(profile.getTick(), epoch);
         SFMT sfmt(initialSeed);
         sfmt.advanceFrames(startFrame);
 
-        auto *seeds = new u64[endFrame];
-        for (u32 i = 0; i < endFrame; i++)
+        for (u32 i = 0; i < endFrame - startFrame + 50; i++)
             seeds[i] = sfmt.nextULong();
 
         for (u32 frame = 0; frame <= (endFrame - startFrame); frame++)
         {
-            if (cancel)
-            {
-                delete[] seeds;
-                return;
-            }
-
             StationaryResult result(initialSeed, profile.getTID(), profile.getSID());
             u32 index = 0;
 
@@ -131,8 +133,6 @@ void StationarySearcher::run()
                 mutex.unlock();
             }
         }
-
-        delete[] seeds;
 
         progress++;
     }

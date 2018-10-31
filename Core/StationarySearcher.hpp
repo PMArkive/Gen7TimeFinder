@@ -42,6 +42,7 @@ private:
     u32 startFrame, endFrame;
     int progress;
     bool cancel;
+    u64 *seeds;
 
     int ivCount, ability, synchNature, pidCount, gender;
     bool alwaysSynch, shinyLocked;
@@ -52,6 +53,7 @@ private:
 public:
     StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
                        int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, StationaryFilter filter);
+    ~StationarySearcher() override;
     void run() override;
     int maxProgress();
     int currentProgress();

@@ -40,14 +40,15 @@ void IDSearcher::run()
 
     for (u64 epoch = epochStart; epoch <= epochEnd; epoch += 1000)
     {
+        if (cancel)
+            return;
+
         u32 initialSeed = Utility::calcInitialSeed(profile.getTick(), epoch);
         SFMT sfmt(initialSeed);
         sfmt.advanceFrames(startFrame);
 
         for (u32 frame = startFrame; frame <= endFrame; frame++)
         {
-            if (cancel)
-                return;
 
             IDResult id(initialSeed, frame, sfmt.nextULong() & 0xffffffff);
             if (filter.compare(id))
