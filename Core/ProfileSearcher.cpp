@@ -1,8 +1,8 @@
 #include "ProfileSearcher.hpp"
 
-ProfileSearcher::ProfileSearcher(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange)
+ProfileSearcher::ProfileSearcher(const QDateTime &start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange)
 {
-    startDate = std::move(start);
+    startDate = start;
     this->initialSeed = initialSeed;
     this->baseTick = baseTick;
     this->baseOffset = baseOffset;

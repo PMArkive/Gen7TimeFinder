@@ -19,11 +19,11 @@
 
 #include "StationarySearcher.hpp"
 
-StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
-                                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, StationaryFilter filter)
+StationarySearcher::StationarySearcher(const QDateTime &start, const QDateTime &end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
+                                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, const StationaryFilter &filter)
 {
-    startTime = std::move(start);
-    endTime = std::move(end);
+    startTime = start;
+    endTime = end;
     this->startFrame = startFrame;
     this->endFrame = endFrame;
     this->ivCount = ivCount ? 3 : 0;
@@ -33,7 +33,7 @@ StationarySearcher::StationarySearcher(QDateTime start, QDateTime end, u32 start
     this->alwaysSynch = alwaysSynch;
     this->shinyLocked = shinyLocked;
     this->profile = profile;
-    this->filter = std::move(filter);
+    this->filter = filter;
 
     pidCount = profile.getShinyCharm() ? 3 : 1;
     cancel = false;

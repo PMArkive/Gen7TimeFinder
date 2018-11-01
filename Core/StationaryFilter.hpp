@@ -33,7 +33,7 @@ private:
 
 public:
     StationaryFilter() = default;
-    StationaryFilter(QVector<int> minIV, QVector<int> maxIV, int nature, int hiddenPower, int ability, bool shiny, int gender);
+    StationaryFilter(const QVector<int> &minIV, const QVector<int> &maxIV, int nature, int hiddenPower, int ability, bool shiny, int gender);
     bool compare(const StationaryResult &frame);
 
 };

@@ -25,7 +25,7 @@ ProfileModel::ProfileModel(QObject *parent) : QAbstractTableModel(parent)
 
 void ProfileModel::setModel(const QVector<Profile> &profiles)
 {
-    if (profiles.empty())
+    if (profiles.isEmpty())
         return;
     int i = rowCount();
     emit beginInsertRows(QModelIndex(), i, i + profiles.size() - 1);
@@ -41,9 +41,9 @@ void ProfileModel::addItem(const Profile &profile)
     emit endInsertRows();
 }
 
-void ProfileModel::updateProfile(Profile profile, int row)
+void ProfileModel::updateProfile(const Profile &profile, int row)
 {
-    model[row] = std::move(profile);
+    model[row] = profile;
     emit dataChanged(index(row, 0), index(row, columnCount()));
 }
 
@@ -63,7 +63,7 @@ QVariant ProfileModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        const Profile &profile = model.at(index.row());
+        auto &profile = model.at(index.row());
         switch (index.column())
         {
             case 0:

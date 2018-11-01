@@ -34,7 +34,7 @@ public:
     ProfileModel(QObject *parent = nullptr);
     void setModel(const QVector<Profile> &profiles);
     void addItem(const Profile &profile);
-    void updateProfile(Profile profile, int row);
+    void updateProfile(const Profile &profile, int row);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role) const override;

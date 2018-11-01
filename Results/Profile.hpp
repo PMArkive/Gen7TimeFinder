@@ -39,7 +39,7 @@ private:
 
 public:
     Profile();
-    Profile(QString name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm);
+    Profile(const QString &name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm);
     QString getName() const;
     u32 getOffset() const;
     u32 getTick() const;

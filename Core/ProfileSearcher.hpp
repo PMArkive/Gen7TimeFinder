@@ -23,7 +23,7 @@ private:
     QMutex mutex;
 
 public:
-    ProfileSearcher(QDateTime start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
+    ProfileSearcher(const QDateTime &start, u32 initialSeed, u32 baseTick, u32 baseOffset, u32 tickRange, u32 offsetRange);
     void run() override;
     int maxProgress();
     int currentProgress();

@@ -19,7 +19,7 @@
 
 #include "IDFilter.hpp"
 
-IDFilter::IDFilter(const QString& idList, const QString& tsvList, int filterType)
+IDFilter::IDFilter(const QString &idList, const QString &tsvList, int filterType)
 {
     this->filterType = static_cast<FilterType>(filterType);
     checkID = !idList.isEmpty();
@@ -27,7 +27,7 @@ IDFilter::IDFilter(const QString& idList, const QString& tsvList, int filterType
 
     if (!idList.isEmpty())
     {
-        for (const QString& in : idList.split("\n"))
+        for (const QString &in : idList.split("\n"))
         {
             switch (this->filterType)
             {
@@ -56,14 +56,14 @@ IDFilter::IDFilter(const QString& idList, const QString& tsvList, int filterType
 
     if (!tsvList.isEmpty())
     {
-        for (const QString& in : tsvList.split("\n"))
+        for (const QString &in : tsvList.split("\n"))
         {
             tsvFilter.append(in.toUInt());
         }
     }
 }
 
-bool IDFilter::compare(const IDResult& frame)
+bool IDFilter::compare(const IDResult &frame)
 {
     if (checkID)
     {

@@ -19,14 +19,14 @@
 
 #include "IDSearcher.hpp"
 
-IDSearcher::IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, IDFilter filter)
+IDSearcher::IDSearcher(const QDateTime &start, const QDateTime &end, u32 startFrame, u32 endFrame, const Profile &profile, const IDFilter &filter)
 {
-    startTime = std::move(start);
-    endTime = std::move(end);
+    startTime = start;
+    endTime = end;
     this->startFrame = startFrame;
     this->endFrame = endFrame;
-    this->profile = std::move(profile);
-    this->filter = std::move(filter);
+    this->profile = profile;
+    this->filter = filter;
     cancel = false;
     progress = 0;
 
@@ -49,7 +49,6 @@ void IDSearcher::run()
 
         for (u32 frame = startFrame; frame <= endFrame; frame++)
         {
-
             IDResult id(initialSeed, frame, sfmt.nextULong() & 0xffffffff);
             if (filter.compare(id))
             {

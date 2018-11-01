@@ -33,7 +33,7 @@ void StationaryModel::addItems(const QVector<StationaryResult> &frames)
 
 void StationaryModel::clear()
 {
-    if (model.empty())
+    if (model.isEmpty())
         return;
     emit beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
     model.clear();
@@ -57,7 +57,7 @@ QVariant StationaryModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        const StationaryResult &frame = model.at(index.row());
+        auto &frame = model.at(index.row());
         switch (index.column())
         {
             case 0:

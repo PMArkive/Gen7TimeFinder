@@ -51,8 +51,8 @@ private:
     QMutex mutex;
 
 public:
-    StationarySearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
-                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, StationaryFilter filter);
+    StationarySearcher(const QDateTime &start, const QDateTime &end, u32 startFrame, u32 endFrame, bool ivCount, int ability, int synchNature,
+                       int gender, bool alwaysSynch, bool shinyLocked, const Profile &profile, const StationaryFilter &filter);
     ~StationarySearcher() override;
     void run() override;
     int maxProgress();

@@ -45,7 +45,7 @@ private:
     QMutex mutex;
 
 public:
-    IDSearcher(QDateTime start, QDateTime end, u32 startFrame, u32 endFrame, Profile profile, IDFilter filter);
+    IDSearcher(const QDateTime &start, const QDateTime &end, u32 startFrame, u32 endFrame, const Profile &profile, const IDFilter &filter);
     void run() override;
     int maxProgress();
     int currentProgress();

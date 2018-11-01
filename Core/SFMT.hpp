@@ -29,13 +29,13 @@ class SFMT
 {
 
 private:
-    static const u32 CMSK1 = 0xdfffffef;
-    static const u32 CMSK2 = 0xddfecb7f;
-    static const u32 CMSK3 = 0xbffaffff;
-    static const u32  CMSK4 = 0xbffffff6;
-    static const int CSL1 = 18;
-    static const int CSR1 = 11;
-    static const int N32 = 624;
+    const u32 CMSK1 = 0xdfffffef;
+    const u32 CMSK2 = 0xddfecb7f;
+    const u32 CMSK3 = 0xbffaffff;
+    const u32  CMSK4 = 0xbffffff6;
+    const int CSL1 = 18;
+    const int CSR1 = 11;
+    const int N32 = 624;
     const u32 PARITY[4] = { 0x1, 0x0, 0x0, 0x13c9e684 };
     u32 *sfmt;
     u32 index;
