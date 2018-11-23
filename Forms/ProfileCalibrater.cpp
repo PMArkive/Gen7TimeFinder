@@ -86,10 +86,12 @@ void ProfileCalibrater::on_comboBox_currentIndexChanged(int index)
 {
     if (index == 0)
     {
-        ui->lineEditBaseTick->setText("2b942c5");
+        ui->lineEditBaseOffset->setText("54");
+        ui->lineEditBaseTick->setText("3532EA4");
     }
     else if (index == 1)
     {
-        ui->lineEditBaseTick->setText("383e329");
+        ui->lineEditBaseOffset->setText("55");
+        ui->lineEditBaseTick->setText("41D9CB9");
     }
 }

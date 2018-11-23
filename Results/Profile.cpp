@@ -22,8 +22,8 @@
 Profile::Profile()
 {
     name = "None";
-    offset = 17;
-    tick = 0x383e329;
+    offset = 55;
+    tick = 0x41D9CB9;
     tid = 12345;
     sid = 54321;
     version = Game::UltraSun;
