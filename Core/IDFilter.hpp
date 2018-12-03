@@ -20,8 +20,8 @@
 #ifndef IDFILTER_HPP
 #define IDFILTER_HPP
 
-#include <QVector>
 #include <QPair>
+#include <QVector>
 #include <Results/IDResult.hpp>
 
 enum FilterType

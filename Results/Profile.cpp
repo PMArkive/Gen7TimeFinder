@@ -41,6 +41,17 @@ Profile::Profile(const QString &name, u32 offset, u32 tick, u16 tid, u16 sid, Ga
     this->shinyCharm = shinyCharm;
 }
 
+Profile::Profile(QJsonObject data)
+{
+    name = data["name"].toString();
+    offset = data["offset"].toString().toUInt();
+    tick = data["tick"].toString().toUInt();
+    tid = data["tid"].toInt();
+    sid = data["sid"].toInt();
+    version = static_cast<Game>(data["version"].toInt());
+    shinyCharm = data["charm"].toBool();
+}
+
 QString Profile::getName() const
 {
     return name;

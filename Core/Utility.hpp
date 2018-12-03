@@ -20,15 +20,14 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include <QApplication>
 #include <QCryptographicHash>
 #include <QDateTime>
-#include <QString>
-#include <QDomDocument>
-#include <QApplication>
 #include <QFile>
-#include <QTextStream>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QVector>
-#include <cstdint>
 #include <Results/Profile.hpp>
 
 using u64 = uint64_t;
@@ -46,6 +45,7 @@ namespace Utility
     void saveProfile(const Profile &profile);
     void deleteProfile(const Profile &profile);
     void updateProfile(const Profile &original, const Profile &edit);
+    QJsonObject getJson(const Profile &profile);
     QStringList getNatures();
     QStringList getHiddenPowers();
     QStringList getGenderRatios();

@@ -26,10 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
-    if (!file.exists())
-        createProfileXML();
-
+    checkProfileJson();
     setupModel();
     updateProfiles();
 }
@@ -209,16 +206,11 @@ void MainWindow::updateProfiles()
         ui->comboBoxProfiles->setCurrentIndex(val);
 }
 
-void MainWindow::createProfileXML()
+void MainWindow::checkProfileJson()
 {
-    QFile file(QApplication::applicationDirPath() + "/profiles.xml");
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    QFile file(QApplication::applicationDirPath() + "/profiles.json");
+    if (file.open(QIODevice::NewOnly | QIODevice::Text))
     {
-        QDomDocument doc;
-        QDomElement profiles = doc.createElement(QString("Profiles"));
-        doc.appendChild(profiles);
-        QTextStream stream(&file);
-        stream << doc.toString();
         file.close();
     }
 }

@@ -20,6 +20,7 @@
 #ifndef PROFILE_HPP
 #define PROFILE_HPP
 
+#include <QJsonObject>
 #include <QString>
 #include <Core/Game.hpp>
 #include <cstdint>
@@ -40,6 +41,7 @@ private:
 public:
     Profile();
     Profile(const QString &name, u32 offset, u32 tick, u16 tid, u16 sid, Game version, bool shinyCharm);
+    Profile(QJsonObject data);
     QString getName() const;
     u32 getOffset() const;
     u32 getTick() const;

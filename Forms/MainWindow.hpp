@@ -65,7 +65,7 @@ private:
     IDModel *idModel;
     QVector<Profile> profiles;
 
-    void createProfileXML();
+    void checkProfileJson();
     void setupModel();
 
 };
