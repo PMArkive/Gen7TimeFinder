@@ -3,8 +3,10 @@ environment:
         # Windows
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           QTDIR: C:\Qt\5.11\msvc2017_64
+          OS: windows
         # Linux
         - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+          OS: linux
           
 services:
     - Docker
